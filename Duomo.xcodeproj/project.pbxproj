@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */; };
+		5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1222F7239200B10AC9 /* Main.storyboard */; };
+		5C6F9A1622F7239500B10AC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1522F7239500B10AC9 /* Assets.xcassets */; };
+		5C6F9A1922F7239500B10AC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1722F7239500B10AC9 /* LaunchScreen.storyboard */; };
+		5C6F9A2E22F7278800B10AC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A2D22F7278800B10AC9 /* GoogleService-Info.plist */; };
+		5C6F9A3022F72A9E00B10AC9 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A2F22F72A9E00B10AC9 /* Navigator.swift */; };
+		5C6F9A3422F72AB900B10AC9 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A3222F72AAF00B10AC9 /* BaseViewController.swift */; };
+		5C6F9A3522F72ABB00B10AC9 /* BindViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A3322F72AAF00B10AC9 /* BindViewModelType.swift */; };
+		5C6F9A3622F72ABD00B10AC9 /* BindViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A3122F72AAF00B10AC9 /* BindViewType.swift */; };
+		5C6F9A3D22F72CF600B10AC9 /* LocationTracking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A3C22F72CF600B10AC9 /* LocationTracking.storyboard */; };
+		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		299533556962C71B901BBEB7 /* Pods-Duomo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duomo.release.xcconfig"; path = "Target Support Files/Pods-Duomo/Pods-Duomo.release.xcconfig"; sourceTree = "<group>"; };
+		5902A1B32282988D20F27CF0 /* Pods-Duomo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duomo.debug.xcconfig"; path = "Target Support Files/Pods-Duomo/Pods-Duomo.debug.xcconfig"; sourceTree = "<group>"; };
+		5C6F9A0B22F7239200B10AC9 /* Duomo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duomo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C6F9A1322F7239200B10AC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5C6F9A1522F7239500B10AC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C6F9A1822F7239500B10AC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5C6F9A1A22F7239500B10AC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C6F9A2D22F7278800B10AC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5C6F9A2F22F72A9E00B10AC9 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		5C6F9A3122F72AAF00B10AC9 /* BindViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindViewType.swift; sourceTree = "<group>"; };
+		5C6F9A3222F72AAF00B10AC9 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5C6F9A3322F72AAF00B10AC9 /* BindViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindViewModelType.swift; sourceTree = "<group>"; };
+		5C6F9A3722F72B0500B10AC9 /* NetworkErrorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorBuilder.swift; sourceTree = "<group>"; };
+		5C6F9A3822F72B0500B10AC9 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		5C6F9A3922F72B0500B10AC9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		5C6F9A3A22F72B0500B10AC9 /* NetworkDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataResponse.swift; sourceTree = "<group>"; };
+		5C6F9A3C22F72CF600B10AC9 /* LocationTracking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationTracking.storyboard; sourceTree = "<group>"; };
+		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C6F9A0822F7239200B10AC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C6F9A0222F7239200B10AC9 = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A0D22F7239200B10AC9 /* Duomo */,
+				5C6F9A0C22F7239200B10AC9 /* Products */,
+				D2DB4F21308B18E768CE74DF /* Pods */,
+				628B79034A1B453FB3D490CF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5C6F9A0C22F7239200B10AC9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A0B22F7239200B10AC9 /* Duomo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C6F9A0D22F7239200B10AC9 /* Duomo */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A2B22F725CE00B10AC9 /* Contents */,
+				5C6F9A2922F725AD00B10AC9 /* Storyboard */,
+				5C6F9A2A22F725C800B10AC9 /* Resources */,
+			);
+			path = Duomo;
+			sourceTree = "<group>";
+		};
+		5C6F9A2022F7255300B10AC9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A2422F7257300B10AC9 /* Navigator */,
+				5C6F9A2522F7257800B10AC9 /* Base */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5C6F9A2122F7255800B10AC9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		5C6F9A2222F7256400B10AC9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A2622F7258F00B10AC9 /* Service */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		5C6F9A2322F7256A00B10AC9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		5C6F9A2422F7257300B10AC9 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A2F22F72A9E00B10AC9 /* Navigator.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
+		5C6F9A2522F7257800B10AC9 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A3222F72AAF00B10AC9 /* BaseViewController.swift */,
+				5C6F9A3322F72AAF00B10AC9 /* BindViewModelType.swift */,
+				5C6F9A3122F72AAF00B10AC9 /* BindViewType.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		5C6F9A2622F7258F00B10AC9 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A2822F7259F00B10AC9 /* Network */,
+				5C6F9A2722F7259800B10AC9 /* Router */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		5C6F9A2722F7259800B10AC9 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		5C6F9A2822F7259F00B10AC9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A3A22F72B0500B10AC9 /* NetworkDataResponse.swift */,
+				5C6F9A3822F72B0500B10AC9 /* NetworkError.swift */,
+				5C6F9A3722F72B0500B10AC9 /* NetworkErrorBuilder.swift */,
+				5C6F9A3922F72B0500B10AC9 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		5C6F9A2922F725AD00B10AC9 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A1222F7239200B10AC9 /* Main.storyboard */,
+				5C6F9A1722F7239500B10AC9 /* LaunchScreen.storyboard */,
+				5C6F9A3C22F72CF600B10AC9 /* LocationTracking.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		5C6F9A2A22F725C800B10AC9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A1522F7239500B10AC9 /* Assets.xcassets */,
+				5C6F9A1A22F7239500B10AC9 /* Info.plist */,
+				5C6F9A2D22F7278800B10AC9 /* GoogleService-Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5C6F9A2B22F725CE00B10AC9 /* Contents */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */,
+				5C6F9A2022F7255300B10AC9 /* Core */,
+				5C6F9A2122F7255800B10AC9 /* Presentation */,
+				5C6F9A2222F7256400B10AC9 /* Domain */,
+				5C6F9A2322F7256A00B10AC9 /* Data */,
+				5C6F9A2C22F7261000B10AC9 /* Utility */,
+			);
+			path = Contents;
+			sourceTree = "<group>";
+		};
+		5C6F9A2C22F7261000B10AC9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		628B79034A1B453FB3D490CF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2DB4F21308B18E768CE74DF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5902A1B32282988D20F27CF0 /* Pods-Duomo.debug.xcconfig */,
+				299533556962C71B901BBEB7 /* Pods-Duomo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C6F9A0A22F7239200B10AC9 /* Duomo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C6F9A1D22F7239500B10AC9 /* Build configuration list for PBXNativeTarget "Duomo" */;
+			buildPhases = (
+				B89962C8AC81BAA031BAA78A /* [CP] Check Pods Manifest.lock */,
+				5C6F9A0722F7239200B10AC9 /* Sources */,
+				5C6F9A0822F7239200B10AC9 /* Frameworks */,
+				5C6F9A0922F7239200B10AC9 /* Resources */,
+				B29CDBC68F5BF57F957EC62E /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Duomo;
+			productName = Duomo;
+			productReference = 5C6F9A0B22F7239200B10AC9 /* Duomo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C6F9A0322F7239200B10AC9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = jinnify;
+				TargetAttributes = {
+					5C6F9A0A22F7239200B10AC9 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 5C6F9A0622F7239200B10AC9 /* Build configuration list for PBXProject "Duomo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C6F9A0222F7239200B10AC9;
+			productRefGroup = 5C6F9A0C22F7239200B10AC9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C6F9A0A22F7239200B10AC9 /* Duomo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C6F9A0922F7239200B10AC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C6F9A1922F7239500B10AC9 /* LaunchScreen.storyboard in Resources */,
+				5C6F9A1622F7239500B10AC9 /* Assets.xcassets in Resources */,
+				5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */,
+				5C6F9A2E22F7278800B10AC9 /* GoogleService-Info.plist in Resources */,
+				5C6F9A3D22F72CF600B10AC9 /* LocationTracking.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B29CDBC68F5BF57F957EC62E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duomo/Pods-Duomo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duomo/Pods-Duomo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duomo/Pods-Duomo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B89962C8AC81BAA031BAA78A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Duomo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C6F9A0722F7239200B10AC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */,
+				5C6F9A3522F72ABB00B10AC9 /* BindViewModelType.swift in Sources */,
+				5C6F9A3622F72ABD00B10AC9 /* BindViewType.swift in Sources */,
+				5C6F9A3022F72A9E00B10AC9 /* Navigator.swift in Sources */,
+				5C6F9A3422F72AB900B10AC9 /* BaseViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5C6F9A1222F7239200B10AC9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C6F9A1322F7239200B10AC9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5C6F9A1722F7239500B10AC9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C6F9A1822F7239500B10AC9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C6F9A1B22F7239500B10AC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5C6F9A1C22F7239500B10AC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C6F9A1E22F7239500B10AC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5902A1B32282988D20F27CF0 /* Pods-Duomo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CNMQE42DQF;
+				INFOPLIST_FILE = "$(SRCROOT)/Duomo/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.duomo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C6F9A1F22F7239500B10AC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 299533556962C71B901BBEB7 /* Pods-Duomo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CNMQE42DQF;
+				INFOPLIST_FILE = "$(SRCROOT)/Duomo/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.duomo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C6F9A0622F7239200B10AC9 /* Build configuration list for PBXProject "Duomo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C6F9A1B22F7239500B10AC9 /* Debug */,
+				5C6F9A1C22F7239500B10AC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C6F9A1D22F7239500B10AC9 /* Build configuration list for PBXNativeTarget "Duomo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C6F9A1E22F7239500B10AC9 /* Debug */,
+				5C6F9A1F22F7239500B10AC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C6F9A0322F7239200B10AC9 /* Project object */;
+}
