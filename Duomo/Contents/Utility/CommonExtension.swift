@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MessageUI
+import MapKit
 
 
 //MARK: - UIStroyBoard
@@ -65,3 +66,17 @@ extension String {
     return NSLocalizedString(self, comment: self)
   }
 }
+
+//MARK: - UIImage
+extension UIImage {
+  func resize(to size: CGSize) -> UIImage? {
+    UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+    self.draw(in: CGRect(x: 5, y: 5, width: size.width - 10, height: size.height - 10))
+    let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return resizeImage
+  }
+}
+
+

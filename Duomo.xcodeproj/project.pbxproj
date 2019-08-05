@@ -31,6 +31,7 @@
 		5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */; };
 		5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5422F7543B00B10AC9 /* Router.swift */; };
 		5C6F9A5722F7DFBE00B10AC9 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */; };
+		5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */; };
 		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtension.swift; sourceTree = "<group>"; };
 		5C6F9A5422F7543B00B10AC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 		5C6F9A2122F7255800B10AC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5CC29A2922F866AE00A1ECA5 /* View */,
 				5C6F9A3E22F72F6900B10AC9 /* LocationTracking */,
 			);
 			path = Presentation;
@@ -136,6 +139,7 @@
 		5C6F9A2322F7256A00B10AC9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -246,6 +250,13 @@
 				5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		5CC29A2922F866AE00A1ECA5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		628B79034A1B453FB3D490CF /* Frameworks */ = {
@@ -399,6 +410,7 @@
 				5C6F9A4D22F752D900B10AC9 /* App.swift in Sources */,
 				5C6F9A4222F72FD500B10AC9 /* LocationTrackingViewModel.swift in Sources */,
 				5C6F9A4E22F753A000B10AC9 /* NetworkService.swift in Sources */,
+				5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */,
 				5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */,
 				5C6F9A3422F72AB900B10AC9 /* BaseViewController.swift in Sources */,
 			);

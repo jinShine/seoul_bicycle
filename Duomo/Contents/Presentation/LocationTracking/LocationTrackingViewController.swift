@@ -10,12 +10,13 @@ import os.log
 import RxSwift
 import RxCocoa
 import MapKit
+import Contacts
 
 class LocationTrackingViewController: BaseViewController, BindViewType {
   
   //MARK: - Constant
   struct Constant {
-    static let rowHeight: CGFloat = 80
+    static let annotationSize = CGSize(width: 30, height: 30)
   }
   
   
@@ -83,20 +84,62 @@ extension LocationTrackingViewController {
 
 //MARK: - Method Handler
 extension LocationTrackingViewController {
+  
   private func setupMapView(_ latitude: Double, _ longitude: Double) {
     self.mapView.delegate = self
-    self.mapView.showsUserLocation = true
     
     print("Latitude: \(latitude), Longitude: \(longitude)")
-    let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude,
-                                                                   longitude: longitude),
-                                    span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-    self.mapView.setRegion(region, animated: true)
+    
+    //User1
+    let user1 = UserAnnotation(title: "김승진", subtitle: "kim", coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+    self.mapView.addAnnotation(user1)
+    //User2
+    let user2 = UserAnnotation(title: "", subtitle: "park", coordinate: CLLocationCoordinate2D(latitude: 37.96762828000323, longitude: 127.15782309999993))
+    self.mapView.addAnnotation(user2)
+    
+    
+    if user2.title == "" {
+      let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude,
+                                                                     longitude: longitude),
+                                      span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
+      self.mapView.setRegion(region, animated: true)
+    } else {
+      mapView.showAnnotations([user1, user2], animated: true)
+    }
+    
+    
   }
+
 }
 
 
 //MARK: - MKMapViewDelegate
 extension LocationTrackingViewController: MKMapViewDelegate {
+  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+    var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "AnnotationView")
+    if annotationView == nil {
+      annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "AnnotationView")
+      annotationView?.image = UIImage(named: "Profile")?.resize(to: Constant.annotationSize)
+      annotationView?.backgroundColor = .white
+      annotationView?.layer.cornerRadius = Constant.annotationSize.width / 2
+      annotationView?.canShowCallout = true
+    }
+    
+
+    
+    return annotationView
+  }
   
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+//    let location = view.annotation
+//    let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+////    location.mapItem().openInMaps(launchOptions: launchOptions)
+//    let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: location!.coordinate, addressDictionary: [CNPostalAddressStreetKey: location?.subtitle]))
+//    mapItem.name = location?.title ?? ""
+//    mapItem.openInMaps(launchOptions: launchOptions)
+  }
+  
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    
+  }
 }
