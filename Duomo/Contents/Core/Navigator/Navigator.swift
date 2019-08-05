@@ -6,5 +6,21 @@
 //  Copyright © 2019 jinnify. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
+enum Navigator {
+  case locationTracking
+}
+
+
+extension Navigator {
+  
+  var viewController: UIViewController {
+    switch self {
+    case .locationTracking:
+      let viewModel = LocationTrackingViewModel(locationUseCase: LocationInteractor())
+      let viewController = LocationTrackingViewController(viewModel: viewModel)
+      return viewController
+    }
+  }
+}

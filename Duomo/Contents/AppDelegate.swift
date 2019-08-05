@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     
+    if let locationTrackingVC = window?.rootViewController as? LocationTrackingViewController {
+      let viewModel = LocationTrackingViewModel(locationUseCase: LocationInteractor())
+      locationTrackingVC.viewModel = viewModel
+    }
+    
+    
     return true
   }
   

@@ -39,5 +39,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>서로의 위치를 파악하는데 사용됩니다.</string>
 </dict>
 </plist>
