@@ -18,8 +18,8 @@ class LoginViewController: UIViewController {
 
   
   @IBAction func signInButtonDidTap(_ sender: UIButton) {
-    let vc = UIStoryboard.create(SignInViewController.self, name: "Login", bundle: nil, identifier: "SignInViewController")
-    vc.viewModel = SignInViewModel()
+    let vc = UIStoryboard.create(SignUpViewController.self, name: "Login", bundle: nil, identifier: "SignUpViewController")
+    vc.viewModel = SignUpViewModel()
     navigationController?.pushViewController(vc, animated: true)
     
   }

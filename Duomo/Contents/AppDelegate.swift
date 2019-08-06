@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     FirebaseApp.configure()
-    
 //    if let locationTrackingVC = window?.rootViewController as? LocationTrackingViewController {
 //      let viewModel = LocationTrackingViewModel(locationUseCase: LocationInteractor())
 //      locationTrackingVC.viewModel = viewModel

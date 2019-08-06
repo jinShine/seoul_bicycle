@@ -10,10 +10,10 @@
 		5C2DB1B522F93143001610C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B422F93143001610C5 /* Login.storyboard */; };
 		5C2DB1B822F933E5001610C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B722F933E5001610C5 /* LoginViewController.swift */; };
 		5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */; };
-		5C2DB1BD22F93E40001610C5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BC22F93E40001610C5 /* SignInViewController.swift */; };
-		5C2DB1C022F93E5E001610C5 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BF22F93E5E001610C5 /* SignInViewModel.swift */; };
+		5C2DB1BD22F93E40001610C5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */; };
+		5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */; };
 		5C2DB1C322F983CB001610C5 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C222F983CB001610C5 /* DebugPrint.swift */; };
-		5C2DB1C522F9938C001610C5 /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C422F9938C001610C5 /* SignInError.swift */; };
+		5C2DB1C522F9938C001610C5 /* SignUpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C422F9938C001610C5 /* SignUpError.swift */; };
 		5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */; };
 		5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1222F7239200B10AC9 /* Main.storyboard */; };
 		5C6F9A1622F7239500B10AC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1522F7239500B10AC9 /* Assets.xcassets */; };
@@ -39,6 +39,7 @@
 		5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5422F7543B00B10AC9 /* Router.swift */; };
 		5C6F9A5722F7DFBE00B10AC9 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */; };
 		5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */; };
+		5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */; };
 		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,10 +49,10 @@
 		5C2DB1B422F93143001610C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C2DB1B722F933E5001610C5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		5C2DB1BC22F93E40001610C5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		5C2DB1BF22F93E5E001610C5 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5C2DB1C222F983CB001610C5 /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
-		5C2DB1C422F9938C001610C5 /* SignInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInError.swift; sourceTree = "<group>"; };
+		5C2DB1C422F9938C001610C5 /* SignUpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpError.swift; sourceTree = "<group>"; };
 		5C6F9A0B22F7239200B10AC9 /* Duomo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duomo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C6F9A1322F7239200B10AC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		5C6F9A5422F7543B00B10AC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
 		5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
+		5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,9 +109,9 @@
 		5C2DB1BB22F933F5001610C5 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				5C2DB1BC22F93E40001610C5 /* SignInViewController.swift */,
-				5C2DB1BF22F93E5E001610C5 /* SignInViewModel.swift */,
-				5C2DB1C422F9938C001610C5 /* SignInError.swift */,
+				5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */,
+				5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */,
+				5C2DB1C422F9938C001610C5 /* SignUpError.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -164,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				5C2DB1B622F933AD001610C5 /* Login */,
-				5CC29A2922F866AE00A1ECA5 /* View */,
 				5C6F9A3E22F72F6900B10AC9 /* LocationTracking */,
 			);
 			path = Presentation;
@@ -208,6 +209,7 @@
 		5C6F9A2622F7258F00B10AC9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				5CC29A2C22F9DBAE00A1ECA5 /* FireStore */,
 				5C6F9A4322F731F700B10AC9 /* Location */,
 				5C6F9A2822F7259F00B10AC9 /* Network */,
 				5C6F9A2722F7259800B10AC9 /* Router */,
@@ -297,11 +299,12 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		5CC29A2922F866AE00A1ECA5 /* View */ = {
+		5CC29A2C22F9DBAE00A1ECA5 /* FireStore */ = {
 			isa = PBXGroup;
 			children = (
+				5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */,
 			);
-			path = View;
+			path = FireStore;
 			sourceTree = "<group>";
 		};
 		628B79034A1B453FB3D490CF /* Frameworks */ = {
@@ -444,12 +447,13 @@
 				5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */,
 				5C6F9A4F22F753A300B10AC9 /* NetworkErrorBuilder.swift in Sources */,
 				5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */,
+				5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */,
 				5C6F9A3522F72ABB00B10AC9 /* BindViewModelType.swift in Sources */,
 				5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */,
 				5C6F9A4522F7320800B10AC9 /* LocationService.swift in Sources */,
 				5C6F9A4822F73E5F00B10AC9 /* UIView+Extension.swift in Sources */,
 				5C2DB1C322F983CB001610C5 /* DebugPrint.swift in Sources */,
-				5C2DB1C522F9938C001610C5 /* SignInError.swift in Sources */,
+				5C2DB1C522F9938C001610C5 /* SignUpError.swift in Sources */,
 				5C6F9A5722F7DFBE00B10AC9 /* LocationError.swift in Sources */,
 				5C6F9A3622F72ABD00B10AC9 /* BindViewType.swift in Sources */,
 				5C6F9A5122F753A800B10AC9 /* NetworkDataResponse.swift in Sources */,
@@ -461,9 +465,9 @@
 				5C6F9A4222F72FD500B10AC9 /* LocationTrackingViewModel.swift in Sources */,
 				5C6F9A4E22F753A000B10AC9 /* NetworkService.swift in Sources */,
 				5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */,
-				5C2DB1C022F93E5E001610C5 /* SignInViewModel.swift in Sources */,
+				5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */,
 				5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */,
-				5C2DB1BD22F93E40001610C5 /* SignInViewController.swift in Sources */,
+				5C2DB1BD22F93E40001610C5 /* SignUpViewController.swift in Sources */,
 				5C6F9A3422F72AB900B10AC9 /* BaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

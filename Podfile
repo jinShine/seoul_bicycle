@@ -24,10 +24,12 @@ target 'Duomo' do
 
 
   # Firebase
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
   pod 'Firebase/Analytics'
-  pod 'Firebase/Database'
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
+  
   
   # Custom View
   pod 'Toast-Swift', '~> 5.0.0'

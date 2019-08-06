@@ -13,4 +13,5 @@ struct App {
   static let preference = UserDefaults.standard
   static let location = LocationService.shared
   static let network = NetworkService.shared
+  static let firestore = FirestoreDB.shared
 }

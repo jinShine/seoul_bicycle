@@ -93,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="81.696428571428569"/>
         </scene>
-        <!--Sign In View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="p0h-ui-0cT">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" id="MJI-fV-Q1K" customClass="SignInViewController" customModule="Duomo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" id="MJI-fV-Q1K" customClass="SignUpViewController" customModule="Duomo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DX7-IF-J17">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,7 +180,7 @@
                         <outlet property="emailField" destination="B5Z-gb-8eg" id="6en-n3-MK1"/>
                         <outlet property="nameField" destination="CB5-Yd-TrU" id="CcI-nv-OhA"/>
                         <outlet property="passwordField" destination="W48-Ir-nQO" id="k18-hG-4R3"/>
-                        <outlet property="signinButton" destination="cFm-DN-08m" id="3TW-Um-idI"/>
+                        <outlet property="signupButton" destination="cFm-DN-08m" id="bI1-0N-fPL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqS-gx-7PX" userLabel="First Responder" sceneMemberID="firstResponder"/>

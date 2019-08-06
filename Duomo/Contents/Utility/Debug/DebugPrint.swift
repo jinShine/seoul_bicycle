@@ -20,7 +20,7 @@ private func functionName(_ function: String) -> String {
 }
 
 public func DLog<T>(_ message: T, file: String = #file, function: String = #function, line: Int = #line) {
-  print("🐞 [\(filename(file))]\(functionName(function))(\(line)): \(message)")
+  print("📣 [\(filename(file))]\(functionName(function))(\(line)): \(message)")
 }
 
 public func ELog(error: Error, file: String = #file, function: String = #function, line: Int = #line) {
