@@ -6,11 +6,10 @@
 //  Copyright © 2019 jinnify. All rights reserved.
 //
 
-import os.log
 import RxSwift
 import RxCocoa
 import MapKit
-import Contacts
+
 
 class LocationTrackingViewController: BaseViewController, BindViewType {
   
@@ -52,11 +51,11 @@ extension LocationTrackingViewController {
   //OUTPUT
   func command(viewModel: LocationTrackingViewModel) {
     
-    let obViewWillAppear = rx.viewWillAppear.map { _ in
-      ViewModel.Command.viewWillAppear
-    }
+    let obViewWillAppear = rx.viewWillAppear
+      .map { _ in ViewModel.Command.viewWillAppear }
     
-    Observable<ViewModel.Command>.merge([
+    Observable<ViewModel.Command>
+      .merge([
         obViewWillAppear
       ])
       .bind(to: viewModel.command)

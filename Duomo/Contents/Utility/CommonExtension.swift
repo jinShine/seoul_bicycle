@@ -62,9 +62,27 @@ extension UIAlertController {
 
 //MARK: - 스트링 로컬라이제이션 적용
 extension String {
+  
   var localize: String {
     return NSLocalizedString(self, comment: self)
   }
+  
+  // E-mail address validation
+  func validateEmail() -> Bool {
+    let emailRegEx = "^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$"
+    
+    let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return predicate.evaluate(with: self)
+  }
+  
+  // Password validation
+  func validatePassword() -> Bool {
+    let passwordRegEx = "^(?=.*[0-9])(?=.*[a-z])(?=.*[!@#$&*]).{8,16}$"
+    
+    let predicate = NSPredicate(format:"SELF MATCHES %@", passwordRegEx)
+    return predicate.evaluate(with: self)
+  }
+  
 }
 
 //MARK: - UIImage

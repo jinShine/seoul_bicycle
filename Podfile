@@ -29,5 +29,8 @@ target 'Duomo' do
   pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   
+  # Custom View
+  pod 'Toast-Swift', '~> 5.0.0'
+  
 
 end
