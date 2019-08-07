@@ -101,8 +101,12 @@ extension SignUpViewController {
         case .viewDidLoadState:
           self.setupUI()
         case .didInputInfoState: return
-        case .didTapSignUpState:
-          print(2)
+        case .didTapSignUpState(let error):
+          guard error == nil else {
+            self.view.makeToast(error?.description, duration: 1.5, position: .center)
+            return
+          }
+          self.navigationController?.popViewController(animated: true)
           
         }
       })

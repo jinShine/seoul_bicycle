@@ -38,7 +38,7 @@ final class SignUpViewModel: BindViewModelType {
   enum State {
     case viewDidLoadState
     case didInputInfoState
-    case didTapSignUpState
+    case didTapSignUpState(SignUpErrors?)
   }
   
   var command = PublishSubject<Command>()
@@ -47,8 +47,7 @@ final class SignUpViewModel: BindViewModelType {
   
   
   //MARK: - Properties
-  var isSignUpValidate = false
-  var validateResult: (SignUpErrors?, Bool)?
+  var signupErrors: SignUpErrors? = nil
   
   
   
@@ -80,7 +79,7 @@ final class SignUpViewModel: BindViewModelType {
       
     case .didInputInfoAction(let name, let email, let password, let confirmPassword):
       
-      validateResult = validateInfo(name: name,
+      signupErrors = validateInfo(name: name,
                    email: email,
                    password: password,
                    confirmPassword: confirmPassword)
@@ -88,36 +87,11 @@ final class SignUpViewModel: BindViewModelType {
       return Observable<State>.just(.didInputInfoState)
       
     case .didTapSignUpAction(let name, let email, let password):
-      return Observable<State>.create { (observer) -> Disposable in
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-          if let error = error {
-            ELog(error: error)
-            return
-          }
-          DLog("SignUp Success!")
-          
-          guard let uid = result?.user.uid else { return }
-          let data = [uid: ["name": name]]
-          App.firestore.create(collection: "users", data: data, completion: { error in
-            if let error = error {
-              ELog(error: error)
-              
-              Auth.auth().currentUser?.delete(completion: { error in
-                if let error = error {
-                  ELog(error: error)
-                }
-              })
-              
-              
-              return
-            }
-            
-            observer.onCompleted()
-            DLog("설마")
-          })
-        }
-        
-        return Disposables.create()
+      
+      if signupErrors != nil {
+        return Observable<State>.just(.didTapSignUpState(signupErrors))
+      } else {
+        return signup(name, email, password)
       }
     }
   }
@@ -129,39 +103,69 @@ extension SignUpViewModel {
   private func validateInfo(name: String,
                             email: String,
                             password: String,
-                            confirmPassword: String) -> (SignUpErrors?, Bool) {
+                            confirmPassword: String) -> SignUpErrors? {
     
-    isSignUpValidate = true
+    if name == "" && email == "" && password == "" && confirmPassword == "" {
+      return SignUpErrors.empty
+    }
     
     // 이름
     if name == "" || name == " " {
-      isSignUpValidate = false
-      return (SignUpErrors.name, false)
+      return SignUpErrors.name
     }
     
     // 이메일
     if !email.validateEmail() {
-      isSignUpValidate = false
-      return (SignUpErrors.email, false)
+      return SignUpErrors.email
     }
     
     // 비밀번호
     if !password.validatePassword() {
-      isSignUpValidate = false
-      return (SignUpErrors.password, false)
+      return SignUpErrors.password
     }
     if password != confirmPassword {
-      isSignUpValidate = false
-      return (SignUpErrors.confirmPassword, false)
+      return SignUpErrors.confirmPassword
     }
     
-    if name == "" && email == "" && password == "" && confirmPassword == "" {
-      isSignUpValidate = false
-      return (SignUpErrors.empty, false)
-    }
-    
-    
-    return (nil, true)
+    return nil
   }
   
+  private func signup(_ name: String,
+                      _ email: String,
+                      _ password: String) -> Observable<State> {
+    return Observable<State>.create { [weak self]  (observer) -> Disposable in
+      guard let self = self else { return Disposables.create() }
+
+        Auth.auth().createUser(withEmail: email,
+                               password: password) { (result, error) in
+          if let error = error {
+            ELog(error: error)
+            observer.onNext(.didTapSignUpState(SignUpErrors.alreadyRegister))
+            return
+          }
+          DLog("SignUp Success!")
+          
+          guard let uid = result?.user.uid else { return }
+          let data = [uid: ["name": name]]
+          
+          App.firestore.db
+            .collection("users")
+            .addDocument(data: data, completion: { error in
+              
+              if let error = error {
+                ELog(error: error)
+                // DB 저장중 에러나면 계정 생성 삭제
+                Auth.auth().currentUser?.delete(completion: nil)
+                return
+              }
+              
+              observer.onNext(.didTapSignUpState(self.signupErrors))
+              observer.onCompleted()
+              DLog("Data Save Success!")
+            })
+        }
+
+      return Disposables.create()
+    }
+  }
 }

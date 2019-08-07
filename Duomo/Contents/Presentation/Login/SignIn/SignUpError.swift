@@ -15,6 +15,7 @@ enum SignUpErrors: Error {
   case password
   case confirmPassword
   case empty
+  case alreadyRegister
   
   var description: String {
     switch self {
@@ -28,6 +29,8 @@ enum SignUpErrors: Error {
       return "비밀번호가 일치하지 않습니다."
     case .empty:
       return "해당 입력란을 모두 채워주세요."
+    case .alreadyRegister:
+      return "이미 가입된 이메일 입니다."
     }
   }
 }
