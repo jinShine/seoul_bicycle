@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C2CBD6522FAB83100F4F11A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2CBD6422FAB7FD00F4F11A /* KakaoOpenSDK.framework */; };
 		5C2DB1B522F93143001610C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B422F93143001610C5 /* Login.storyboard */; };
 		5C2DB1B822F933E5001610C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B722F933E5001610C5 /* LoginViewController.swift */; };
 		5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		299533556962C71B901BBEB7 /* Pods-Duomo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duomo.release.xcconfig"; path = "Target Support Files/Pods-Duomo/Pods-Duomo.release.xcconfig"; sourceTree = "<group>"; };
 		5902A1B32282988D20F27CF0 /* Pods-Duomo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duomo.debug.xcconfig"; path = "Target Support Files/Pods-Duomo/Pods-Duomo.debug.xcconfig"; sourceTree = "<group>"; };
+		5C2CBD6422FAB7FD00F4F11A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		5C2DB1B422F93143001610C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C2DB1B722F933E5001610C5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */,
+				5C2CBD6522FAB83100F4F11A /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +313,7 @@
 		628B79034A1B453FB3D490CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C2CBD6422FAB7FD00F4F11A /* KakaoOpenSDK.framework */,
 				5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */,
 			);
 			name = Frameworks;
@@ -617,6 +621,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNMQE42DQF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Duomo/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -637,6 +645,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNMQE42DQF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Duomo/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

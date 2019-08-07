@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import KakaoOpenSDK
 
 class LoginViewController: UIViewController {
-
+  
+  
+  @IBOutlet weak var kakaoButton: KOLoginButton!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
   

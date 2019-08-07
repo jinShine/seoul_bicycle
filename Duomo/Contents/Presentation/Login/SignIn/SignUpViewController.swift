@@ -8,7 +8,6 @@
 
 import RxSwift
 import RxCocoa
-import Toast_Swift
 
 class SignUpViewController: BaseViewController, BindViewType {
   
@@ -25,6 +24,7 @@ class SignUpViewController: BaseViewController, BindViewType {
   @IBOutlet weak var passwordField: UITextField!
   @IBOutlet weak var confirmPasswordField: UITextField!
   @IBOutlet weak var signupButton: UIButton!
+  
   
   
   //MARK: - Properties
@@ -107,7 +107,10 @@ extension SignUpViewController {
             return
           }
           self.navigationController?.popViewController(animated: true)
-          
+         
+        case .showIndicatorState(let isStarting):
+          DLog(isStarting)
+          isStarting ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
         }
       })
       .disposed(by: self.disposeBag)

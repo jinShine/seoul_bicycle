@@ -39,6 +39,7 @@ final class SignUpViewModel: BindViewModelType {
     case viewDidLoadState
     case didInputInfoState
     case didTapSignUpState(SignUpErrors?)
+    case showIndicatorState(_ isStarting: Bool)
   }
   
   var command = PublishSubject<Command>()
@@ -135,37 +136,46 @@ extension SignUpViewModel {
                       _ password: String) -> Observable<State> {
     return Observable<State>.create { [weak self]  (observer) -> Disposable in
       guard let self = self else { return Disposables.create() }
-
-        Auth.auth().createUser(withEmail: email,
-                               password: password) { (result, error) in
-          if let error = error {
-            ELog(error: error)
-            observer.onNext(.didTapSignUpState(SignUpErrors.alreadyRegister))
-            return
-          }
-          DLog("SignUp Success!")
-          
-          guard let uid = result?.user.uid else { return }
-          let data = [uid: ["name": name]]
-          
-          App.firestore.db
-            .collection("users")
-            .addDocument(data: data, completion: { error in
-              
-              if let error = error {
-                ELog(error: error)
-                // DB 저장중 에러나면 계정 생성 삭제
-                Auth.auth().currentUser?.delete(completion: nil)
-                return
-              }
-              
-              observer.onNext(.didTapSignUpState(self.signupErrors))
-              observer.onCompleted()
-              DLog("Data Save Success!")
-            })
+      
+      self.showIndicator(true)
+      Auth.auth().createUser(withEmail: email,
+                             password: password) { (result, error) in
+        if let error = error {
+          ELog(error: error)
+          observer.onNext(.didTapSignUpState(SignUpErrors.alreadyRegister))
+          self.showIndicator(false)
+          return
         }
+        DLog("SignUp Success!")
+        
+        guard let uid = result?.user.uid else { return }
+        let data = [uid: ["name": name]]
+        
+        App.firestore.db
+          .collection("users")
+          .addDocument(data: data, completion: { error in
+            
+            if let error = error {
+              ELog(error: error)
+              // DB 저장중 에러나면 계정 생성 삭제
+              Auth.auth().currentUser?.delete(completion: nil)
+              self.showIndicator(false)
+              return
+            }
 
-      return Disposables.create()
+            observer.onNext(.didTapSignUpState(self.signupErrors))
+            observer.onCompleted()
+            DLog("Data Save Success!")
+          })
+      }
+      
+      return Disposables.create {
+        self.showIndicator(false)
+      }
     }
+  }
+  
+  private func showIndicator(_ isStarting: Bool) {
+    self.stateSubject.onNext(.showIndicatorState(isStarting))
   }
 }

@@ -45,9 +45,8 @@
                                     <action selector="signInButtonDidTap:" destination="BG3-U2-HME" eventType="touchUpInside" id="RKA-R9-yN8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaE-RU-1bb">
-                                <rect key="frame" x="188" y="570" width="39" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaE-RU-1bb" customClass="KOLoginButton">
+                                <rect key="frame" x="30" y="553" width="354" height="30"/>
                                 <state key="normal" title="카카오"/>
                             </button>
                         </subviews>
@@ -62,14 +61,21 @@
                             <constraint firstItem="8LA-o5-K93" firstAttribute="top" secondItem="kXD-jK-GwP" secondAttribute="bottom" constant="30" id="J2M-qi-c4X"/>
                             <constraint firstItem="CQc-au-0T0" firstAttribute="trailing" secondItem="q8N-Lw-yZI" secondAttribute="trailing" constant="30" id="JPD-i1-Tp7"/>
                             <constraint firstItem="R7d-nD-1mP" firstAttribute="top" secondItem="kXD-jK-GwP" secondAttribute="bottom" constant="30" id="NmN-72-F9h"/>
+                            <constraint firstItem="CQc-au-0T0" firstAttribute="trailing" secondItem="vaE-RU-1bb" secondAttribute="trailing" constant="30" id="cPv-1d-C6j"/>
                             <constraint firstItem="R7d-nD-1mP" firstAttribute="leading" secondItem="CQc-au-0T0" secondAttribute="leading" constant="30" id="cfT-LX-6Y7"/>
+                            <constraint firstItem="vaE-RU-1bb" firstAttribute="centerX" secondItem="spg-cL-KGY" secondAttribute="centerX" id="dha-Fs-YSv"/>
                             <constraint firstItem="Y3r-6t-Dc5" firstAttribute="leading" secondItem="CQc-au-0T0" secondAttribute="leading" constant="30" id="mVY-Dw-6ku"/>
                             <constraint firstItem="CQc-au-0T0" firstAttribute="trailing" secondItem="8LA-o5-K93" secondAttribute="trailing" constant="30" id="mcX-lD-X2f"/>
+                            <constraint firstItem="vaE-RU-1bb" firstAttribute="leading" secondItem="CQc-au-0T0" secondAttribute="leading" constant="30" id="wu6-so-o7c"/>
+                            <constraint firstItem="vaE-RU-1bb" firstAttribute="top" secondItem="R7d-nD-1mP" secondAttribute="bottom" constant="30" id="xV3-7y-tN4"/>
                             <constraint firstItem="kXD-jK-GwP" firstAttribute="top" secondItem="Y3r-6t-Dc5" secondAttribute="bottom" constant="10" id="xkB-TA-CpA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CQc-au-0T0"/>
                     </view>
                     <navigationItem key="navigationItem" id="9xR-fR-nvD"/>
+                    <connections>
+                        <outlet property="kakaoButton" destination="vaE-RU-1bb" id="T9U-kA-QmO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pk-HP-Bea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
