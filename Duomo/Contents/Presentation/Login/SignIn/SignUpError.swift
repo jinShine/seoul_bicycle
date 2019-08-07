@@ -16,6 +16,7 @@ enum SignUpErrors: Error {
   case confirmPassword
   case empty
   case alreadyRegister
+  case dbError
   
   var description: String {
     switch self {
@@ -31,6 +32,8 @@ enum SignUpErrors: Error {
       return "해당 입력란을 모두 채워주세요."
     case .alreadyRegister:
       return "이미 가입된 이메일 입니다."
+    case .dbError:
+      return "DB 접근 권한"
     }
   }
 }

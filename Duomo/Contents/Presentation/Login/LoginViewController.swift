@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
   
   @IBAction func signInButtonDidTap(_ sender: UIButton) {
     let vc = UIStoryboard.create(SignUpViewController.self, name: "Login", bundle: nil, identifier: "SignUpViewController")
-    vc.viewModel = SignUpViewModel()
+    vc.viewModel = SignUpViewModel(signupUseCase: SignUpInteractor())
     navigationController?.pushViewController(vc, animated: true)
     
   }
