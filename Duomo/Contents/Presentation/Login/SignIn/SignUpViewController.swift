@@ -30,7 +30,6 @@ class SignUpViewController: BaseViewController, BindViewType {
   //MARK: - Properties
   typealias ViewModel = SignUpViewModel
   var disposeBag = DisposeBag()
-  //  var dataSource: RxTableViewSectionedReloadDataSource<SectionOfUserModel>?
   
   
   init(viewModel: ViewModel) {
@@ -52,7 +51,7 @@ class SignUpViewController: BaseViewController, BindViewType {
 extension SignUpViewController {
   
   //OUTPUT
-  func command(viewModel: SignUpViewModel) {
+  func command(viewModel: ViewModel) {
     
     let obViewDidLoad = rx.viewDidLoad
       .map { ViewModel.Command.viewDidLoad }
@@ -91,7 +90,7 @@ extension SignUpViewController {
   
   
   //INPUT
-  func state(viewModel: SignUpViewModel) {
+  func state(viewModel: ViewModel) {
     
     viewModel.state
       .drive(onNext: { [weak self] state in
@@ -102,14 +101,15 @@ extension SignUpViewController {
           self.setupUI()
         case .didInputInfoState: return
         case .didTapSignUpState(let error):
-          guard error == nil else {
+          if error != nil {
             self.view.makeToast(error?.description, duration: 1.5, position: .center)
-            return
+          } else {
+            //이동
+            self.navigationController?.popViewController(animated: true)
           }
-          self.navigationController?.popViewController(animated: true)
+          
          
         case .showIndicatorState(let isStarting):
-          DLog(isStarting)
           isStarting ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
         }
       })

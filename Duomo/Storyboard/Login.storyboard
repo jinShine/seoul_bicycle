@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="DOf-S5-zmC">
             <objects>
-                <viewController id="BG3-U2-HME" customClass="LoginViewController" customModule="Duomo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BG3-U2-HME" customClass="LoginViewController" customModule="Duomo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="spg-cL-KGY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,9 +41,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8LA-o5-K93">
                                 <rect key="frame" x="276" y="493" width="108" height="30"/>
                                 <state key="normal" title="이메일로 회원가입"/>
-                                <connections>
-                                    <action selector="signInButtonDidTap:" destination="BG3-U2-HME" eventType="touchUpInside" id="RKA-R9-yN8"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaE-RU-1bb" customClass="KOLoginButton">
                                 <rect key="frame" x="30" y="553" width="354" height="30"/>
@@ -74,7 +71,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="9xR-fR-nvD"/>
                     <connections>
-                        <outlet property="kakaoButton" destination="vaE-RU-1bb" id="T9U-kA-QmO"/>
+                        <outlet property="emailField" destination="q8N-Lw-yZI" id="GEA-Hi-Egn"/>
+                        <outlet property="findPasswordButton" destination="R7d-nD-1mP" id="VqQ-MU-17K"/>
+                        <outlet property="kakaoButton" destination="vaE-RU-1bb" id="u5f-vZ-HLv"/>
+                        <outlet property="loginButton" destination="kXD-jK-GwP" id="T2a-NV-lDU"/>
+                        <outlet property="passwordField" destination="Y3r-6t-Dc5" id="fgR-DS-WlW"/>
+                        <outlet property="signupButton" destination="8LA-o5-K93" id="lwv-hi-goH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pk-HP-Bea" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -84,6 +86,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jI1-lK-V1c">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fB3-v2-FJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zcd-PA-z2J" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="60u-ZC-7gZ">
@@ -95,7 +98,6 @@
                         <segue destination="BG3-U2-HME" kind="relationship" relationship="rootViewController" id="BY9-bQ-Xu9"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fB3-v2-FJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="8.6956521739130448" y="81.696428571428569"/>
         </scene>

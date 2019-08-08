@@ -6,6 +6,7 @@
 //  Copyright © 2019 Jinnify. All rights reserved.
 //
 
+import Alamofire
 import Moya
 
 enum Router {
@@ -39,7 +40,7 @@ extension Router: TargetType {
     }
   }
   
-  var method: Method {
+  var method: Alamofire.HTTPMethod {
     switch self {
     case .allUser:
       return .get

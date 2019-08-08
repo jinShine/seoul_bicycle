@@ -138,4 +138,5 @@ extension SignUpViewModel {
   private func showIndicator(_ isStarting: Bool) {
     self.stateSubject.onNext(.showIndicatorState(isStarting))
   }
+  
 }
