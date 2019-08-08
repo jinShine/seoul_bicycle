@@ -18,6 +18,8 @@
 		5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */; };
 		5C2DB1C322F983CB001610C5 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C222F983CB001610C5 /* DebugPrint.swift */; };
 		5C2DB1C522F9938C001610C5 /* SignUpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C422F9938C001610C5 /* SignUpError.swift */; };
+		5C3673B422FC7B4E00BEC76E /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3673B322FC7B4E00BEC76E /* Font.swift */; };
+		5C3673B622FC7B7B00BEC76E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3673B522FC7B7B00BEC76E /* Color.swift */; };
 		5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */; };
 		5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1222F7239200B10AC9 /* Main.storyboard */; };
 		5C6F9A1622F7239500B10AC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1522F7239500B10AC9 /* Assets.xcassets */; };
@@ -54,7 +56,6 @@
 		5C2CBD6822FAC12900F4F11A /* SignUpInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInteractor.swift; sourceTree = "<group>"; };
 		5C2CBD6A22FBF55400F4F11A /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
-		5C2CBD6F22FC0C3000F4F11A /* JeonggamDisplay.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JeonggamDisplay.ttf; sourceTree = "<group>"; };
 		5C2CBD7022FC2BEE00F4F11A /* Duomo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duomo-Bridging-Header.h"; sourceTree = "<group>"; };
 		5C2DB1B422F93143001610C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C2DB1B722F933E5001610C5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +64,8 @@
 		5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5C2DB1C222F983CB001610C5 /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
 		5C2DB1C422F9938C001610C5 /* SignUpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpError.swift; sourceTree = "<group>"; };
+		5C3673B322FC7B4E00BEC76E /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		5C3673B522FC7B7B00BEC76E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5C6F9A0B22F7239200B10AC9 /* Duomo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duomo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C6F9A1322F7239200B10AC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,14 +110,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C2CBD6E22FC0C1B00F4F11A /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				5C2CBD6F22FC0C3000F4F11A /* JeonggamDisplay.ttf */,
-			);
-			path = Font;
-			sourceTree = "<group>";
-		};
 		5C2DB1B622F933AD001610C5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +137,15 @@
 				5C2DB1C222F983CB001610C5 /* DebugPrint.swift */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		5C3673B022FC79E200BEC76E /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				5C3673B322FC7B4E00BEC76E /* Font.swift */,
+				5C3673B522FC7B7B00BEC76E /* Color.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		5C6F9A0222F7239200B10AC9 = {
@@ -272,7 +276,6 @@
 		5C6F9A2A22F725C800B10AC9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5C2CBD6E22FC0C1B00F4F11A /* Font */,
 				5C6F9A1522F7239500B10AC9 /* Assets.xcassets */,
 				5C6F9A1A22F7239500B10AC9 /* Info.plist */,
 				5C6F9A2D22F7278800B10AC9 /* GoogleService-Info.plist */,
@@ -297,6 +300,7 @@
 		5C6F9A2C22F7261000B10AC9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				5C3673B022FC79E200BEC76E /* Theme */,
 				5C2DB1C122F983A7001610C5 /* Debug */,
 				5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */,
 				5C6F9A4722F73E4A00B10AC9 /* UIView+Extension.swift */,
@@ -473,6 +477,7 @@
 				5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */,
 				5C6F9A4F22F753A300B10AC9 /* NetworkErrorBuilder.swift in Sources */,
 				5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */,
+				5C3673B622FC7B7B00BEC76E /* Color.swift in Sources */,
 				5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */,
 				5C6F9A3522F72ABB00B10AC9 /* BindViewModelType.swift in Sources */,
 				5C2CBD6B22FBF55400F4F11A /* LoginError.swift in Sources */,
@@ -492,6 +497,7 @@
 				5C6F9A4D22F752D900B10AC9 /* App.swift in Sources */,
 				5C6F9A4222F72FD500B10AC9 /* LocationTrackingViewModel.swift in Sources */,
 				5C6F9A4E22F753A000B10AC9 /* NetworkService.swift in Sources */,
+				5C3673B422FC7B4E00BEC76E /* Font.swift in Sources */,
 				5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */,
 				5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */,
 				5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */,

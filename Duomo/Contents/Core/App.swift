@@ -14,4 +14,9 @@ struct App {
   static let location = LocationService.shared
   static let network = NetworkService.shared
   static let firestore = FirestoreDB.shared
+  
+  
+  
+  static let font = Font()
+  static let color = Color()
 }

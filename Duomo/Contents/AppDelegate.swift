@@ -24,6 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    if KOSession.isKakaoAccountLoginCallback(url) {
+      return KOSession.handleOpen(url)
+    }
+    return true
+  }
+  
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    KOSession.handleDidBecomeActive()
+  }
+  
+  
 }
 
 extension AppDelegate {

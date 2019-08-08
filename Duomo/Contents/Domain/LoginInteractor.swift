@@ -13,6 +13,7 @@ import FirebaseAuth
 protocol LoginUseCase {
   func login(email: String, password: String) -> Observable<LoginError?>
   func kakaoLogin() -> Observable<(NSError?, KOUserMe?)>
+  func kakaoToken() -> String?
 }
 
 final class LoginInteractor: LoginUseCase {
@@ -53,13 +54,34 @@ final class LoginInteractor: LoginUseCase {
             observer.onError(error)
             return
           }
-          
         }
-        DLog("Kakao Open")
+        
+        DLog("Kakao Login Success!")
+        
+        KOSessionTask.userMeTask(completion: { (error, result) in
+          if let error = error as NSError? {
+            observer.onError(error)
+            return
+          }
+          
+          DLog("Get Kakao User Info Success!")
+          observer.onNext((nil, result))
+          observer.onCompleted()
+        })
       }
       
       return Disposables.create()
     })
     
+  }
+  
+  func kakaoToken() -> String? {
+    guard let session = KOSession.shared() else {
+      return nil
+    }
+    
+    let token = session.token?.accessToken
+    
+    return token
   }
 }

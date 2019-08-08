@@ -98,10 +98,15 @@ extension LoginViewController {
           self.navigationController?.pushViewController(Navigator.signup.viewController, animated: true)
         case .showIndicatorState(let isStarting):
           isStarting ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-        case .didTapKakaoState:
-          print(12)
+        case .didTapKakaoState(let error):
+          if error != nil {
+            if let error = error as NSError? {
+              self.view.makeToast(error.description, duration: 1.5, position: .center)
+            }
+          } else {
+            // 이동
+          }
         }
-        
       })
       .disposed(by: self.disposeBag)
   }
@@ -111,6 +116,6 @@ extension LoginViewController {
 
 //MARK: - Method Handler
 extension LoginViewController {
-  
+
 }
 

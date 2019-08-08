@@ -37,7 +37,7 @@ final class LoginViewModel: BindViewModelType {
     case didTapLoginState(LoginError?)
     case didTapSignupState
     case showIndicatorState(_ isStarting: Bool)
-    case didTapKakaoState(Error?, KOUserMe?)
+    case didTapKakaoState(Error?)
   }
   
   var command = PublishSubject<Command>()
@@ -85,13 +85,19 @@ final class LoginViewModel: BindViewModelType {
     case .didTapSignupAction:
       return Observable<State>.just(.didTapSignupState)
     case .didTapKakaoAction:
+      let token = loginUseCase.kakaoToken()
       return loginUseCase.kakaoLogin()
         .flatMap { (error, result) -> Observable<State> in
-          print(result)
           
-          return Observable<State>.just(.didTapKakaoState(error, result))
-        }.catchErrorJustReturn(.didTapKakaoState(nil, nil))
-      
+          let data = [token ?? "" : [
+              "name" : result?.nickname,
+              "profileImage" : result?.properties?["profile_image"]
+            ]]
+          
+          App.firestore.create(collection: "users", data: data, completion: nil)
+          
+          return Observable<State>.just(.didTapKakaoState(error))
+        }
     }
   }
   
