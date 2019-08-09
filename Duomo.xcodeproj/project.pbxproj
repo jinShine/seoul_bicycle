@@ -11,6 +11,7 @@
 		5C2CBD6922FAC12900F4F11A /* SignUpInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6822FAC12900F4F11A /* SignUpInteractor.swift */; };
 		5C2CBD6B22FBF55400F4F11A /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6A22FBF55400F4F11A /* LoginError.swift */; };
 		5C2CBD6D22FBF6B400F4F11A /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */; };
+		5C2CBD7622FD5CA600F4F11A /* TermOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD7522FD5CA600F4F11A /* TermOfServiceViewController.swift */; };
 		5C2DB1B522F93143001610C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B422F93143001610C5 /* Login.storyboard */; };
 		5C2DB1B822F933E5001610C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B722F933E5001610C5 /* LoginViewController.swift */; };
 		5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */; };
@@ -57,6 +58,7 @@
 		5C2CBD6A22FBF55400F4F11A /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		5C2CBD7022FC2BEE00F4F11A /* Duomo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duomo-Bridging-Header.h"; sourceTree = "<group>"; };
+		5C2CBD7522FD5CA600F4F11A /* TermOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermOfServiceViewController.swift; sourceTree = "<group>"; };
 		5C2DB1B422F93143001610C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5C2DB1B722F933E5001610C5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -110,9 +112,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C2CBD7422FD42AA00F4F11A /* TermOfService */ = {
+			isa = PBXGroup;
+			children = (
+				5C2CBD7522FD5CA600F4F11A /* TermOfServiceViewController.swift */,
+			);
+			path = TermOfService;
+			sourceTree = "<group>";
+		};
 		5C2DB1B622F933AD001610C5 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				5C2CBD7422FD42AA00F4F11A /* TermOfService */,
 				5C2DB1B722F933E5001610C5 /* LoginViewController.swift */,
 				5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */,
 				5C2CBD6A22FBF55400F4F11A /* LoginError.swift */,
@@ -494,6 +505,7 @@
 				5C6F9A3022F72A9E00B10AC9 /* Navigator.swift in Sources */,
 				5C6F9A5022F753A600B10AC9 /* NetworkError.swift in Sources */,
 				5C6F9A4022F72F9400B10AC9 /* LocationTrackingViewController.swift in Sources */,
+				5C2CBD7622FD5CA600F4F11A /* TermOfServiceViewController.swift in Sources */,
 				5C6F9A4D22F752D900B10AC9 /* App.swift in Sources */,
 				5C6F9A4222F72FD500B10AC9 /* LocationTrackingViewModel.swift in Sources */,
 				5C6F9A4E22F753A000B10AC9 /* NetworkService.swift in Sources */,

@@ -22,22 +22,28 @@ final class LoginViewModel: BindViewModelType {
   //MARK: - Unidirection
   
   enum Command {
+    case viewDidLoad
     case didTapLogin(email: String, password: String)
     case didTapSignup
     case didTapKakao
+    case validateField(email: String, password: String)
   }
   
   enum Action {
+    case viewDidLoadAction
     case didTapLoginAction(email: String, password: String)
     case didTapSignupAction
     case didTapKakaoAction
+    case validateFieldAction(email: String, password: String)
   }
   
   enum State {
+    case viewDidLoadState
     case didTapLoginState(LoginError?)
     case didTapSignupState
     case showIndicatorState(_ isStarting: Bool)
     case didTapKakaoState(Error?)
+    case validateFieldState(Bool)
   }
   
   var command = PublishSubject<Command>()
@@ -64,17 +70,23 @@ final class LoginViewModel: BindViewModelType {
   
   func toAction(from command: Command) -> Observable<Action> {
     switch command {
+    case .viewDidLoad:
+      return Observable<Action>.just(.viewDidLoadAction)
     case .didTapLogin(let email, let password):
       return Observable<Action>.just(.didTapLoginAction(email: email, password: password))
     case .didTapSignup:
       return Observable<Action>.just(.didTapSignupAction)
     case .didTapKakao:
       return Observable<Action>.just(.didTapKakaoAction)
+    case .validateField(let email, let password):
+      return Observable<Action>.just(.validateFieldAction(email: email, password: password))
     }
   }
   
   func toState(from action: Action) -> Observable<State> {
     switch action {
+    case .viewDidLoadAction:
+      return Observable<State>.just(.viewDidLoadState)
     case .didTapLoginAction(let email, let password):
       showIndicator(true)
       return loginUseCase.login(email: email, password: password)
@@ -88,16 +100,19 @@ final class LoginViewModel: BindViewModelType {
       let token = loginUseCase.kakaoToken()
       return loginUseCase.kakaoLogin()
         .flatMap { (error, result) -> Observable<State> in
-          
           let data = [token ?? "" : [
               "name" : result?.nickname,
               "profileImage" : result?.properties?["profile_image"]
             ]]
-          
           App.firestore.create(collection: "users", data: data, completion: nil)
           
           return Observable<State>.just(.didTapKakaoState(error))
         }
+    case .validateFieldAction(let email, let password):
+      if email.validateEmail() && password.validatePassword() {
+        return Observable<State>.just(.validateFieldState(true))
+      }
+      return Observable<State>.just(.validateFieldState(false))
     }
   }
   
@@ -109,6 +124,6 @@ extension LoginViewModel {
   private func showIndicator(_ isStarting: Bool) {
     self.stateSubject.onNext(.showIndicatorState(isStarting))
   }
-  
+
 }
 

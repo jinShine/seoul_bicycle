@@ -50,8 +50,9 @@ extension BaseViewController {
     activityIndicator = NVActivityIndicatorView(frame: CGRect(origin: point, size: Constant.activityIndicatorSize),
                                                 type: NVActivityIndicatorType.ballPulseSync, color: .red, padding: 0)
     self.view.addSubview(activityIndicator)
-    
-    
-    
+  }
+  
+  func dismissKeyboard() {
+    view.endEditing(true)
   }
 }

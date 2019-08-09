@@ -135,7 +135,23 @@ extension UIColor {
     return NSString(format: "#%06x", rgb) as String
   }
   
-  convenience init(r: Int, g: Int, b: Int, a: Int? = nil) {
-    self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a ?? 255) / 255)
+  convenience init(r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat? = nil) {
+    self.init(red: r / 255, green: g / 255, blue: b / 255, alpha: a ?? 255 / 255)
   }
+}
+
+extension UIButton {
+  
+  func isActivate(by state: Bool) {
+    
+    self.isEnabled = state
+    
+    if state {
+      self.setTitleColor(UIColor.white, for: .normal)
+    } else {
+      self.setTitleColor(UIColor.init(white: 1, alpha: 0.5), for: .disabled)
+    }
+    
+  }
+  
 }

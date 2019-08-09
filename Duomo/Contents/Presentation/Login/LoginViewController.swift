@@ -14,17 +14,24 @@ class LoginViewController: BaseViewController, BindViewType {
   
   //MARK: - Constant
   struct Constant {
-    
+    static let cornerRadius: CGFloat = 5
+    static let buttonHeight: CGFloat = 60
+    static let safeAreaBottom: CGFloat = 34
   }
   
   
   //MARK: - UI Properties
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var fieldContainer: UIView!
+  @IBOutlet weak var separatorView: UIView!
   @IBOutlet weak var emailField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
-  @IBOutlet weak var kakaoButton: UIButton!
-  @IBOutlet weak var loginButton: UIButton!
-  @IBOutlet weak var signupButton: UIButton!
   @IBOutlet weak var findPasswordButton: UIButton!
+  @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var kakaoButton: UIButton!
+  @IBOutlet weak var signupButton: UIButton!
+  @IBOutlet weak var signupHeightConstraint: NSLayoutConstraint!
+  
   
   
   
@@ -47,6 +54,10 @@ class LoginViewController: BaseViewController, BindViewType {
     
   }
 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.dismissKeyboard()
+  }
+  
 }
 
 //MARK: - Bind
@@ -54,6 +65,11 @@ extension LoginViewController {
   
   //OUTPUT
   func command(viewModel: ViewModel) {
+    
+    let obViewDidLoad = rx.viewDidLoad
+      .map { _ in ViewModel.Command.viewDidLoad }
+    
+    
     let obEmailField = emailField.rx.text.orEmpty
     let obPasswordField = passwordField.rx.text.orEmpty
     let obContents = Observable.combineLatest([obEmailField, obPasswordField])
@@ -68,16 +84,23 @@ extension LoginViewController {
     let obSignup = signupButton.rx.tap
       .throttle(2.0, scheduler: MainScheduler.instance)
       .map { ViewModel.Command.didTapSignup }
+    
+    let obValidateField = obContents.map {
+      ViewModel.Command.validateField(email: $0[0], password: $0[1])
+    }
 
     
     Observable<ViewModel.Command>.merge([
+        obViewDidLoad,
         obLogin,
         obKakaoLogin,
-        obSignup
+        obSignup,
+    obValidateField
       ])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
   }
+
   
   
   //INPUT
@@ -88,16 +111,25 @@ extension LoginViewController {
         guard let self = self else { return }
         
         switch state {
+          
+        case .viewDidLoadState:
+          self.setupUI()
+          
         case .didTapLoginState(let loginError):
           if loginError != nil {
             self.view.makeToast(loginError?.description, duration: 1.5, position: .center)
           } else {
+            self.dismissKeyboard()
             //이동
           }
+          
         case .didTapSignupState:
+          self.dismissKeyboard()
           self.navigationController?.pushViewController(Navigator.signup.viewController, animated: true)
+          
         case .showIndicatorState(let isStarting):
           isStarting ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+          
         case .didTapKakaoState(let error):
           if error != nil {
             if let error = error as NSError? {
@@ -106,6 +138,9 @@ extension LoginViewController {
           } else {
             // 이동
           }
+          
+        case .validateFieldState(let isEnabled):
+          self.loginButton.isActivate(by: isEnabled)
         }
       })
       .disposed(by: self.disposeBag)
@@ -117,5 +152,42 @@ extension LoginViewController {
 //MARK: - Method Handler
 extension LoginViewController {
 
+  private func setupUI() {
+    
+    view.backgroundColor = App.color.background
+    
+    // 타이틀
+    titleLabel.font = App.font.bold(size: 20)
+    
+    // 텍스트필드 Container
+    fieldContainer.layer.cornerRadius = Constant.cornerRadius
+    fieldContainer.layer.borderColor = App.color.lightAlphaGray.cgColor
+    fieldContainer.layer.borderWidth = 1
+    separatorView.backgroundColor = App.color.lightAlphaGray
+    
+    // 비번번호 찾기 버튼
+    let findPasswordAttributedText = NSMutableAttributedString(string: "비밀번호를 분실하셨나요?",
+                                         attributes: [.foregroundColor : App.color.lightGray,
+                                                      .font : App.font.medium(size: 11),
+                                                      .underlineStyle: NSUnderlineStyle.single.rawValue])
+    findPasswordButton.setAttributedTitle(findPasswordAttributedText, for: .normal)
+    
+    // 로그인 버튼
+    loginButton.layer.cornerRadius = Constant.cornerRadius
+    loginButton.titleLabel?.font = App.font.bold(size: 18)
+    loginButton.isEnabled = false
+    
+    // 회원가입 버튼
+    let signupAttributedText = NSMutableAttributedString(string: "계정이 없으신가요? ",
+                              attributes: [.foregroundColor : App.color.lightGray,
+                                           .font : App.font.regular(size: 13)])
+    signupAttributedText.append(NSMutableAttributedString(string: "회원 가입",
+                                                          attributes: [.foregroundColor : UIColor.black,
+                                                                       .font : App.font.bold(size: 13)]))
+    signupButton.setAttributedTitle(signupAttributedText, for: .normal)
+    signupHeightConstraint.constant = Constant.buttonHeight + Constant.safeAreaBottom
+    
+  }
+  
 }
 
