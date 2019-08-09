@@ -10,10 +10,16 @@ import UIKit
 
 class TermOfServiceViewController: UIViewController {
 
-    override func viewDidLoad() {
+  @IBOutlet weak var textView: UITextView!
+  
+  override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
+    textView.attributedText = NSAttributedString.readRTF(forResource: "TermOfServiceFile")
+    
+  }
+  
+  @IBAction func close(_ sender: UIButton) {
+    dismiss(animated: true, completion: nil)
+  }
 }

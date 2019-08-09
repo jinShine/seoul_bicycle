@@ -140,18 +140,35 @@ extension UIColor {
   }
 }
 
+
+//MARK: - UIButton
 extension UIButton {
   
   func isActivate(by state: Bool) {
-    
     self.isEnabled = state
-    
     if state {
       self.setTitleColor(UIColor.white, for: .normal)
     } else {
       self.setTitleColor(UIColor.init(white: 1, alpha: 0.5), for: .disabled)
     }
-    
   }
+
+}
+
+
+//MARK: - NSAttributedString
+extension NSAttributedString {
   
+  static func readRTF(forResource: String) -> NSAttributedString {
+    if let rtfPath = Bundle.main.url(forResource: forResource, withExtension: "rtf") {
+      do {
+        let attributedStringWithRtf: NSAttributedString = try NSAttributedString(url: rtfPath, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil)
+        return attributedStringWithRtf
+      } catch let error {
+        print("Got an error \(error)")
+      }
+    }
+    
+    return NSAttributedString(string: "")
+  }
 }

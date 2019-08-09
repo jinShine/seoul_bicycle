@@ -95,7 +95,7 @@ extension LoginViewController {
         obLogin,
         obKakaoLogin,
         obSignup,
-    obValidateField
+        obValidateField
       ])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
@@ -168,7 +168,7 @@ extension LoginViewController {
     // 비번번호 찾기 버튼
     let findPasswordAttributedText = NSMutableAttributedString(string: "비밀번호를 분실하셨나요?",
                                          attributes: [.foregroundColor : App.color.lightGray,
-                                                      .font : App.font.medium(size: 11),
+                                                      .font : App.font.medium(size: 12),
                                                       .underlineStyle: NSUnderlineStyle.single.rawValue])
     findPasswordButton.setAttributedTitle(findPasswordAttributedText, for: .normal)
     
@@ -180,10 +180,10 @@ extension LoginViewController {
     // 회원가입 버튼
     let signupAttributedText = NSMutableAttributedString(string: "계정이 없으신가요? ",
                               attributes: [.foregroundColor : App.color.lightGray,
-                                           .font : App.font.regular(size: 13)])
+                                           .font : App.font.regular(size: 14)])
     signupAttributedText.append(NSMutableAttributedString(string: "회원 가입",
                                                           attributes: [.foregroundColor : UIColor.black,
-                                                                       .font : App.font.bold(size: 13)]))
+                                                                       .font : App.font.bold(size: 14)]))
     signupButton.setAttributedTitle(signupAttributedText, for: .normal)
     signupHeightConstraint.constant = Constant.buttonHeight + Constant.safeAreaBottom
     
