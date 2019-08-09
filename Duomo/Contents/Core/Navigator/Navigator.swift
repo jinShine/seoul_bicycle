@@ -11,6 +11,7 @@ import UIKit
 enum Navigator {
   case login
   case signup
+  case findPassword
   case locationTracking
 }
 
@@ -29,10 +30,16 @@ extension Navigator {
       let viewController = UIStoryboard.create(SignUpViewController.self, name: "Login", bundle: nil, identifier: "SignUpViewController")
       viewController.viewModel = viewModel
       return viewController
+    case .findPassword:
+      let viewModel = FindPasswordViewModel(findPasswordUseCase: FindPasswordInteractor())
+      let viewController = UIStoryboard.create(FindPasswordViewController.self, name: "Login", bundle: nil, identifier: "FindPasswordViewController")
+      viewController.viewModel = viewModel
+      return viewController
     case .locationTracking:
       let viewModel = LocationTrackingViewModel(locationUseCase: LocationInteractor())
       let viewController = LocationTrackingViewController(viewModel: viewModel)
       return viewController
+      
     }
   }
 }

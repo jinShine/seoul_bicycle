@@ -55,4 +55,30 @@ extension BaseViewController {
   func dismissKeyboard() {
     view.endEditing(true)
   }
+  
+  
+  func present(to ViewController: UIViewController) {
+    self.present(ViewController, animated: true, completion: nil)
+  }
+  
+  func dismiss() {
+    self.dismiss(animated: true, completion: nil)
+  }
+  
+  func push(to ViewContoller: UIViewController) {
+    self.navigationController?.pushViewController(ViewContoller, animated: true)
+  }
+  
+  func pop() {
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  func pop(to viewController: UIViewController) {
+    self.navigationController?.popToViewController(viewController, animated: true)
+  }
+  
+  func popToRootViewController() {
+    self.navigationController?.popToRootViewController(animated: true)
+  }
+  
 }

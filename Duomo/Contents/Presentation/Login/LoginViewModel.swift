@@ -27,6 +27,7 @@ final class LoginViewModel: BindViewModelType {
     case didTapSignup
     case didTapKakao
     case validateField(email: String, password: String)
+    case didTapFindPW
   }
   
   enum Action {
@@ -35,6 +36,7 @@ final class LoginViewModel: BindViewModelType {
     case didTapSignupAction
     case didTapKakaoAction
     case validateFieldAction(email: String, password: String)
+    case didTapFindPWAction
   }
   
   enum State {
@@ -44,6 +46,7 @@ final class LoginViewModel: BindViewModelType {
     case showIndicatorState(_ isStarting: Bool)
     case didTapKakaoState(Error?)
     case validateFieldState(Bool)
+    case didTapFindPWState
   }
   
   var command = PublishSubject<Command>()
@@ -80,6 +83,8 @@ final class LoginViewModel: BindViewModelType {
       return Observable<Action>.just(.didTapKakaoAction)
     case .validateField(let email, let password):
       return Observable<Action>.just(.validateFieldAction(email: email, password: password))
+    case .didTapFindPW:
+      return Observable<Action>.just(.didTapFindPWAction)
     }
   }
   
@@ -113,6 +118,9 @@ final class LoginViewModel: BindViewModelType {
         return Observable<State>.just(.validateFieldState(true))
       }
       return Observable<State>.just(.validateFieldState(false))
+      
+    case .didTapFindPWAction:
+      return Observable<State>.just(.didTapFindPWState)
     }
   }
   

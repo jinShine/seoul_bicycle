@@ -27,12 +27,14 @@ final class SignUpViewModel: BindViewModelType {
     case viewDidLoad
     case didInputInfo(_ name: String, _ email: String, _ password: String, _ confirmPassword: String)
     case didTapSignUp(_ name: String, _ email: String, _ password: String)
+    case didTapClose
   }
   
   enum Action {
     case viewDidLoadAction
     case didInputInfoAction(_ name: String, _ email: String, _ password: String, _ confirmPassword: String)
     case didTapSignUpAction(_ name: String, _ email: String, _ password: String)
+    case didTapCloseAction
   }
   
   enum State {
@@ -40,6 +42,8 @@ final class SignUpViewModel: BindViewModelType {
     case didInputInfoState
     case didTapSignUpState(SignUpErrors?)
     case showIndicatorState(_ isStarting: Bool)
+    case didTapCloseState
+    case validatedFieldState(_ isValidating: Bool)
   }
   
   var command = PublishSubject<Command>()
@@ -70,6 +74,8 @@ final class SignUpViewModel: BindViewModelType {
       return Observable<Action>.just(.didInputInfoAction(name, email, password, confirmPassword))
     case .didTapSignUp(let name, let email, let password):
       return Observable<Action>.just(.didTapSignUpAction(name, email, password))
+    case .didTapClose:
+      return Observable<Action>.just(.didTapCloseAction)
     }
   }
 
@@ -83,7 +89,7 @@ final class SignUpViewModel: BindViewModelType {
                    email: email,
                    password: password,
                    confirmPassword: confirmPassword)
-      
+      validatedField(signupErrors)
       return Observable<State>.just(.didInputInfoState)
       
     case .didTapSignUpAction(let name, let email, let password):
@@ -98,6 +104,10 @@ final class SignUpViewModel: BindViewModelType {
             return Observable<State>.just(.didTapSignUpState(signupErrors))
           }
       }
+      
+    case .didTapCloseAction:
+      return Observable<State>.just(.didTapCloseState)
+      
     }
   }
 }
@@ -137,6 +147,14 @@ extension SignUpViewModel {
 
   private func showIndicator(_ isStarting: Bool) {
     self.stateSubject.onNext(.showIndicatorState(isStarting))
+  }
+  
+  private func validatedField(_ signupErrors: SignUpErrors?) {
+    if signupErrors == nil {
+      self.stateSubject.onNext(.validatedFieldState(true))
+    } else {
+      self.stateSubject.onNext(.validatedFieldState(false))
+    }
   }
   
 }

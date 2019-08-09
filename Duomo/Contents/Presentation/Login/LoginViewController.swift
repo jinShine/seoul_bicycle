@@ -74,14 +74,14 @@ extension LoginViewController {
     let obPasswordField = passwordField.rx.text.orEmpty
     let obContents = Observable.combineLatest([obEmailField, obPasswordField])
 
-    let obLogin = loginButton.rx.tap
+    let obDidTapLogin = loginButton.rx.tap
       .withLatestFrom(obContents)
       .map { ViewModel.Command.didTapLogin(email: $0[0], password: $0[1]) }
     
-    let obKakaoLogin = kakaoButton.rx.tap
+    let obDidTapKakaoLogin = kakaoButton.rx.tap
       .map { ViewModel.Command.didTapKakao }
     
-    let obSignup = signupButton.rx.tap
+    let obDidTapSignup = signupButton.rx.tap
       .throttle(2.0, scheduler: MainScheduler.instance)
       .map { ViewModel.Command.didTapSignup }
     
@@ -89,13 +89,16 @@ extension LoginViewController {
       ViewModel.Command.validateField(email: $0[0], password: $0[1])
     }
 
+    let obDidTapFindPW = findPasswordButton.rx.tap
+      .map { _ in ViewModel.Command.didTapFindPW }
     
     Observable<ViewModel.Command>.merge([
         obViewDidLoad,
-        obLogin,
-        obKakaoLogin,
-        obSignup,
-        obValidateField
+        obDidTapLogin,
+        obDidTapKakaoLogin,
+        obDidTapSignup,
+        obValidateField,
+        obDidTapFindPW
       ])
       .bind(to: viewModel.command)
       .disposed(by: self.disposeBag)
@@ -125,7 +128,7 @@ extension LoginViewController {
           
         case .didTapSignupState:
           self.dismissKeyboard()
-          self.navigationController?.pushViewController(Navigator.signup.viewController, animated: true)
+          self.present(to: Navigator.signup.viewController)
           
         case .showIndicatorState(let isStarting):
           isStarting ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
@@ -141,6 +144,9 @@ extension LoginViewController {
           
         case .validateFieldState(let isEnabled):
           self.loginButton.isActivate(by: isEnabled)
+          
+        case .didTapFindPWState:
+          self.push(to: Navigator.findPassword.viewController)
         }
       })
       .disposed(by: self.disposeBag)
@@ -173,6 +179,7 @@ extension LoginViewController {
     findPasswordButton.setAttributedTitle(findPasswordAttributedText, for: .normal)
     
     // 로그인 버튼
+    loginButton.backgroundColor = App.color.main
     loginButton.layer.cornerRadius = Constant.cornerRadius
     loginButton.titleLabel?.font = App.font.bold(size: 18)
     loginButton.isEnabled = false
