@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		5C2CBD6522FAB83100F4F11A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2CBD6422FAB7FD00F4F11A /* KakaoOpenSDK.framework */; };
 		5C2CBD6922FAC12900F4F11A /* SignUpInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6822FAC12900F4F11A /* SignUpInteractor.swift */; };
-		5C2CBD6B22FBF55400F4F11A /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6A22FBF55400F4F11A /* LoginError.swift */; };
-		5C2CBD6D22FBF6B400F4F11A /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */; };
+		5C2CBD6B22FBF55400F4F11A /* SignInError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6A22FBF55400F4F11A /* SignInError.swift */; };
+		5C2CBD6D22FBF6B400F4F11A /* SignInInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD6C22FBF6B400F4F11A /* SignInInteractor.swift */; };
 		5C2CBD7622FD5CA600F4F11A /* TermOfServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2CBD7522FD5CA600F4F11A /* TermOfServiceViewController.swift */; };
 		5C2DB1B522F93143001610C5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B422F93143001610C5 /* Login.storyboard */; };
-		5C2DB1B822F933E5001610C5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B722F933E5001610C5 /* LoginViewController.swift */; };
-		5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */; };
+		5C2DB1B822F933E5001610C5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B722F933E5001610C5 /* SignInViewController.swift */; };
+		5C2DB1BA22F933F0001610C5 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1B922F933F0001610C5 /* SignInViewModel.swift */; };
 		5C2DB1BD22F93E40001610C5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */; };
 		5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */; };
 		5C2DB1C322F983CB001610C5 /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2DB1C222F983CB001610C5 /* DebugPrint.swift */; };
@@ -26,6 +26,8 @@
 		5C46ABAE22FDA254002424C0 /* FindPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46ABAD22FDA254002424C0 /* FindPasswordViewModel.swift */; };
 		5C46ABB022FDA934002424C0 /* FindPasswordInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46ABAF22FDA934002424C0 /* FindPasswordInteractor.swift */; };
 		5C46ABB222FDBAEB002424C0 /* FindPasswordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46ABB122FDBAEB002424C0 /* FindPasswordError.swift */; };
+		5C46ABB522FDCE87002424C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46ABB422FDCE87002424C0 /* LoginViewController.swift */; };
+		5C46ABB722FDCE93002424C0 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C46ABB622FDCE93002424C0 /* LoginViewModel.swift */; };
 		5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */; };
 		5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1222F7239200B10AC9 /* Main.storyboard */; };
 		5C6F9A1622F7239500B10AC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C6F9A1522F7239500B10AC9 /* Assets.xcassets */; };
@@ -50,6 +52,9 @@
 		5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */; };
 		5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5422F7543B00B10AC9 /* Router.swift */; };
 		5C6F9A5722F7DFBE00B10AC9 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */; };
+		5C72C52122FFDF1A003E8547 /* CreateSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72C52022FFDF1A003E8547 /* CreateSpaceViewController.swift */; };
+		5C72C52322FFDF26003E8547 /* CreateSpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */; };
+		5C72C52522FFDFBF003E8547 /* CreateSpace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */; };
 		5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */; };
 		5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */; };
 		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
@@ -60,13 +65,13 @@
 		5902A1B32282988D20F27CF0 /* Pods-Duomo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Duomo.debug.xcconfig"; path = "Target Support Files/Pods-Duomo/Pods-Duomo.debug.xcconfig"; sourceTree = "<group>"; };
 		5C2CBD6422FAB7FD00F4F11A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		5C2CBD6822FAC12900F4F11A /* SignUpInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpInteractor.swift; sourceTree = "<group>"; };
-		5C2CBD6A22FBF55400F4F11A /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
-		5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		5C2CBD6A22FBF55400F4F11A /* SignInError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInError.swift; sourceTree = "<group>"; };
+		5C2CBD6C22FBF6B400F4F11A /* SignInInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInteractor.swift; sourceTree = "<group>"; };
 		5C2CBD7022FC2BEE00F4F11A /* Duomo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duomo-Bridging-Header.h"; sourceTree = "<group>"; };
 		5C2CBD7522FD5CA600F4F11A /* TermOfServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermOfServiceViewController.swift; sourceTree = "<group>"; };
 		5C2DB1B422F93143001610C5 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		5C2DB1B722F933E5001610C5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5C2DB1B722F933E5001610C5 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		5C2DB1B922F933F0001610C5 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5C2DB1C222F983CB001610C5 /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
@@ -78,6 +83,8 @@
 		5C46ABAD22FDA254002424C0 /* FindPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewModel.swift; sourceTree = "<group>"; };
 		5C46ABAF22FDA934002424C0 /* FindPasswordInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordInteractor.swift; sourceTree = "<group>"; };
 		5C46ABB122FDBAEB002424C0 /* FindPasswordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordError.swift; sourceTree = "<group>"; };
+		5C46ABB422FDCE87002424C0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5C46ABB622FDCE93002424C0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5C6F9A0B22F7239200B10AC9 /* Duomo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duomo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6F9A0E22F7239200B10AC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C6F9A1322F7239200B10AC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +111,9 @@
 		5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtension.swift; sourceTree = "<group>"; };
 		5C6F9A5422F7543B00B10AC9 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		5C72C52022FFDF1A003E8547 /* CreateSpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpaceViewController.swift; sourceTree = "<group>"; };
+		5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpaceViewModel.swift; sourceTree = "<group>"; };
+		5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSpace.storyboard; sourceTree = "<group>"; };
 		5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,27 +140,24 @@
 			path = TermOfService;
 			sourceTree = "<group>";
 		};
-		5C2DB1B622F933AD001610C5 /* Login */ = {
+		5C2DB1B622F933AD001610C5 /* SignIn */ = {
 			isa = PBXGroup;
 			children = (
-				5C46ABAA22FDA1D4002424C0 /* FindPassword */,
-				5C2CBD7422FD42AA00F4F11A /* TermOfService */,
-				5C2DB1B722F933E5001610C5 /* LoginViewController.swift */,
-				5C2DB1B922F933F0001610C5 /* LoginViewModel.swift */,
-				5C2CBD6A22FBF55400F4F11A /* LoginError.swift */,
-				5C2DB1BB22F933F5001610C5 /* SignIn */,
+				5C2DB1B722F933E5001610C5 /* SignInViewController.swift */,
+				5C2DB1B922F933F0001610C5 /* SignInViewModel.swift */,
+				5C2CBD6A22FBF55400F4F11A /* SignInError.swift */,
 			);
-			path = Login;
+			path = SignIn;
 			sourceTree = "<group>";
 		};
-		5C2DB1BB22F933F5001610C5 /* SignIn */ = {
+		5C2DB1BB22F933F5001610C5 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
 				5C2DB1BC22F93E40001610C5 /* SignUpViewController.swift */,
 				5C2DB1BF22F93E5E001610C5 /* SignUpViewModel.swift */,
 				5C2DB1C422F9938C001610C5 /* SignUpError.swift */,
 			);
-			path = SignIn;
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		5C2DB1C122F983A7001610C5 /* Debug */ = {
@@ -178,6 +185,19 @@
 				5C46ABB122FDBAEB002424C0 /* FindPasswordError.swift */,
 			);
 			path = FindPassword;
+			sourceTree = "<group>";
+		};
+		5C46ABB322FDCC31002424C0 /* LoginMain */ = {
+			isa = PBXGroup;
+			children = (
+				5C46ABB422FDCE87002424C0 /* LoginViewController.swift */,
+				5C46ABB622FDCE93002424C0 /* LoginViewModel.swift */,
+				5C46ABAA22FDA1D4002424C0 /* FindPassword */,
+				5C2CBD7422FD42AA00F4F11A /* TermOfService */,
+				5C2DB1BB22F933F5001610C5 /* SignUp */,
+				5C2DB1B622F933AD001610C5 /* SignIn */,
+			);
+			path = LoginMain;
 			sourceTree = "<group>";
 		};
 		5C6F9A0222F7239200B10AC9 = {
@@ -221,7 +241,8 @@
 		5C6F9A2122F7255800B10AC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				5C2DB1B622F933AD001610C5 /* Login */,
+				5C72C51B22FE9078003E8547 /* Space */,
+				5C46ABB322FDCC31002424C0 /* LoginMain */,
 				5C6F9A3E22F72F6900B10AC9 /* LocationTracking */,
 			);
 			path = Presentation;
@@ -233,7 +254,7 @@
 				5C6F9A2622F7258F00B10AC9 /* Service */,
 				5C6F9A4A22F740F100B10AC9 /* LocationInteractor.swift */,
 				5C2CBD6822FAC12900F4F11A /* SignUpInteractor.swift */,
-				5C2CBD6C22FBF6B400F4F11A /* LoginInteractor.swift */,
+				5C2CBD6C22FBF6B400F4F11A /* SignInInteractor.swift */,
 				5C46ABAF22FDA934002424C0 /* FindPasswordInteractor.swift */,
 			);
 			path = Domain;
@@ -302,6 +323,7 @@
 				5C6F9A3C22F72CF600B10AC9 /* LocationTracking.storyboard */,
 				5C2DB1B422F93143001610C5 /* Login.storyboard */,
 				5C6F9A1722F7239500B10AC9 /* LaunchScreen.storyboard */,
+				5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -359,6 +381,15 @@
 				5C6F9A5622F7DFBD00B10AC9 /* LocationError.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		5C72C51B22FE9078003E8547 /* Space */ = {
+			isa = PBXGroup;
+			children = (
+				5C72C52022FFDF1A003E8547 /* CreateSpaceViewController.swift */,
+				5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */,
+			);
+			path = Space;
 			sourceTree = "<group>";
 		};
 		5CC29A2C22F9DBAE00A1ECA5 /* FireStore */ = {
@@ -453,6 +484,7 @@
 				5C2DB1B522F93143001610C5 /* Login.storyboard in Resources */,
 				5C6F9A1422F7239200B10AC9 /* Main.storyboard in Resources */,
 				5C6F9A2E22F7278800B10AC9 /* GoogleService-Info.plist in Resources */,
+				5C72C52522FFDFBF003E8547 /* CreateSpace.storyboard in Resources */,
 				5C46ABA922FD8B8A002424C0 /* TermOfServiceFile.rtf in Resources */,
 				5C6F9A3D22F72CF600B10AC9 /* LocationTracking.storyboard in Resources */,
 			);
@@ -507,17 +539,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C2DB1B822F933E5001610C5 /* LoginViewController.swift in Sources */,
+				5C2DB1B822F933E5001610C5 /* SignInViewController.swift in Sources */,
 				5C46ABAE22FDA254002424C0 /* FindPasswordViewModel.swift in Sources */,
 				5C6F9A4922F73E6400B10AC9 /* UIViewController+Rx.swift in Sources */,
-				5C2DB1BA22F933F0001610C5 /* LoginViewModel.swift in Sources */,
+				5C2DB1BA22F933F0001610C5 /* SignInViewModel.swift in Sources */,
+				5C46ABB522FDCE87002424C0 /* LoginViewController.swift in Sources */,
 				5C6F9A4F22F753A300B10AC9 /* NetworkErrorBuilder.swift in Sources */,
 				5C6F9A0F22F7239200B10AC9 /* AppDelegate.swift in Sources */,
 				5C3673B622FC7B7B00BEC76E /* Color.swift in Sources */,
+				5C46ABB722FDCE93002424C0 /* LoginViewModel.swift in Sources */,
 				5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */,
 				5C6F9A3522F72ABB00B10AC9 /* BindViewModelType.swift in Sources */,
-				5C2CBD6B22FBF55400F4F11A /* LoginError.swift in Sources */,
-				5C2CBD6D22FBF6B400F4F11A /* LoginInteractor.swift in Sources */,
+				5C2CBD6B22FBF55400F4F11A /* SignInError.swift in Sources */,
+				5C2CBD6D22FBF6B400F4F11A /* SignInInteractor.swift in Sources */,
 				5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */,
 				5C6F9A4522F7320800B10AC9 /* LocationService.swift in Sources */,
 				5C6F9A4822F73E5F00B10AC9 /* UIView+Extension.swift in Sources */,
@@ -530,6 +564,7 @@
 				5C6F9A5122F753A800B10AC9 /* NetworkDataResponse.swift in Sources */,
 				5C6F9A4B22F740F100B10AC9 /* LocationInteractor.swift in Sources */,
 				5C6F9A3022F72A9E00B10AC9 /* Navigator.swift in Sources */,
+				5C72C52122FFDF1A003E8547 /* CreateSpaceViewController.swift in Sources */,
 				5C6F9A5022F753A600B10AC9 /* NetworkError.swift in Sources */,
 				5C6F9A4022F72F9400B10AC9 /* LocationTrackingViewController.swift in Sources */,
 				5C2CBD7622FD5CA600F4F11A /* TermOfServiceViewController.swift in Sources */,
@@ -540,6 +575,7 @@
 				5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */,
 				5C2DB1C022F93E5E001610C5 /* SignUpViewModel.swift in Sources */,
 				5C6F9A5322F7541700B10AC9 /* CommonExtension.swift in Sources */,
+				5C72C52322FFDF26003E8547 /* CreateSpaceViewModel.swift in Sources */,
 				5C46ABAC22FDA20B002424C0 /* FindPasswordViewController.swift in Sources */,
 				5C2DB1BD22F93E40001610C5 /* SignUpViewController.swift in Sources */,
 				5C2CBD6922FAC12900F4F11A /* SignUpInteractor.swift in Sources */,

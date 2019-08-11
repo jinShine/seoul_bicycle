@@ -9,17 +9,17 @@
 import Foundation
 
 struct Font {
+    
+    func regular(size: CGFloat) -> UIFont {
+      return UIFont(name: "HelveticaNeue", size: size)!
+    }
+    
+    func medium(size: CGFloat) -> UIFont {
+      return UIFont(name: "HelveticaNeue-Medium", size: size)!
+    }
+    
+    func bold(size: CGFloat) -> UIFont {
+      return UIFont(name: "HelveticaNeue-Bold", size: size)!
+    }
 
-  func regular(size: CGFloat) -> UIFont {
-    return UIFont(name: "HelveticaNeue", size: size)!
-  }
-  
-  func medium(size: CGFloat) -> UIFont {
-    return UIFont(name: "HelveticaNeue-Medium", size: size)!
-  }
-  
-  func bold(size: CGFloat) -> UIFont {
-    return UIFont(name: "HelveticaNeue-Bold", size: size)!
-  }
-  
 }

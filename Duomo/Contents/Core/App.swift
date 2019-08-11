@@ -16,7 +16,6 @@ struct App {
   static let firestore = FirestoreDB.shared
   
   
-  
   static let font = Font()
   static let color = Color()
 }

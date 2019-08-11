@@ -44,7 +44,7 @@ extension AppDelegate {
     if let navigationController = window?.rootViewController as? UINavigationController,
       let viewController = navigationController.viewControllers.first,
       let loginViewController = viewController as? LoginViewController {
-      let viewModel = LoginViewModel(loginUseCase: LoginInteractor())
+      let viewModel = LoginViewModel(signinUseCase: SignInInteractor())
       loginViewController.viewModel = viewModel
     }
   }
