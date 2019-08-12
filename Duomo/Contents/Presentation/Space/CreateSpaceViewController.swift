@@ -45,7 +45,7 @@ class CreateSpaceViewController: BaseViewController, BindViewType {
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    
+    Preference.standard.
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

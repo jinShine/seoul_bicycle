@@ -35,5 +35,7 @@ target 'Duomo' do
   pod 'Toast-Swift', '~> 5.0.0' # Toast
   pod 'NVActivityIndicatorView' # ActivityIndicator
   
+  # Utilities
+  pod 'KeychainAccess'
 
 end

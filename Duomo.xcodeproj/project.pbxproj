@@ -55,6 +55,7 @@
 		5C72C52122FFDF1A003E8547 /* CreateSpaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72C52022FFDF1A003E8547 /* CreateSpaceViewController.swift */; };
 		5C72C52322FFDF26003E8547 /* CreateSpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */; };
 		5C72C52522FFDFBF003E8547 /* CreateSpace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */; };
+		5CC002DA23016927007C7FC3 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC002D923016927007C7FC3 /* Preference.swift */; };
 		5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */; };
 		5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */; };
 		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
@@ -114,6 +115,7 @@
 		5C72C52022FFDF1A003E8547 /* CreateSpaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpaceViewController.swift; sourceTree = "<group>"; };
 		5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpaceViewModel.swift; sourceTree = "<group>"; };
 		5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSpace.storyboard; sourceTree = "<group>"; };
+		5CC002D923016927007C7FC3 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -356,11 +358,10 @@
 		5C6F9A2C22F7261000B10AC9 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				5CC002DB23016938007C7FC3 /* Extension */,
 				5C3673B022FC79E200BEC76E /* Theme */,
 				5C2DB1C122F983A7001610C5 /* Debug */,
-				5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */,
-				5C6F9A4722F73E4A00B10AC9 /* UIView+Extension.swift */,
-				5C6F9A4622F73E4A00B10AC9 /* UIViewController+Rx.swift */,
+				5CC002D923016927007C7FC3 /* Preference.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -390,6 +391,16 @@
 				5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */,
 			);
 			path = Space;
+			sourceTree = "<group>";
+		};
+		5CC002DB23016938007C7FC3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5C6F9A5222F7541700B10AC9 /* CommonExtension.swift */,
+				5C6F9A4722F73E4A00B10AC9 /* UIView+Extension.swift */,
+				5C6F9A4622F73E4A00B10AC9 /* UIViewController+Rx.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		5CC29A2C22F9DBAE00A1ECA5 /* FireStore */ = {
@@ -567,6 +578,7 @@
 				5C72C52122FFDF1A003E8547 /* CreateSpaceViewController.swift in Sources */,
 				5C6F9A5022F753A600B10AC9 /* NetworkError.swift in Sources */,
 				5C6F9A4022F72F9400B10AC9 /* LocationTrackingViewController.swift in Sources */,
+				5CC002DA23016927007C7FC3 /* Preference.swift in Sources */,
 				5C2CBD7622FD5CA600F4F11A /* TermOfServiceViewController.swift in Sources */,
 				5C6F9A4D22F752D900B10AC9 /* App.swift in Sources */,
 				5C6F9A4222F72FD500B10AC9 /* LocationTrackingViewModel.swift in Sources */,

@@ -80,7 +80,7 @@ final class CreateSpaceViewModel: BindViewModelType {
       return Observable<State>.just(.didInputInfo(validated))
     case .didTapCreateButtonAction(let spaceName):
       let data = [spaceName: [App.preference.string(forKey: "UserToken")]]
-      App.firestore.db.collection("spaces").document(spaceName).updateData(<#T##fields: [AnyHashable : Any]##[AnyHashable : Any]#>, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+//      App.firestore.db.collection("spaces").document(spaceName).updateData(<#T##fields: [AnyHashable : Any]##[AnyHashable : Any]#>, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
       App.firestore.create(collection: "spaces", data: data, completion: nil)
       return Observable<State>.just(.didTapCreateButtonState)
     }
