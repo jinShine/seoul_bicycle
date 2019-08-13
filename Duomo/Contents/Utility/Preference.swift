@@ -13,8 +13,12 @@ struct Preference {
   
   // Singleton
   static let standard = Preference()
+  private init() { }
   
-
+  // Properties
+  private let keyChain = Keychain()
+  
+  
   // KEY
   struct Key {
     static let email = "com.jinnify.duomo.key.email"
@@ -27,11 +31,32 @@ struct Preference {
     case userDefault, keychain
   }
   
-  
-  private init() {
-    
+  func setObject(object: Any?, key: String, type: PersistenceType) {
+    if type == .keychain {
+      setObjectInKeychain(object: object, key: key)
+    } else {
+      setObjectInUserDefault(object: object, key: key)
+    }
   }
   
+  func objectForKey(key: String, type: PersistenceType) -> Any? {
+    var value: Any?
+    if type == .keychain {
+      value = objectFromKeychain(key: key)
+    } else {
+      value = objectFromUserDefault(key: key)
+    }
+    
+    return value
+  }
+  
+  func removeObject(key: String, type: PersistenceType) {
+    if type == .keychain {
+      removeObjectFromKeychain(key: key)
+    } else {
+      removeObjectFromUserdefault(key: key)
+    }
+  }
   
 }
 
@@ -51,23 +76,25 @@ extension Preference {
     UserDefaults.standard.synchronize()
   }
   
-  private func resetUserDefault(_ keepKeys: [String]? = nil) {
-    let userDefault = UserDefaults.standard
-    
-    guard let keys = keepKeys, keys.count > 0 else {
-      return
-    }
-    
-    let userKeys = userDefault.dictionaryRepresentation().keys
-    let deletableKeys = userKeys.filter(<#T##isIncluded: (String) throws -> Bool##(String) throws -> Bool#>)
-    
-    
-  }
-  
 }
 
 
 //MARK: - Keychain
 extension Preference {
+  
+  private func setObjectInKeychain(object: Any?, key: String) {
+    guard let obj = object as? String else {
+      return
+    }
+    keyChain[key] = obj
+  }
+  
+  private func objectFromKeychain(key: String) -> Any? {
+    return keyChain[key]
+  }
+  
+  private func removeObjectFromKeychain(key: String) {
+    try? keyChain.remove(key)
+  }
   
 }
