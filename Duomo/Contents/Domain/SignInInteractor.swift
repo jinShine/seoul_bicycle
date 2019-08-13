@@ -64,10 +64,13 @@ final class SignInInteractor: SignInUseCase {
             return
           }
           
+          guard let uid = self.kakaoToken() else { return }
+          let data = [uid: ["name": result?.nickname,
+                            "email": result?.account?.email,
+                            "token": uid]]
           
-          //UserDefault에 UserToken 저장
-          let uid = self.kakaoToken()
-          App.preference.setObject(object: uid, key: Preference.Key.token, type: .keychain)
+          App.firestore.create(collection: "users", data: data, completion: nil)
+          
           
           DLog("Get Kakao User Info Success!")
           observer.onNext((nil, result))
@@ -84,7 +87,7 @@ final class SignInInteractor: SignInUseCase {
     guard let session = KOSession.shared() else {
       return nil
     }
-    
+
     let token = session.token?.accessToken
     
     return token

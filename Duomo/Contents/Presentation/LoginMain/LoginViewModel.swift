@@ -81,12 +81,13 @@ final class LoginViewModel: BindViewModelType {
       let token = signinUseCase.kakaoToken()
       return signinUseCase.kakaoLogin()
         .flatMap { (error, result) -> Observable<State> in
-          
-          
+
           let data = [token ?? "" : [
             "name" : result?.nickname,
+            "email": result?.account?.email,
             "profileImage" : result?.properties?["profile_image"]
             ]]
+          
           App.firestore.create(collection: "users", data: data, completion: nil)
           
           return Observable<State>.just(.didTapKakaoState(error))
