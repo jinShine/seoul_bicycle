@@ -56,6 +56,7 @@
 		5C72C52322FFDF26003E8547 /* CreateSpaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */; };
 		5C72C52522FFDFBF003E8547 /* CreateSpace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */; };
 		5CC002DA23016927007C7FC3 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC002D923016927007C7FC3 /* Preference.swift */; };
+		5CC002DD230256B1007C7FC3 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC002DC230256B1007C7FC3 /* UserSession.swift */; };
 		5CC29A2822F8530800A1ECA5 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */; };
 		5CC29A2E22F9DBF100A1ECA5 /* Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */; };
 		F391E746E9B48B74E15C7119 /* Pods_Duomo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */; };
@@ -116,6 +117,7 @@
 		5C72C52222FFDF26003E8547 /* CreateSpaceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSpaceViewModel.swift; sourceTree = "<group>"; };
 		5C72C52422FFDFBF003E8547 /* CreateSpace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateSpace.storyboard; sourceTree = "<group>"; };
 		5CC002D923016927007C7FC3 /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		5CC002DC230256B1007C7FC3 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		5CC29A2D22F9DBF100A1ECA5 /* Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestore.swift; sourceTree = "<group>"; };
 		5DF35C892A0B073F3D0D7F2B /* Pods_Duomo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Duomo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				5CC29A2722F8530800A1ECA5 /* UserAnnotation.swift */,
+				5CC002DC230256B1007C7FC3 /* UserSession.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				5C2CBD6D22FBF6B400F4F11A /* SignInInteractor.swift in Sources */,
 				5C6F9A5522F7543D00B10AC9 /* Router.swift in Sources */,
 				5C6F9A4522F7320800B10AC9 /* LocationService.swift in Sources */,
+				5CC002DD230256B1007C7FC3 /* UserSession.swift in Sources */,
 				5C6F9A4822F73E5F00B10AC9 /* UIView+Extension.swift in Sources */,
 				5C2DB1C322F983CB001610C5 /* DebugPrint.swift in Sources */,
 				5C2DB1C522F9938C001610C5 /* SignUpError.swift in Sources */,

@@ -32,7 +32,9 @@ final class SignUpInteractor: SignUpUseCase {
         DLog("SignUp Success!")
         
         guard let uid = result?.user.uid else { return }
-        let data = [uid: ["name": name]]
+        let data = [uid: ["name": name,
+                          "email": email,
+                          "token": uid]]
         
         App.firestore.db
           .collection("users")

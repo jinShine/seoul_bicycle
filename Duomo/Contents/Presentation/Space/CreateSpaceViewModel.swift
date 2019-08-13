@@ -79,8 +79,10 @@ final class CreateSpaceViewModel: BindViewModelType {
       let validated = validateInfo(name: name, password: password)
       return Observable<State>.just(.didInputInfo(validated))
     case .didTapCreateButtonAction(let spaceName):
-      let data = [spaceName: [App.preference.string(forKey: "UserToken")]]
-//      App.firestore.db.collection("spaces").document(spaceName).updateData(<#T##fields: [AnyHashable : Any]##[AnyHashable : Any]#>, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+      let token = App.preference.objectForKey(key: Preference.Key.token, type: .keychain)
+      
+      App.firestore.db.collection("spaces").document(spaceName).setData(<#T##documentData: [String : Any]##[String : Any]#>)
+
       App.firestore.create(collection: "spaces", data: data, completion: nil)
       return Observable<State>.just(.didTapCreateButtonState)
     }

@@ -21,9 +21,9 @@ struct Preference {
   
   // KEY
   struct Key {
+    static let name = "com.jinnify.duomo.key.name"
     static let email = "com.jinnify.duomo.key.email"
     static let token = "com.jinnify.duomo.key.token"
-    static let password = "com.jinnify.duomo.key.password"
   }
   
   

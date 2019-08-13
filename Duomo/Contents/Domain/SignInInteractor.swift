@@ -29,10 +29,6 @@ final class SignInInteractor: SignInUseCase {
           return
         }
         
-        //UserDefault에 UserToken 저장
-        let uid = result?.user.uid
-        App.preference.set(uid, forKey: "UserToken")
-        
         DLog("Login Success!")
         observer.onNext(nil)
       })
@@ -71,7 +67,7 @@ final class SignInInteractor: SignInUseCase {
           
           //UserDefault에 UserToken 저장
           let uid = self.kakaoToken()
-          App.preference.set(uid, forKey: "UserToken")
+          App.preference.setObject(object: uid, key: Preference.Key.token, type: .keychain)
           
           DLog("Get Kakao User Info Success!")
           observer.onNext((nil, result))

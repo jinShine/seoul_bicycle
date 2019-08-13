@@ -10,7 +10,8 @@ import UIKit
 
 struct App {
   static let delegate = UIApplication.shared.delegate as! AppDelegate
-  static let preference = UserDefaults.standard
+//  static let userSession = 
+  static let preference = Preference.standard
   static let location = LocationService.shared
   static let network = NetworkService.shared
   static let firestore = FirestoreDB.shared

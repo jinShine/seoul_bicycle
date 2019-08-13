@@ -101,6 +101,7 @@ final class SignUpViewModel: BindViewModelType {
         return signupUseCase.signup(name: name, email: email, password: password)
           .flatMap { signupErrors -> Observable<State> in
             self.showIndicator(false)
+            self.saveUserSession(name, email, password)
             return Observable<State>.just(.didTapSignUpState(signupErrors))
           }
       }
@@ -155,6 +156,12 @@ extension SignUpViewModel {
     } else {
       self.stateSubject.onNext(.validatedFieldState(false))
     }
+  }
+  
+  private func saveUserSession(_ name: String, _ email: String, _ password: String) {
+    App.preference.setObject(object: name , key: Preference.Key.name, type: .userDefault)
+    App.preference.setObject(object: email , key: Preference.Key.email, type: .keychain)
+    App.preference.setObject(object: password , key: Preference.Key.password, type: .keychain)
   }
   
 }
