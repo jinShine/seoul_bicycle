@@ -1,41 +1,29 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'Duomo' do
+target 'bicycle' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Duomo
-
+  # Pods for bicycle
   
   # rx
-  pod 'RxSwift', '~> 4.0'
-  pod 'RxCocoa', '~> 4.0'
-  pod 'RxDataSources', '~> 3.0'
-  
-  
-  # Network
-  pod 'Moya', '~> 13.0.1'
-  pod 'Moya/RxSwift', '~> 13.0.1'
-  
-  
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
+  pod 'RxDataSources', '~> 4.0'
+  pod 'Moya/RxSwift', '~> 14.0'
+  pod 'RxViewController'
+
   # image
-  pod 'Kingfisher', '~> 4.0'
+  pod 'Kingfisher', '~> 5.0'
 
+  target 'bicycleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
 
-  # Firebase
-  pod 'Firebase/Core'
-  pod 'Firebase/Firestore'
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Messaging'
-  pod 'Firebase/Auth'
-  
-  
-  # Custom View
-  pod 'Toast-Swift', '~> 5.0.0' # Toast
-  pod 'NVActivityIndicatorView' # ActivityIndicator
-  
-  # Utilities
-  pod 'KeychainAccess'
+  target 'bicycleUITests' do
+    # Pods for testing
+  end
 
 end
