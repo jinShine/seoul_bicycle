@@ -14,8 +14,14 @@ target 'bicycle' do
   pod 'Moya/RxSwift', '~> 14.0'
   pod 'RxViewController'
 
+  # auto layout
+  pod 'SnapKit', '~> 5.0.0'
+
   # image
   pod 'Kingfisher', '~> 5.0'
+
+  # UI
+  pod 'RAMAnimatedTabBarController'
 
   target 'bicycleTests' do
     inherit! :search_paths
