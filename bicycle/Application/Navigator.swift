@@ -11,16 +11,20 @@ import UIKit
 class Navigator {
   
   enum Scene {
-    case tabs
+    case tabs(viewModel: HomeTabBarViewModel)
+    case favorite(viewModel: FavoriteViewModel)
+    case stationMap(viewModel: StationMapViewModel)
+    case userInfo(viewModel: UserInfoViewModel)
   }
   
   func navigate(to scene: Scene) -> UIViewController {
     switch scene {
-    case .tabs:
-      let vc = HomeTabBarController()
-      return vc
-    default:
-      return UIViewController()
+    case .tabs(let viewModel):
+      let rootVC = HomeTabBarController(viewModel: viewModel, navigator: self)
+      return rootVC
+    case .favorite(let viewModel): return FavoriteViewController(viewModel: viewModel, navigator: self)
+    case .stationMap(let viewModel): return StationMapViewController(viewModel: viewModel, navigator: self)
+    case .userInfo(let viewModel): return StationMapViewController(viewModel: viewModel, navigator: self)
     }
   }
 }

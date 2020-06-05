@@ -7,3 +7,7 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+
+let loggedIn = BehaviorRelay<Bool>(value: false)

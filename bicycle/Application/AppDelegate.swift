@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import NMapsMap
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //Show initial screen
     self.window = UIWindow(frame: UIScreen.main.bounds)
     Application.shared.presentInitialScreen(in: self.window)
+    
+    //Naver Map
+    NMFAuthManager.shared().clientId = AppConfiguration.current().naverAppId
     
     return true
   }

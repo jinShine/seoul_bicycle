@@ -6,4 +6,22 @@
 //  Copyright © 2020 Jinnify. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class BaseViewController: UIViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setupUI()
+    bindViewModel()
+  }
+  
+  func setupUI() {
+    
+  }
+  
+  func bindViewModel() {
+    
+  }
+}

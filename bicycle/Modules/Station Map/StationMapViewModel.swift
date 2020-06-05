@@ -7,3 +7,21 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+
+class StationMapViewModel: BaseViewModel, ViewModelType {
+  
+  struct Input {
+    
+  }
+  
+  struct Output {
+    
+  }
+  
+  func transform(input: Input) -> Output {
+    
+    return Output()
+  }
+}

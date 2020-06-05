@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */; };
+		367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B61248A101B009111E7 /* BaseViewModel.swift */; };
+		367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B63248A1070009111E7 /* ViewModelType.swift */; };
+		367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B65248A1134009111E7 /* HomeTabBarViewModel.swift */; };
+		367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B69248A1655009111E7 /* FavoriteViewModel.swift */; };
+		367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B6B248A1779009111E7 /* UserInfoViewController.swift */; };
+		367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B6D248A1783009111E7 /* UserInfoViewModel.swift */; };
+		367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B6F248A17BC009111E7 /* StationMapViewController.swift */; };
+		367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B71248A17C4009111E7 /* StationMapViewModel.swift */; };
+		367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B73248A1A58009111E7 /* BaseViewController.swift */; };
+		367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B77248A1FA3009111E7 /* Obervable+Operator.swift */; };
+		367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B7A248A23EF009111E7 /* AuthManager.swift */; };
+		367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B7C248A32A6009111E7 /* BaseNavigationController.swift */; };
+		367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B7F248AC28E009111E7 /* AppConfiguration.swift */; };
+		367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367C2B81248AC2AC009111E7 /* AppConfiguration.plist */; };
+		367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B83248AC55C009111E7 /* AppInfo.swift */; };
+		367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */; };
 		36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F042487DBEE00DF3145 /* AppDelegate.swift */; };
 		36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36C37F0A2487DBEF00DF3145 /* Main.storyboard */; };
 		36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */; };
@@ -43,6 +60,23 @@
 		08CD4F7BD4B2082C5B8C3FE6 /* Pods-bicycle-bicycleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.release.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		1E5BF0C6F85F43CB29CEDD57 /* Pods-bicycleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycleTests.debug.xcconfig"; path = "Target Support Files/Pods-bicycleTests/Pods-bicycleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2B07272FC1AC75A257109B72 /* Pods-bicycleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycleTests.release.xcconfig"; path = "Target Support Files/Pods-bicycleTests/Pods-bicycleTests.release.xcconfig"; sourceTree = "<group>"; };
+		367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		367C2B61248A101B009111E7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		367C2B63248A1070009111E7 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		367C2B65248A1134009111E7 /* HomeTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewModel.swift; sourceTree = "<group>"; };
+		367C2B69248A1655009111E7 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		367C2B6B248A1779009111E7 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		367C2B6D248A1783009111E7 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		367C2B6F248A17BC009111E7 /* StationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMapViewController.swift; sourceTree = "<group>"; };
+		367C2B71248A17C4009111E7 /* StationMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMapViewModel.swift; sourceTree = "<group>"; };
+		367C2B73248A1A58009111E7 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		367C2B77248A1FA3009111E7 /* Obervable+Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Obervable+Operator.swift"; sourceTree = "<group>"; };
+		367C2B7A248A23EF009111E7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		367C2B7C248A32A6009111E7 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		367C2B7F248AC28E009111E7 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		367C2B81248AC2AC009111E7 /* AppConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
+		367C2B83248AC55C009111E7 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+Naver.swift"; sourceTree = "<group>"; };
 		36C37F012487DBEE00DF3145 /* bicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C37F042487DBEE00DF3145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36C37F0B2487DBEF00DF3145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,8 +132,74 @@
 		36776D502489092F005A8C9F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				367C2B61248A101B009111E7 /* BaseViewModel.swift */,
+				367C2B63248A1070009111E7 /* ViewModelType.swift */,
+				367C2B73248A1A58009111E7 /* BaseViewController.swift */,
+				367C2B7C248A32A6009111E7 /* BaseNavigationController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		367C2B5E248A0C46009111E7 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */,
+				367C2B69248A1655009111E7 /* FavoriteViewModel.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		367C2B67248A157A009111E7 /* User Information */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B6B248A1779009111E7 /* UserInfoViewController.swift */,
+				367C2B6D248A1783009111E7 /* UserInfoViewModel.swift */,
+			);
+			path = "User Information";
+			sourceTree = "<group>";
+		};
+		367C2B68248A1580009111E7 /* Station Map */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B6F248A17BC009111E7 /* StationMapViewController.swift */,
+				367C2B71248A17C4009111E7 /* StationMapViewModel.swift */,
+			);
+			path = "Station Map";
+			sourceTree = "<group>";
+		};
+		367C2B75248A1C9B009111E7 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B76248A1F8D009111E7 /* RxSwift */,
+				367C2B83248AC55C009111E7 /* AppInfo.swift */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
+		367C2B76248A1F8D009111E7 /* RxSwift */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B77248A1FA3009111E7 /* Obervable+Operator.swift */,
+			);
+			path = RxSwift;
+			sourceTree = "<group>";
+		};
+		367C2B79248A23D9009111E7 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B7A248A23EF009111E7 /* AuthManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		367C2B7E248ABD95009111E7 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B7F248AC28E009111E7 /* AppConfiguration.swift */,
+				367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */,
+				367C2B81248AC2AC009111E7 /* AppConfiguration.plist */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		36C37EF82487DBEE00DF3145 = {
@@ -127,9 +227,12 @@
 		36C37F032487DBEE00DF3145 /* bicycle */ = {
 			isa = PBXGroup;
 			children = (
-				36776D502489092F005A8C9F /* Common */,
 				36C37F392487F24800DF3145 /* Application */,
 				36C37F402488F46A00DF3145 /* Modules */,
+				367C2B79248A23D9009111E7 /* Managers */,
+				36776D502489092F005A8C9F /* Common */,
+				367C2B7E248ABD95009111E7 /* Configuration */,
+				367C2B75248A1C9B009111E7 /* Utilites */,
 				36C37F442488F4B600DF3145 /* Resources */,
 				36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */,
 			);
@@ -167,6 +270,9 @@
 		36C37F402488F46A00DF3145 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				367C2B68248A1580009111E7 /* Station Map */,
+				367C2B67248A157A009111E7 /* User Information */,
+				367C2B5E248A0C46009111E7 /* Favorite */,
 				36C37F422488F48300DF3145 /* Main */,
 			);
 			path = Modules;
@@ -178,6 +284,7 @@
 				36C37F0A2487DBEF00DF3145 /* Main.storyboard */,
 				36C37F122487DBF100DF3145 /* LaunchScreen.storyboard */,
 				36C37F452489076300DF3145 /* HomeTabBarController.swift */,
+				367C2B65248A1134009111E7 /* HomeTabBarViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -324,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36C37F142487DBF100DF3145 /* LaunchScreen.storyboard in Resources */,
+				367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */,
 				36C37F112487DBF100DF3145 /* Assets.xcassets in Resources */,
 				36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */,
 			);
@@ -454,10 +562,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				36C37F3B2487F27500DF3145 /* Application.swift in Sources */,
+				367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */,
 				36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */,
+				367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */,
 				36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */,
+				367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */,
+				367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */,
+				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
+				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
+				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
+				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
+				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
+				367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */,
 				36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */,
+				367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */,
+				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
+				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
+				367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */,
+				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
+				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,7 +758,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNMQE42DQF;
 				INFOPLIST_FILE = "$(SRCROOT)/bicycle/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -654,7 +778,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CNMQE42DQF;
 				INFOPLIST_FILE = "$(SRCROOT)/bicycle/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

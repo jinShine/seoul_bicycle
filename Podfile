@@ -13,6 +13,7 @@ target 'bicycle' do
   pod 'RxDataSources', '~> 4.0'
   pod 'Moya/RxSwift', '~> 14.0'
   pod 'RxViewController'
+  pod 'NSObject+Rx'
 
   # auto layout
   pod 'SnapKit', '~> 5.0.0'
@@ -20,8 +21,11 @@ target 'bicycle' do
   # image
   pod 'Kingfisher', '~> 5.0'
 
-  # UI
+  # ui
   pod 'RAMAnimatedTabBarController'
+
+  # naver map
+  pod 'NMapsMap'
 
   target 'bicycleTests' do
     inherit! :search_paths

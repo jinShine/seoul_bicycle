@@ -6,4 +6,11 @@
 //  Copyright © 2020 Jinnify. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class BaseNavigationController: UINavigationController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+}
