@@ -12,5 +12,9 @@ class BaseNavigationController: UINavigationController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    isNavigationBarHidden = true
+    navigationBar.isTranslucent = false
+    
   }
 }

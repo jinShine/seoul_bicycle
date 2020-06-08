@@ -24,6 +24,10 @@
 		367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 367C2B81248AC2AC009111E7 /* AppConfiguration.plist */; };
 		367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B83248AC55C009111E7 /* AppInfo.swift */; };
 		367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */; };
+		367C2B89248E7F44009111E7 /* UIView+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B88248E7F44009111E7 /* UIView+Addition.swift */; };
+		367C2B8C248E9DC7009111E7 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8B248E9DC7009111E7 /* AppTheme.swift */; };
+		367C2B8E248E9E06009111E7 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8D248E9E06009111E7 /* ThemeColor.swift */; };
+		367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */; };
 		36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F042487DBEE00DF3145 /* AppDelegate.swift */; };
 		36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36C37F0A2487DBEF00DF3145 /* Main.storyboard */; };
 		36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */; };
@@ -77,6 +81,10 @@
 		367C2B81248AC2AC009111E7 /* AppConfiguration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
 		367C2B83248AC55C009111E7 /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+Naver.swift"; sourceTree = "<group>"; };
+		367C2B88248E7F44009111E7 /* UIView+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Addition.swift"; sourceTree = "<group>"; };
+		367C2B8B248E9DC7009111E7 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		367C2B8D248E9E06009111E7 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
+		367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Addition.swift"; sourceTree = "<group>"; };
 		36C37F012487DBEE00DF3145 /* bicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C37F042487DBEE00DF3145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36C37F0B2487DBEF00DF3145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -170,6 +178,8 @@
 		367C2B75248A1C9B009111E7 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				367C2B8A248E9DB2009111E7 /* Theme */,
+				367C2B87248E7F26009111E7 /* Extension */,
 				367C2B76248A1F8D009111E7 /* RxSwift */,
 				367C2B83248AC55C009111E7 /* AppInfo.swift */,
 			);
@@ -200,6 +210,24 @@
 				367C2B81248AC2AC009111E7 /* AppConfiguration.plist */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		367C2B87248E7F26009111E7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B88248E7F44009111E7 /* UIView+Addition.swift */,
+				367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		367C2B8A248E9DB2009111E7 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B8B248E9DC7009111E7 /* AppTheme.swift */,
+				367C2B8D248E9E06009111E7 /* ThemeColor.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		36C37EF82487DBEE00DF3145 = {
@@ -561,20 +589,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				367C2B89248E7F44009111E7 /* UIView+Addition.swift in Sources */,
 				36C37F3B2487F27500DF3145 /* Application.swift in Sources */,
 				367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */,
 				36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */,
 				367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */,
+				367C2B8E248E9E06009111E7 /* ThemeColor.swift in Sources */,
 				36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */,
 				367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */,
 				367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */,
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
+				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
 				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
 				367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */,
 				36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */,
+				367C2B8C248E9DC7009111E7 /* AppTheme.swift in Sources */,
 				367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */,
 				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
 				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
