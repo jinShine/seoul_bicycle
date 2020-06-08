@@ -44,5 +44,7 @@
 	</array>
 	<key>ApplicationConfiguration</key>
 	<string>${CONFIGURATION}</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME)의 위치를 업데이트하기 위해 권한이 필요합니다.</string>
 </dict>
 </plist>

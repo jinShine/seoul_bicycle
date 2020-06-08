@@ -28,6 +28,8 @@
 		367C2B8C248E9DC7009111E7 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8B248E9DC7009111E7 /* AppTheme.swift */; };
 		367C2B8E248E9E06009111E7 /* ThemeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8D248E9E06009111E7 /* ThemeColor.swift */; };
 		367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */; };
+		367C2B92248EA468009111E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B91248EA468009111E7 /* LocationManager.swift */; };
+		367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B96248EB6C7009111E7 /* LocationInteractor.swift */; };
 		36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F042487DBEE00DF3145 /* AppDelegate.swift */; };
 		36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36C37F0A2487DBEF00DF3145 /* Main.storyboard */; };
 		36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */; };
@@ -85,6 +87,8 @@
 		367C2B8B248E9DC7009111E7 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		367C2B8D248E9E06009111E7 /* ThemeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColor.swift; sourceTree = "<group>"; };
 		367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Addition.swift"; sourceTree = "<group>"; };
+		367C2B91248EA468009111E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		367C2B96248EB6C7009111E7 /* LocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInteractor.swift; sourceTree = "<group>"; };
 		36C37F012487DBEE00DF3145 /* bicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C37F042487DBEE00DF3145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36C37F0B2487DBEF00DF3145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				367C2B7A248A23EF009111E7 /* AuthManager.swift */,
+				367C2B91248EA468009111E7 /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -228,6 +233,32 @@
 				367C2B8D248E9E06009111E7 /* ThemeColor.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		367C2B93248EB69E009111E7 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B68248A1580009111E7 /* Station Map */,
+				367C2B67248A157A009111E7 /* User Information */,
+				367C2B5E248A0C46009111E7 /* Favorite */,
+				36C37F422488F48300DF3145 /* Main */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		367C2B94248EB6A6009111E7 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				367C2B96248EB6C7009111E7 /* LocationInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		367C2B95248EB6AF009111E7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		36C37EF82487DBEE00DF3145 = {
@@ -298,10 +329,9 @@
 		36C37F402488F46A00DF3145 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				367C2B68248A1580009111E7 /* Station Map */,
-				367C2B67248A157A009111E7 /* User Information */,
-				367C2B5E248A0C46009111E7 /* Favorite */,
-				36C37F422488F48300DF3145 /* Main */,
+				367C2B93248EB69E009111E7 /* Scene */,
+				367C2B94248EB6A6009111E7 /* Interactor */,
+				367C2B95248EB6AF009111E7 /* Model */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -601,6 +631,7 @@
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
+				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
 				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
@@ -614,6 +645,7 @@
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
+				367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

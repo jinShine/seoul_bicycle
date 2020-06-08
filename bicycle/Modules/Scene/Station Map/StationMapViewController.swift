@@ -11,6 +11,8 @@ import NMapsMap
 
 class StationMapViewController: BaseViewController {
   
+  //MARK: - Constant
+  
   enum Constant {
     case search
     
@@ -26,6 +28,8 @@ class StationMapViewController: BaseViewController {
       }
     }
   }
+  
+  //MARK: - Properties
   
   let mapView: NMFMapView = {
     let mapView = NMFMapView()
@@ -79,7 +83,7 @@ class StationMapViewController: BaseViewController {
     
     return containerView
   }()
-
+  
   let viewModel: StationMapViewModel?
   let navigator: Navigator
   
@@ -110,17 +114,18 @@ class StationMapViewController: BaseViewController {
       $0.height.equalTo(60)
     }
     
-    
   }
   
   override func bindViewModel() {
     super.bindViewModel()
     
-    //    // Input
-    //    let input = HomeTabBarViewModel.Input(setupTabBarTrigger: rx.viewWillAppear.mapToVoid())
-    //
-    //    // Output
-    //    let output = viewModel?.transform(input: input)
+    // Input
+    let input = StationMapViewModel.Input(locationGrantTrigger: rx.viewWillAppear.mapToVoid())
+    
+    // Output
+    let output = viewModel?.transform(input: input)
+    
+    output?.locationGrantPermission.drive().disposed(by: rx.disposeBag)
     
   }
   
