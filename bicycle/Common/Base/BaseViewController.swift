@@ -11,6 +11,17 @@ import SnapKit
 
 class BaseViewController: UIViewController {
   
+  lazy var toastView: ToastView = {
+    let view = ToastView()
+    
+    self.view.addSubview(view)
+    view.snp.makeConstraints {
+      $0.width.equalToSuperview()
+      $0.height.equalTo(view.statusMessage.snp.height).offset(44)
+    }
+    return view
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -25,4 +36,5 @@ class BaseViewController: UIViewController {
   func bindViewModel() {
     
   }
+  
 }

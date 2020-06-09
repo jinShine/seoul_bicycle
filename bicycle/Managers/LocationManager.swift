@@ -29,6 +29,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   private var didUpdateLocation: LocationDidUpdate?
   
   var running = false
+  var permissionStatus = false
   
   deinit {
     stopMonitoringUpdates()
@@ -36,15 +37,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   
   //MARK: Methods
   
-  func grantPermissions() {
+  func grantPermissions() -> Bool {
     let status = CLLocationManager.authorizationStatus()
     switch status {
     case .notDetermined:
       locationManager?.requestWhenInUseAuthorization()
+      self.startMonitoringUpdates()
+      permissionStatus = true
+      return permissionStatus
     case .restricted, .denied:
-      break
+      permissionStatus = false
+      return permissionStatus
     case .authorizedWhenInUse, .authorizedAlways:
       self.startMonitoringUpdates()
+      permissionStatus = true
+      return permissionStatus
     @unknown default:
       fatalError("To use location in iOS8 you need to define either NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription in the app bundle's Info.plist file")
     }
@@ -80,4 +87,17 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     print(locations.last)
   }
   
+  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    switch status {
+    case .authorizedAlways, .authorizedWhenInUse:
+      running = true
+      locationManager?.startUpdatingLocation()
+    case .denied, .restricted, .notDetermined:
+      fallthrough
+    default:
+      didUpdateLocation?(nil, LocationError.authorizationDenied)
+      locationManager?.stopUpdatingLocation()
+      running = false
+    }
+  }
 }

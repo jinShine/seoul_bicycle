@@ -8,23 +8,26 @@
 
 import UIKit
 import NMapsMap
+import SwiftEntryKit
 
 class StationMapViewController: BaseViewController {
   
   //MARK: - Constant
   
   enum Constant {
-    case search
+    case search, locationError
     
     var image: UIImage? {
       switch self {
       case .search: return UIImage(named: "Icon-Search")
+      default: return nil
       }
     }
     
     var title: String {
       switch self {
       case .search: return "대여소 검색"
+      case .locationError: return "원활한 서비스를 위해\n위치서비스를 활성화 시켜주세요.\n\n⚙️ 설정 → bicycle앱 → 위치 활성화"
       }
     }
   }
@@ -41,6 +44,7 @@ class StationMapViewController: BaseViewController {
     containerView.backgroundColor = AppTheme.color.white
     containerView.layer.cornerRadius = 10
     containerView.layer.masksToBounds = true
+    containerView.layer.applyShadow()
     
     let searchImageView: UIImageView = {
       let view = UIImageView()
@@ -125,8 +129,11 @@ class StationMapViewController: BaseViewController {
     // Output
     let output = viewModel?.transform(input: input)
     
-    output?.locationGrantPermission.drive().disposed(by: rx.disposeBag)
-    
+    output?.locationGrantPermission.drive(onNext: { [weak self] status in
+      if !status {
+        self?.toastView.show(image: .error, message: Constant.locationError.title)
+      }
+    }).disposed(by: rx.disposeBag)
   }
   
 }

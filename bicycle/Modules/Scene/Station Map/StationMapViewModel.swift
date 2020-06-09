@@ -17,7 +17,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   }
   
   struct Output {
-    let locationGrantPermission: Driver<Void>
+    let locationGrantPermission: Driver<Bool>
   }
   
   let locationInteractor: LocationUseCase
@@ -28,7 +28,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   func transform(input: Input) -> Output {
     
-    let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: ())
+    let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: false)
     
     return Output(locationGrantPermission: locationGrantPermission)
   }
