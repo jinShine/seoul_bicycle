@@ -43,6 +43,16 @@
 		36C37F3B2487F27500DF3145 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3A2487F27500DF3145 /* Application.swift */; };
 		36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3C2487F28100DF3145 /* Navigator.swift */; };
 		36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F452489076300DF3145 /* HomeTabBarController.swift */; };
+		36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */; };
+		36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */; };
+		36DF358D2493944100EDC36D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358C2493944100EDC36D /* NetworkService.swift */; };
+		36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358E2493949400EDC36D /* NetworkResponse.swift */; };
+		36DF3591249394A600EDC36D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF3590249394A600EDC36D /* NetworkError.swift */; };
+		36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35922493986D00EDC36D /* Data+Decode.swift */; };
+		36DF359524939CE300EDC36D /* SeoulBicycleErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF359424939CE300EDC36D /* SeoulBicycleErrorModel.swift */; };
+		36DF359824939D5E00EDC36D /* DebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF359724939D5E00EDC36D /* DebugPrint.swift */; };
+		36DF359A2493A04A00EDC36D /* SeoulBicycleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35992493A04A00EDC36D /* SeoulBicycleInteractor.swift */; };
+		36DF359C2493A0DC00EDC36D /* StationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF359B2493A0DC00EDC36D /* StationModel.swift */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -111,6 +121,16 @@
 		36C37F3A2487F27500DF3145 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		36C37F3C2487F28100DF3145 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		36C37F452489076300DF3145 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleAPI.swift; sourceTree = "<group>"; };
+		36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+SeoulBicycle.swift"; sourceTree = "<group>"; };
+		36DF358C2493944100EDC36D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		36DF358E2493949400EDC36D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		36DF3590249394A600EDC36D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		36DF35922493986D00EDC36D /* Data+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
+		36DF359424939CE300EDC36D /* SeoulBicycleErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleErrorModel.swift; sourceTree = "<group>"; };
+		36DF359724939D5E00EDC36D /* DebugPrint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugPrint.swift; sourceTree = "<group>"; };
+		36DF35992493A04A00EDC36D /* SeoulBicycleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleInteractor.swift; sourceTree = "<group>"; };
+		36DF359B2493A0DC00EDC36D /* StationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModel.swift; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +226,7 @@
 		367C2B75248A1C9B009111E7 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				36DF359624939D5300EDC36D /* Debug */,
 				367C2B8A248E9DB2009111E7 /* Theme */,
 				367C2B87248E7F26009111E7 /* Extension */,
 				367C2B76248A1F8D009111E7 /* RxSwift */,
@@ -236,6 +257,7 @@
 			children = (
 				367C2B7F248AC28E009111E7 /* AppConfiguration.swift */,
 				367C2B85248AD06D009111E7 /* AppConfiguration+Naver.swift */,
+				36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */,
 				367C2B81248AC2AC009111E7 /* AppConfiguration.plist */,
 			);
 			path = Configuration;
@@ -247,6 +269,7 @@
 				367C2B88248E7F44009111E7 /* UIView+Addition.swift */,
 				367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */,
 				365F8495249006200023CAE3 /* CALayer+Addition.swift */,
+				36DF35922493986D00EDC36D /* Data+Decode.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -275,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				367C2B96248EB6C7009111E7 /* LocationInteractor.swift */,
+				36DF35992493A04A00EDC36D /* SeoulBicycleInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -282,6 +306,8 @@
 		367C2B95248EB6AF009111E7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				36DF359424939CE300EDC36D /* SeoulBicycleErrorModel.swift */,
+				36DF359B2493A0DC00EDC36D /* StationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +339,7 @@
 			children = (
 				36C37F392487F24800DF3145 /* Application */,
 				36C37F402488F46A00DF3145 /* Modules */,
+				36C4537424936DF100164052 /* Networking */,
 				367C2B79248A23D9009111E7 /* Managers */,
 				36776D502489092F005A8C9F /* Common */,
 				367C2B7E248ABD95009111E7 /* Configuration */,
@@ -379,6 +406,25 @@
 				36C37F152487DBF100DF3145 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		36C4537424936DF100164052 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */,
+				36DF358C2493944100EDC36D /* NetworkService.swift */,
+				36DF358E2493949400EDC36D /* NetworkResponse.swift */,
+				36DF3590249394A600EDC36D /* NetworkError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		36DF359624939D5300EDC36D /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				36DF359724939D5E00EDC36D /* DebugPrint.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		3B461733A7689E1287DE884F /* Pods */ = {
@@ -652,16 +698,22 @@
 				367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */,
 				367C2B8E248E9E06009111E7 /* ThemeColor.swift in Sources */,
 				36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */,
+				36DF359A2493A04A00EDC36D /* SeoulBicycleInteractor.swift in Sources */,
 				367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */,
+				36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */,
 				365F8496249006200023CAE3 /* CALayer+Addition.swift in Sources */,
 				365F8494248FFC2A0023CAE3 /* ToastView.swift in Sources */,
+				36DF358D2493944100EDC36D /* NetworkService.swift in Sources */,
 				367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */,
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
+				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
+				36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */,
 				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
+				36DF359824939D5E00EDC36D /* DebugPrint.swift in Sources */,
 				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
 				367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */,
 				36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */,
@@ -670,10 +722,14 @@
 				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
 				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
 				367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */,
+				36DF359524939CE300EDC36D /* SeoulBicycleErrorModel.swift in Sources */,
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
+				36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
 				367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */,
+				36DF359C2493A0DC00EDC36D /* StationModel.swift in Sources */,
+				36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

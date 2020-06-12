@@ -4,11 +4,15 @@
 <dict>
 	<key>Debug</key>
 	<dict>
+		<key>SeoulBicycleId</key>
+		<string>5943494849726c6137355849575a57</string>
 		<key>NMFClientId</key>
 		<string>nz6gvsgzw0</string>
 	</dict>
 	<key>Release</key>
 	<dict>
+		<key>SeoulBicycleId</key>
+		<string>5943494849726c6137355849575a57</string>
 		<key>NMFClientId</key>
 		<string>nz6gvsgzw0</string>
 	</dict>

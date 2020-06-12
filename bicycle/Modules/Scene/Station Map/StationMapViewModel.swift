@@ -18,17 +18,28 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
+    let fetchBicycleList: Driver<Station>
   }
   
   let locationInteractor: LocationUseCase
+  let seoulBicycleInteractor: SeoulBicycleUseCase
   
-  init(locationInteractor: LocationUseCase) {
+  init(locationInteractor: LocationUseCase, seoulBicycleInteractor: SeoulBicycleUseCase) {
     self.locationInteractor = locationInteractor
+    self.seoulBicycleInteractor = seoulBicycleInteractor
   }
   
   func transform(input: Input) -> Output {
     
     let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: false)
+    
+    let fetchBicycleList = seoulBicycleInteractor.fetchBicycleList(start: 1, last: 100)
+      .map { response in
+        let result = try JSONDecoder().decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
+        }
+    }
+    
+    print(fetchBicycleList)
     
     return Output(locationGrantPermission: locationGrantPermission)
   }

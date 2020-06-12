@@ -134,6 +134,7 @@ class StationMapViewController: BaseViewController {
         self?.toastView.show(image: .error, message: Constant.locationError.title)
       }
     }).disposed(by: rx.disposeBag)
+
   }
   
 }
