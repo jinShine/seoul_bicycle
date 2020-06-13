@@ -18,7 +18,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
-    let fetchBicycleList: Driver<Station>
+    let fetchBicycleList: Driver<[Station]>
   }
   
   let locationInteractor: LocationUseCase
@@ -33,14 +33,12 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     
     let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: false)
     
-    let fetchBicycleList = seoulBicycleInteractor.fetchBicycleList(start: 1, last: 100)
-      .map { response in
-        let result = try JSONDecoder().decode(<#T##type: Decodable.Protocol##Decodable.Protocol#>, from: <#T##Data#>)
-        }
-    }
+    let fetchBicycleList = seoulBicycleInteractor
+      .fetchBicycleList(start: 1, last: 1000)
+      .map { $0.status.row }
+      .asDriver(onErrorJustReturn: [])
     
-    print(fetchBicycleList)
-    
-    return Output(locationGrantPermission: locationGrantPermission)
+    return Output(locationGrantPermission: locationGrantPermission,
+                  fetchBicycleList: fetchBicycleList)
   }
 }

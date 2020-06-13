@@ -17,7 +17,7 @@ class BaseViewController: UIViewController {
     self.view.addSubview(view)
     view.snp.makeConstraints {
       $0.width.equalToSuperview()
-      $0.height.equalTo(view.statusMessage.snp.height).offset(44)
+      $0.height.equalTo(view.statusMessage.snp.height).offset(36)
     }
     return view
   }()

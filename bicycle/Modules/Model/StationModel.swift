@@ -31,6 +31,11 @@ struct StationStatus: Decodable {
 struct StationResult: Decodable {
   var code: String
   var message: String
+  
+  enum CodingKeys: String, CodingKey {
+    case code = "CODE"
+    case message = "MESSAGE"
+  }
 }
 
 struct Station: Decodable {

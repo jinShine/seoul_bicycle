@@ -15,7 +15,7 @@ class StationMapViewController: BaseViewController {
   //MARK: - Constant
   
   enum Constant {
-    case search, locationError
+    case search, locationError, networkError
     
     var image: UIImage? {
       switch self {
@@ -28,6 +28,7 @@ class StationMapViewController: BaseViewController {
       switch self {
       case .search: return "대여소 검색"
       case .locationError: return "원활한 서비스를 위해\n위치서비스를 활성화 시켜주세요.\n\n⚙️ 설정 → bicycle앱 → 위치 활성화"
+      case .networkError: return "네트워크 에러!😱\n관리자에게 문의 부탁드립니다."
       }
     }
   }
@@ -43,7 +44,6 @@ class StationMapViewController: BaseViewController {
     let containerView = UIView()
     containerView.backgroundColor = AppTheme.color.white
     containerView.layer.cornerRadius = 10
-    containerView.layer.masksToBounds = true
     containerView.layer.applyShadow()
     
     let searchImageView: UIImageView = {
@@ -64,6 +64,7 @@ class StationMapViewController: BaseViewController {
       let button = UIButton()
       button.setTitle(Constant.search.title, for: .normal)
       button.setTitleColor(AppTheme.color.gray, for: .normal)
+      button.titleLabel?.font = AppTheme.font.custom(size: 14)
       button.contentHorizontalAlignment = .left
       return button
     }()
@@ -104,6 +105,15 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
+    for family: String in UIFont.familyNames
+    {
+        print(family)
+        for names: String in UIFont.fontNames(forFamilyName: family)
+        {
+            print("== \(names)")
+        }
+    }
+    
     [mapView].forEach { view.addSubview($0) }
     [stationContainerView].forEach { mapView.addSubview($0) }
     
@@ -112,10 +122,10 @@ class StationMapViewController: BaseViewController {
     }
     
     stationContainerView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(view.topNotchHeight + 16)
+      $0.top.equalToSuperview().offset(view.topNotchHeight + 12)
       $0.leading.equalToSuperview().offset(16)
       $0.trailing.equalToSuperview().offset(-16)
-      $0.height.equalTo(60)
+      $0.height.equalTo(54)
     }
     
   }
@@ -133,6 +143,14 @@ class StationMapViewController: BaseViewController {
       if !status {
         self?.toastView.show(image: .error, message: Constant.locationError.title)
       }
+    }).disposed(by: rx.disposeBag)
+    
+    output?.fetchBicycleList.drive(onNext: { [weak self] stations in
+      guard stations.count > 0 else {
+        self?.toastView.show(image: .error, message: Constant.networkError.title)
+        return
+      }
+    
     }).disposed(by: rx.disposeBag)
 
   }

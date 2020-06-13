@@ -22,5 +22,6 @@ extension CALayer {
     shadowOpacity = alpha
     shadowOffset = CGSize(width: x, height: y)
     shadowRadius = blur / 2.0
+    masksToBounds = false
   }
 }

@@ -27,6 +27,7 @@ class ToastView: UIView {
   let statusMessage: UILabel = {
     let label = UILabel()
     label.textColor = AppTheme.color.gray
+    label.font = AppTheme.font.custom(size: 12)
     label.numberOfLines = 0
     return label
   }()
@@ -43,8 +44,8 @@ class ToastView: UIView {
   func setupUI() {
     backgroundColor = .white
     layer.cornerRadius = 5
-    layer.masksToBounds = true
     layer.applyShadow()
+    layer.masksToBounds = true
     
     [statusImage, statusMessage].forEach { self.addSubview($0) }
     
@@ -64,7 +65,6 @@ class ToastView: UIView {
   
   func show(image status: Status, message: String, position: EKAttributes = .topFloat) {
     toast(status: status, message: message)
-    SwiftEntryKit.display(entry: self, using: position)
   }
   
   private func toast(status: Status, message: String, position: EKAttributes = .topFloat) {

@@ -11,7 +11,7 @@ import RxSwift
 
 protocol SeoulBicycleUseCase {
   
-  func fetchBicycleList(start: Int, last: Int) -> Single<NetworkDataResponse>
+  func fetchBicycleList(start: Int, last: Int) -> Single<RentStationStatus>
 }
 
 class SeoulBicycleInteractor: SeoulBicycleUseCase {
@@ -22,12 +22,15 @@ class SeoulBicycleInteractor: SeoulBicycleUseCase {
     self.network = network
   }
   
-  func fetchBicycleList(start: Int, last: Int) -> Single<NetworkDataResponse> {
+  func fetchBicycleList(start: Int, last: Int) -> Single<RentStationStatus> {
     return network.buildRequest(to: .bicycleList(start: start, last: last))
       .map { response in
-        let model = try JSONDecoder().decode(RentStationStatus.self, from: response.jo)
-        let result = NetworkDataResponse(json: response.json, result: <#T##NetworkResult#>, error: <#T##NetworkError?#>)
-        return result
+        return try JSONDecoder().decode(RentStationStatus.self, from: response.jsonData ?? Data())
+      }.catchError { error in
+        return Single.create { single -> Disposable in
+          single(.error(error))
+          return Disposables.create()
+      }
     }
   }
 }
