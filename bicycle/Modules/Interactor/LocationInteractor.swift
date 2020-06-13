@@ -11,6 +11,7 @@ import RxCocoa
 
 protocol LocationUseCase {
   func start() -> Observable<Bool>
+  func fetchLocation() -> Observable<LocationDidUpdate>
 }
 
 class LocationInteractor: LocationUseCase {
@@ -22,14 +23,11 @@ class LocationInteractor: LocationUseCase {
   }
   
   func start() -> Observable<Bool> {
-    Observable<Bool>.just(locationManager.permissionStatus)
+    return locationManager.grantPermissions()
   }
   
-//  func fetch() -> Observable<LocationResponse> {
-//    return Observable.create { observer -> Disposable in
-//
-//      self.locationManager
-//    }
-//  }
+  func fetchLocation() -> Observable<LocationDidUpdate> {
+    return locationManager.didUpdateLocation.asObservable()
+  }
   
 }

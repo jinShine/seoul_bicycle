@@ -26,10 +26,11 @@ class SeoulBicycleInteractor: SeoulBicycleUseCase {
     return network.buildRequest(to: .bicycleList(start: start, last: last))
       .map { response in
         return try JSONDecoder().decode(RentStationStatus.self, from: response.jsonData ?? Data())
-      }.catchError { error in
-        return Single.create { single -> Disposable in
-          single(.error(error))
-          return Disposables.create()
+    }
+    .catchError { error in
+      return Single.create { single -> Disposable in
+        single(.error(error))
+        return Disposables.create()
       }
     }
   }

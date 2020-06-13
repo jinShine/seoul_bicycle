@@ -15,7 +15,7 @@ class StationMapViewController: BaseViewController {
   //MARK: - Constant
   
   enum Constant {
-    case search, locationError, networkError
+    case search, locationError, locationUpdateError, networkError
     
     var image: UIImage? {
       switch self {
@@ -28,15 +28,20 @@ class StationMapViewController: BaseViewController {
       switch self {
       case .search: return "대여소 검색"
       case .locationError: return "원활한 서비스를 위해\n위치서비스를 활성화 시켜주세요.\n\n⚙️ 설정 → bicycle앱 → 위치 활성화"
-      case .networkError: return "네트워크 에러!😱\n관리자에게 문의 부탁드립니다."
+      case .locationUpdateError: return "위치 업데이트 에러! 😱"
+      case .networkError: return "네트워크 에러! 😱\n관리자에게 문의 부탁드립니다."
       }
     }
   }
   
   //MARK: - Properties
   
-  let mapView: NMFMapView = {
+  lazy var mapView: NMFMapView = {
     let mapView = NMFMapView()
+    mapView.mapType = .basic
+    mapView.isIndoorMapEnabled = true
+    mapView.setLayerGroup(NMF_LAYER_GROUP_BICYCLE, isEnabled: true)
+    mapView.positionMode = .normal
     return mapView
   }()
   
@@ -105,15 +110,6 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
-    for family: String in UIFont.familyNames
-    {
-        print(family)
-        for names: String in UIFont.fontNames(forFamilyName: family)
-        {
-            print("== \(names)")
-        }
-    }
-    
     [mapView].forEach { view.addSubview($0) }
     [stationContainerView].forEach { mapView.addSubview($0) }
     
@@ -134,7 +130,7 @@ class StationMapViewController: BaseViewController {
     super.bindViewModel()
     
     // Input
-    let input = StationMapViewModel.Input(locationGrantTrigger: rx.viewWillAppear.mapToVoid())
+    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid())
     
     // Output
     let output = viewModel?.transform(input: input)
@@ -146,13 +142,40 @@ class StationMapViewController: BaseViewController {
     }).disposed(by: rx.disposeBag)
     
     output?.fetchBicycleList.drive(onNext: { [weak self] stations in
-      guard stations.count > 0 else {
-        self?.toastView.show(image: .error, message: Constant.networkError.title)
+
+      stations.forEach {
+        self?.viewModel?.stationLists.append($0)
+        
+        let lat = Double($0.stationLatitude) ?? 0.0
+        let lng = Double($0.stationLongitude) ?? 0.0
+        
+        self?.setupStationMarker(lat: lat, lng: lng)
+      }
+      
+    }).disposed(by: rx.disposeBag)
+    
+    output?.updateLocation.drive(onNext: { [weak self] (coordinator, error) in
+      if let _ = error {
+        self?.toastView.show(image: .error, message: Constant.locationUpdateError.title)
         return
       }
-    
-    }).disposed(by: rx.disposeBag)
+      
+      let lat = coordinator.0 ?? 37.5666805
+      let lng = coordinator.1 ?? 126.9784147
 
+      let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
+      self?.mapView.moveCamera(cameraUpdate)
+      self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
+//      self?.mapView.positionMode = .compass
+    }).disposed(by: rx.disposeBag)
+  }
+  
+  //MARK:- Methods
+  
+  func setupStationMarker(lat: Double, lng: Double) {
+    let marker = NMFMarker()
+    marker.position = NMGLatLng(lat: lat, lng: lng)
+    marker.mapView = self.mapView
   }
   
 }

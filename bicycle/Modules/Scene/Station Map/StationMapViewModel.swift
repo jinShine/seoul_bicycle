@@ -13,16 +13,19 @@ import RxCocoa
 class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
-    let locationGrantTrigger: Observable<Void>
+    let trigger: Observable<Void>
   }
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
     let fetchBicycleList: Driver<[Station]>
+    let updateLocation: Driver<((Double?, Double?), Error?)>
   }
   
   let locationInteractor: LocationUseCase
   let seoulBicycleInteractor: SeoulBicycleUseCase
+  
+  var stationLists: [Station] = []
   
   init(locationInteractor: LocationUseCase, seoulBicycleInteractor: SeoulBicycleUseCase) {
     self.locationInteractor = locationInteractor
@@ -36,9 +39,34 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let fetchBicycleList = seoulBicycleInteractor
       .fetchBicycleList(start: 1, last: 1000)
       .map { $0.status.row }
-      .asDriver(onErrorJustReturn: [])
+      .asObservable()
+    
+    let fetchBicycleList1 = seoulBicycleInteractor
+      .fetchBicycleList(start: 1001, last: 2000)
+      .map { $0.status.row }
+      .asObservable()
+    
+    let fetchBicycleList2 = seoulBicycleInteractor
+      .fetchBicycleList(start: 2001, last: 3000)
+      .map { $0.status.row }
+      .asObservable()
+    
+    let dd = Observable<[Station]>.concat([
+      fetchBicycleList,
+      fetchBicycleList1,
+      fetchBicycleList2
+      ]).asDriver(onErrorJustReturn: [])
+
+    
+    let updateLocation = locationInteractor
+      .fetchLocation()
+      .map { (location, error) in
+        return ((location?.coordinate.latitude, location?.coordinate.longitude), error)
+      }
+      .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
     
     return Output(locationGrantPermission: locationGrantPermission,
-                  fetchBicycleList: fetchBicycleList)
+                  fetchBicycleList: dd,
+                  updateLocation: updateLocation)
   }
 }

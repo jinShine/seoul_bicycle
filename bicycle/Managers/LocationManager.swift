@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import CoreLocation
 
-typealias LocationDidUpdate = ((_ location: CLLocation?, _ error: Error?)->())
+typealias LocationDidUpdate = (location: CLLocation?, error: Error?)
 typealias LocationResponse = (location: CLLocation?, error: LocationError?)
 
 enum LocationError: Error {
@@ -19,17 +19,12 @@ enum LocationError: Error {
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
   
-  //MARK: Errors
-  
-  
-  
   //MARK: Properties
   
   private lazy var locationManager: CLLocationManager? = CLLocationManager()
-  private var didUpdateLocation: LocationDidUpdate?
-  
-  var running = false
-  var permissionStatus = false
+  var didUpdateLocation = PublishSubject<LocationDidUpdate>()
+  var running = BehaviorSubject<Bool>(value: false)
+  var permissionStatus = BehaviorSubject<Bool>(value: false)
   
   deinit {
     stopMonitoringUpdates()
@@ -37,23 +32,27 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   
   //MARK: Methods
   
-  func grantPermissions() -> Bool {
-    let status = CLLocationManager.authorizationStatus()
-    switch status {
-    case .notDetermined:
-      locationManager?.requestWhenInUseAuthorization()
-      self.startMonitoringUpdates()
-      permissionStatus = true
-      return permissionStatus
-    case .restricted, .denied:
-      permissionStatus = false
-      return permissionStatus
-    case .authorizedWhenInUse, .authorizedAlways:
-      self.startMonitoringUpdates()
-      permissionStatus = true
-      return permissionStatus
-    @unknown default:
-      fatalError("To use location in iOS8 you need to define either NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription in the app bundle's Info.plist file")
+  func grantPermissions() -> Observable<Bool> {
+    return Observable<Bool>.create { observer -> Disposable in
+      let status = CLLocationManager.authorizationStatus()
+      switch status {
+      case .notDetermined:
+        self.locationManager?.requestWhenInUseAuthorization()
+        self.startMonitoringUpdates()
+        self.permissionStatus.onNext(true)
+        observer.onNext(true)
+      case .restricted, .denied:
+        self.permissionStatus.onNext(false)
+        observer.onNext(false)
+      case .authorizedWhenInUse, .authorizedAlways:
+        self.startMonitoringUpdates()
+        self.permissionStatus.onNext(true)
+        observer.onNext(true)
+      @unknown default:
+        fatalError("To use location in iOS8 you need to define either NSLocationWhenInUseUsageDescription or NSLocationAlwaysUsageDescription in the app bundle's Info.plist file")
+      }
+
+      return Disposables.create()
     }
   }
   
@@ -67,37 +66,40 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   }
   
   func stopMonitoringUpdates() {
-    didUpdateLocation = nil
+    didUpdateLocation.onNext((nil, nil))
     locationManager?.stopUpdatingLocation()
     locationManager?.allowsBackgroundLocationUpdates = false
     locationManager?.disallowDeferredLocationUpdates()
     locationManager?.delegate = nil
-    running = false
+    running.onNext(false)
   }
-  
-  //MARK: Location Authorization Status Changed
-  
+
   //MARK: Location Manager Delegate
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-    print(error)
+    print("Error ", error)
+    didUpdateLocation.onNext((nil, error))
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    print(locations.last)
+    let location = locations.last
+    didUpdateLocation.onNext((location, nil))
+    print("didUpdateLocations :", location)
   }
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     switch status {
     case .authorizedAlways, .authorizedWhenInUse:
-      running = true
+      running.onNext(true)
+      permissionStatus.onNext(true)
       locationManager?.startUpdatingLocation()
     case .denied, .restricted, .notDetermined:
       fallthrough
     default:
-      didUpdateLocation?(nil, LocationError.authorizationDenied)
+      didUpdateLocation.onNext((nil, LocationError.authorizationDenied))
       locationManager?.stopUpdatingLocation()
-      running = false
+      running.onNext(false)
+      permissionStatus.onNext(true)
     }
   }
 }
