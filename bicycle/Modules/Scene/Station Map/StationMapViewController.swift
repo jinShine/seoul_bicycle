@@ -15,11 +15,13 @@ class StationMapViewController: BaseViewController {
   //MARK: - Constant
   
   enum Constant {
-    case search, locationError, locationUpdateError, networkError
+    case search, locationError, locationUpdateError, networkError, updateLocation, refreshStation
     
     var image: UIImage? {
       switch self {
       case .search: return UIImage(named: "Icon-Search")
+      case .updateLocation: return UIImage(named: "Icon-LocateMe")
+      case .refreshStation: return UIImage(named: "Icon-Refresh")
       default: return nil
       }
     }
@@ -30,6 +32,7 @@ class StationMapViewController: BaseViewController {
       case .locationError: return "원활한 서비스를 위해\n위치서비스를 활성화 시켜주세요.\n\n⚙️ 설정 → bicycle앱 → 위치 활성화"
       case .locationUpdateError: return "위치 업데이트 에러! 😱"
       case .networkError: return "네트워크 에러! 😱\n관리자에게 문의 부탁드립니다."
+      default: return ""
       }
     }
   }
@@ -42,6 +45,8 @@ class StationMapViewController: BaseViewController {
     mapView.isIndoorMapEnabled = true
     mapView.setLayerGroup(NMF_LAYER_GROUP_BICYCLE, isEnabled: true)
     mapView.positionMode = .normal
+    mapView.logoAlign = .rightBottom
+    mapView.touchDelegate = self
     return mapView
   }()
   
@@ -94,6 +99,28 @@ class StationMapViewController: BaseViewController {
     return containerView
   }()
   
+  let updateStationButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = AppTheme.color.white
+    button.layer.cornerRadius = 12
+    button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    button.setImage(Constant.refreshStation.image, for: .normal)
+    button.tintColor = AppTheme.color.blueMagenta
+    button.layer.applyShadow(x: 0, y: -1)
+    return button
+  }()
+  
+  let updateLocationButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = AppTheme.color.white
+    button.layer.cornerRadius = 12
+    button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+    button.setImage(Constant.updateLocation.image, for: .normal)
+    button.tintColor = AppTheme.color.blueMagenta
+    button.layer.applyShadow()
+    return button
+  }()
+  
   let viewModel: StationMapViewModel?
   let navigator: Navigator
   
@@ -111,10 +138,11 @@ class StationMapViewController: BaseViewController {
     super.setupUI()
     
     [mapView].forEach { view.addSubview($0) }
-    [stationContainerView].forEach { mapView.addSubview($0) }
+    [stationContainerView, updateLocationButton, updateStationButton].forEach { mapView.addSubview($0) }
     
     mapView.snp.makeConstraints {
-      $0.edges.equalToSuperview()
+      $0.leading.trailing.top.equalToSuperview()
+      $0.bottom.equalToSuperview().offset(-(self.tabBarController?.tabBar.frame.height ?? 0.0))
     }
     
     stationContainerView.snp.makeConstraints {
@@ -123,6 +151,24 @@ class StationMapViewController: BaseViewController {
       $0.trailing.equalToSuperview().offset(-16)
       $0.height.equalTo(54)
     }
+    
+    updateStationButton.snp.makeConstraints {
+      $0.bottom.equalTo(updateLocationButton.snp.top)
+      $0.leading.equalTo(updateLocationButton.snp.leading)
+      $0.size.equalTo(48)
+    }
+    
+    updateLocationButton.snp.makeConstraints {
+      $0.bottom.equalToSuperview().offset(-20)
+      $0.leading.equalToSuperview().offset(20)
+      $0.size.equalTo(48)
+    }
+    
+    self.view.bringSubviewToFront(updateLocationButton)
+    updateLocationButton.rx.tap.subscribe(onNext: { _ in
+      print(3333333)
+      
+    }).disposed(by: rx.disposeBag)
     
   }
   
@@ -167,8 +213,7 @@ class StationMapViewController: BaseViewController {
     }).disposed(by: rx.disposeBag)
     
     output?.locationForCameraMove.drive(onNext: { [weak self] (lat, lng) in
-      let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
-      self?.mapView.moveCamera(cameraUpdate)
+      self?.updateCurrentMoveCamera(lat: (self?.viewModel?.currentCoordinate.lat)!, lng: (self?.viewModel?.currentCoordinate.lng)!)
     }).disposed(by: rx.disposeBag)
     
   }
@@ -181,4 +226,15 @@ class StationMapViewController: BaseViewController {
     marker.mapView = self.mapView
   }
   
+  func updateCurrentMoveCamera(lat: Double, lng: Double) {
+    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
+    self.mapView.moveCamera(cameraUpdate)
+  }
+  
+}
+
+extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate {
+  func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+    print("LAT :", latlng.lat, "LNG :", latlng.lng)
+  }
 }

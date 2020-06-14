@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class FavoriteViewController: UIViewController {
+class FavoriteViewController: BaseViewController {
+  
+  let button1 = UIButton()
   
   let viewModel: BaseViewModel
   let navigator: Navigator
@@ -27,6 +31,18 @@ class FavoriteViewController: UIViewController {
     super.viewDidLoad()
     
     print("Favorite")
+    
+    view.addSubview(button1)
+    button1.setTitle("123", for: .normal)
+    button1.setTitleColor(.black, for: .normal)
+    
+    button1.snp.makeConstraints {
+      $0.center.equalToSuperview()
+    }
+    
+    button1.rx.tap.subscribe(onNext: { _ in
+      print(12312312312312312)
+    }).disposed(by: rx.disposeBag)
   }
 
 }

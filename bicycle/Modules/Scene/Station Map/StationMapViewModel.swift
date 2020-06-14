@@ -36,7 +36,8 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   func transform(input: Input) -> Output {
     
-    let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: false)
+    let locationGrantPermission = locationInteractor
+      .start().asDriver(onErrorJustReturn: false)
     
     let fetchBicycleList1 = seoulBicycleInteractor
       .fetchBicycleList(start: 1, last: 1000)
@@ -66,7 +67,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
 
         let lat = location?.coordinate.latitude ?? 0.0
         let lng = location?.coordinate.longitude ?? 0.0
-       
+
         self.currentCoordinate = (lat, lng)
         
         return ((lat, lng), error)
