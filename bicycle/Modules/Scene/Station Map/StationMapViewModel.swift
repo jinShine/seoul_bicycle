@@ -18,14 +18,16 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
-    let fetchBicycleList: Driver<[Station]>
+    let fetchBicycleLists: Driver<[Station]>
     let updateLocation: Driver<((Double?, Double?), Error?)>
+    let locationForCameraMove: Driver<(Double, Double)>
   }
   
   let locationInteractor: LocationUseCase
   let seoulBicycleInteractor: SeoulBicycleUseCase
   
   var stationLists: [Station] = []
+  var currentCoordinate: (lat: Double, lng: Double) = (0.0, 0.0)
   
   init(locationInteractor: LocationUseCase, seoulBicycleInteractor: SeoulBicycleUseCase) {
     self.locationInteractor = locationInteractor
@@ -36,37 +38,53 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     
     let locationGrantPermission = locationInteractor.start().asDriver(onErrorJustReturn: false)
     
-    let fetchBicycleList = seoulBicycleInteractor
+    let fetchBicycleList1 = seoulBicycleInteractor
       .fetchBicycleList(start: 1, last: 1000)
       .map { $0.status.row }
       .asObservable()
     
-    let fetchBicycleList1 = seoulBicycleInteractor
+    let fetchBicycleList2 = seoulBicycleInteractor
       .fetchBicycleList(start: 1001, last: 2000)
       .map { $0.status.row }
       .asObservable()
     
-    let fetchBicycleList2 = seoulBicycleInteractor
+    let fetchBicycleList3 = seoulBicycleInteractor
       .fetchBicycleList(start: 2001, last: 3000)
       .map { $0.status.row }
       .asObservable()
     
-    let dd = Observable<[Station]>.concat([
-      fetchBicycleList,
-      fetchBicycleList1,
-      fetchBicycleList2
+    let fetchBicycleLists = Observable<[Station]>.concat([
+        fetchBicycleList1,
+        fetchBicycleList2,
+        fetchBicycleList3
       ]).asDriver(onErrorJustReturn: [])
 
     
     let updateLocation = locationInteractor
       .fetchLocation()
-      .map { (location, error) in
-        return ((location?.coordinate.latitude, location?.coordinate.longitude), error)
+      .map { (location, error) -> ((Double?, Double?), Error?) in
+
+        let lat = location?.coordinate.latitude ?? 0.0
+        let lng = location?.coordinate.longitude ?? 0.0
+       
+        self.currentCoordinate = (lat, lng)
+        
+        return ((lat, lng), error)
       }
       .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
     
+    let locationForCameraMove = locationInteractor
+      .fetchLocation()
+      .map { (location, _) in
+        return (location?.coordinate.latitude ?? self.currentCoordinate.lat,
+                location?.coordinate.longitude ?? self.currentCoordinate.lng)
+      }
+      .take(1)
+      .asDriver(onErrorJustReturn: currentCoordinate)
+
     return Output(locationGrantPermission: locationGrantPermission,
-                  fetchBicycleList: dd,
-                  updateLocation: updateLocation)
+                  fetchBicycleLists: fetchBicycleLists,
+                  updateLocation: updateLocation,
+                  locationForCameraMove: locationForCameraMove)
   }
 }

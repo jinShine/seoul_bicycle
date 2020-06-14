@@ -141,7 +141,7 @@ class StationMapViewController: BaseViewController {
       }
     }).disposed(by: rx.disposeBag)
     
-    output?.fetchBicycleList.drive(onNext: { [weak self] stations in
+    output?.fetchBicycleLists.drive(onNext: { [weak self] stations in
 
       stations.forEach {
         self?.viewModel?.stationLists.append($0)
@@ -162,12 +162,15 @@ class StationMapViewController: BaseViewController {
       
       let lat = coordinator.0 ?? 37.5666805
       let lng = coordinator.1 ?? 126.9784147
-
+      self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
+      self?.mapView.positionMode = .normal
+    }).disposed(by: rx.disposeBag)
+    
+    output?.locationForCameraMove.drive(onNext: { [weak self] (lat, lng) in
       let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
       self?.mapView.moveCamera(cameraUpdate)
-      self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
-//      self?.mapView.positionMode = .compass
     }).disposed(by: rx.disposeBag)
+    
   }
   
   //MARK:- Methods
