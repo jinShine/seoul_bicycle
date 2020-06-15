@@ -14,6 +14,8 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
     let trigger: Observable<Void>
+    let didTapUpdateStation: Observable<Void>
+    let didTapUpdateLocation: Observable<Void>
   }
   
   struct Output {
@@ -21,6 +23,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let fetchBicycleLists: Driver<[Station]>
     let updateLocation: Driver<((Double?, Double?), Error?)>
     let locationForCameraMove: Driver<(Double, Double)>
+    let didTapUpdateLocation: Driver<Void>
   }
   
   let locationInteractor: LocationUseCase
@@ -82,10 +85,15 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       }
       .take(1)
       .asDriver(onErrorJustReturn: currentCoordinate)
-
+    
+    let didTapUpdateLocation = input.didTapUpdateLocation
+      .mapToVoid()
+      .asDriver(onErrorJustReturn: ())
+    
     return Output(locationGrantPermission: locationGrantPermission,
                   fetchBicycleLists: fetchBicycleLists,
                   updateLocation: updateLocation,
-                  locationForCameraMove: locationForCameraMove)
+                  locationForCameraMove: locationForCameraMove,
+                  didTapUpdateLocation: didTapUpdateLocation)
   }
 }

@@ -15,13 +15,16 @@ class StationMapViewController: BaseViewController {
   //MARK: - Constant
   
   enum Constant {
-    case search, locationError, locationUpdateError, networkError, updateLocation, refreshStation
+    case search, locationError, locationUpdateError,
+    networkError, updateLocation, refreshStation,
+    compass
     
     var image: UIImage? {
       switch self {
       case .search: return UIImage(named: "Icon-Search")
       case .updateLocation: return UIImage(named: "Icon-LocateMe")
       case .refreshStation: return UIImage(named: "Icon-Refresh")
+      case .compass: return UIImage(named: "Icon-Compass")
       default: return nil
       }
     }
@@ -47,6 +50,8 @@ class StationMapViewController: BaseViewController {
     mapView.positionMode = .normal
     mapView.logoAlign = .rightBottom
     mapView.touchDelegate = self
+    mapView.addCameraDelegate(delegate: self)
+    mapView.addOptionDelegate(delegate: self)
     return mapView
   }()
   
@@ -134,11 +139,16 @@ class StationMapViewController: BaseViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  deinit {
+    mapView.removeCameraDelegate(delegate: self)
+    mapView.removeOptionDelegate(delegate: self)
+  }
+  
   override func setupUI() {
     super.setupUI()
     
-    [mapView].forEach { view.addSubview($0) }
-    [stationContainerView, updateLocationButton, updateStationButton].forEach { mapView.addSubview($0) }
+    [mapView, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
+    [stationContainerView].forEach { mapView.addSubview($0) }
     
     mapView.snp.makeConstraints {
       $0.leading.trailing.top.equalToSuperview()
@@ -159,16 +169,10 @@ class StationMapViewController: BaseViewController {
     }
     
     updateLocationButton.snp.makeConstraints {
-      $0.bottom.equalToSuperview().offset(-20)
+      $0.bottom.equalTo(mapView).offset(-20)
       $0.leading.equalToSuperview().offset(20)
       $0.size.equalTo(48)
     }
-    
-    self.view.bringSubviewToFront(updateLocationButton)
-    updateLocationButton.rx.tap.subscribe(onNext: { _ in
-      print(3333333)
-      
-    }).disposed(by: rx.disposeBag)
     
   }
   
@@ -176,7 +180,9 @@ class StationMapViewController: BaseViewController {
     super.bindViewModel()
     
     // Input
-    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid())
+    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
+                                          didTapUpdateStation: updateStationButton.rx.tap.asObservable(),
+                                          didTapUpdateLocation: updateLocationButton.rx.tap.asObservable())
     
     // Output
     let output = viewModel?.transform(input: input)
@@ -188,7 +194,7 @@ class StationMapViewController: BaseViewController {
     }).disposed(by: rx.disposeBag)
     
     output?.fetchBicycleLists.drive(onNext: { [weak self] stations in
-
+      
       stations.forEach {
         self?.viewModel?.stationLists.append($0)
         
@@ -209,11 +215,35 @@ class StationMapViewController: BaseViewController {
       let lat = coordinator.0 ?? 37.5666805
       let lng = coordinator.1 ?? 126.9784147
       self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
-      self?.mapView.positionMode = .normal
     }).disposed(by: rx.disposeBag)
     
     output?.locationForCameraMove.drive(onNext: { [weak self] (lat, lng) in
-      self?.updateCurrentMoveCamera(lat: (self?.viewModel?.currentCoordinate.lat)!, lng: (self?.viewModel?.currentCoordinate.lng)!)
+      guard let self = self else { return }
+      if let coordinate = self.viewModel?.currentCoordinate {
+        self.updateCurrentMoveCamera(lat: coordinate.lat, lng: coordinate.lng)
+      }
+    }).disposed(by: rx.disposeBag)
+    
+    output?.didTapUpdateLocation.drive(onNext: { [weak self] _ in
+      guard let self = self else { return }
+      
+      let position = self.mapView.positionMode
+      switch position {
+      case .normal:
+        self.mapView.positionMode = .direction
+        self.updateLocationButton.tintColor = AppTheme.color.main
+      case .direction:
+        self.mapView.positionMode = .compass
+        self.updateLocationButton.setImage(Constant.compass.image, for: .normal)
+        self.updateLocationButton.tintColor = AppTheme.color.main
+      case .compass:
+        self.mapView.positionMode = .direction
+        self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
+        self.updateLocationButton.tintColor = AppTheme.color.main
+      default:
+        self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
+        self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
+      }
     }).disposed(by: rx.disposeBag)
     
   }
@@ -228,13 +258,25 @@ class StationMapViewController: BaseViewController {
   
   func updateCurrentMoveCamera(lat: Double, lng: Double) {
     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
+    cameraUpdate.animation = .fly
+    cameraUpdate.animationDuration = 0.5
     self.mapView.moveCamera(cameraUpdate)
   }
   
 }
 
-extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate {
+extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
     print("LAT :", latlng.lat, "LNG :", latlng.lng)
   }
+  
+  func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+    
+    //사용자의 제스처로 인해 카메라가 움직였을때 updateLocationButton 초기화
+    if reason == NMFMapChangedByGesture {
+      self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
+      self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
+    }
+  }
+  
 }
