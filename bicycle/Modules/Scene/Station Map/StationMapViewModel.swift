@@ -20,9 +20,10 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
-    let fetchBicycleLists: Driver<[Station]>
+    let fetchBicycleLists: Observable<[Station]>
     let updateLocation: Driver<((Double?, Double?), Error?)>
     let locationForCameraMove: Driver<(Double, Double)>
+    let didTapUpdateStation: Observable<[Station]>
     let didTapUpdateLocation: Driver<Void>
   }
   
@@ -52,39 +53,49 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .map { $0.status.row }
       .asObservable()
     
+    // 2000개 이상 Station이 생겼는지 확인해보기~
     let fetchBicycleList3 = seoulBicycleInteractor
       .fetchBicycleList(start: 2001, last: 3000)
       .map { $0.status.row }
       .asObservable()
     
     let fetchBicycleLists = Observable<[Station]>.concat([
-        fetchBicycleList1,
-        fetchBicycleList2,
-        fetchBicycleList3
-      ]).asDriver(onErrorJustReturn: [])
-
+      fetchBicycleList1,
+      fetchBicycleList2,
+      fetchBicycleList3
+    ])
+      .catchErrorJustReturn([])
+      .reduce([], accumulator: { $0 + $1 })
+      .do(onNext: {
+        self.stationLists.removeAll(keepingCapacity: true)
+        self.stationLists.append(contentsOf: $0 )}
+    )
     
     let updateLocation = locationInteractor
       .fetchLocation()
       .map { (location, error) -> ((Double?, Double?), Error?) in
-
+        
         let lat = location?.coordinate.latitude ?? 0.0
         let lng = location?.coordinate.longitude ?? 0.0
-
+        
         self.currentCoordinate = (lat, lng)
         
         return ((lat, lng), error)
-      }
-      .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
+    }
+    .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
     
     let locationForCameraMove = locationInteractor
       .fetchLocation()
       .map { (location, _) in
         return (location?.coordinate.latitude ?? self.currentCoordinate.lat,
                 location?.coordinate.longitude ?? self.currentCoordinate.lng)
-      }
-      .take(1)
-      .asDriver(onErrorJustReturn: currentCoordinate)
+    }
+    .take(1)
+    .asDriver(onErrorJustReturn: currentCoordinate)
+    
+    let didTapUpdateStation = input.didTapUpdateStation
+      .flatMap { fetchBicycleLists }
+      .asObservable()
     
     let didTapUpdateLocation = input.didTapUpdateLocation
       .mapToVoid()
@@ -94,6 +105,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
                   fetchBicycleLists: fetchBicycleLists,
                   updateLocation: updateLocation,
                   locationForCameraMove: locationForCameraMove,
+                  didTapUpdateStation: didTapUpdateStation,
                   didTapUpdateLocation: didTapUpdateLocation)
   }
 }

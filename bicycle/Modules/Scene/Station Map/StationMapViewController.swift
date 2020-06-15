@@ -55,6 +55,8 @@ class StationMapViewController: BaseViewController {
     return mapView
   }()
   
+  var markers = [NMFMarker]()
+  
   lazy var stationContainerView: UIView = {
     let containerView = UIView()
     containerView.backgroundColor = AppTheme.color.white
@@ -187,85 +189,108 @@ class StationMapViewController: BaseViewController {
     // Output
     let output = viewModel?.transform(input: input)
     
-    output?.locationGrantPermission.drive(onNext: { [weak self] status in
-      if !status {
-        self?.toastView.show(image: .error, message: Constant.locationError.title)
-      }
-    }).disposed(by: rx.disposeBag)
+    output?.locationGrantPermission
+      .drive(onNext: { [weak self] status in
+        if !status {
+          self?.toastView.show(image: .error, message: Constant.locationError.title)
+        }
+      }).disposed(by: rx.disposeBag)
     
-    output?.fetchBicycleLists.drive(onNext: { [weak self] stations in
-      
-      stations.forEach {
-        self?.viewModel?.stationLists.append($0)
+    output?.fetchBicycleLists
+      .subscribe(onNext: { [weak self] stations in
+        DLog(stations.count)
         
-        let lat = Double($0.stationLatitude) ?? 0.0
-        let lng = Double($0.stationLongitude) ?? 0.0
-        
-        self?.setupStationMarker(lat: lat, lng: lng)
-      }
-      
-    }).disposed(by: rx.disposeBag)
+        stations.forEach {
+          let lat = Double($0.stationLatitude) ?? 0.0
+          let lng = Double($0.stationLongitude) ?? 0.0
+          
+          self?.setupStationMarker(lat: lat, lng: lng)
+        }
+      }).disposed(by: rx.disposeBag)
     
-    output?.updateLocation.drive(onNext: { [weak self] (coordinator, error) in
-      if let _ = error {
-        self?.toastView.show(image: .error, message: Constant.locationUpdateError.title)
-        return
-      }
-      
-      let lat = coordinator.0 ?? 37.5666805
-      let lng = coordinator.1 ?? 126.9784147
-      self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
-    }).disposed(by: rx.disposeBag)
+    output?.updateLocation
+      .drive(onNext: { [weak self] (coordinator, error) in
+        if let _ = error {
+          self?.toastView.show(image: .error, message: Constant.locationUpdateError.title)
+          return
+        }
+        
+        let lat = coordinator.0 ?? 37.5666805
+        let lng = coordinator.1 ?? 126.9784147
+        self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
+      }).disposed(by: rx.disposeBag)
     
     output?.locationForCameraMove.drive(onNext: { [weak self] (lat, lng) in
       guard let self = self else { return }
+      
       if let coordinate = self.viewModel?.currentCoordinate {
         self.updateCurrentMoveCamera(lat: coordinate.lat, lng: coordinate.lng)
       }
     }).disposed(by: rx.disposeBag)
     
-    output?.didTapUpdateLocation.drive(onNext: { [weak self] _ in
-      guard let self = self else { return }
-      
-      let position = self.mapView.positionMode
-      switch position {
-      case .normal:
-        self.mapView.positionMode = .direction
-        self.updateLocationButton.tintColor = AppTheme.color.main
-      case .direction:
-        self.mapView.positionMode = .compass
-        self.updateLocationButton.setImage(Constant.compass.image, for: .normal)
-        self.updateLocationButton.tintColor = AppTheme.color.main
-      case .compass:
-        self.mapView.positionMode = .direction
-        self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
-        self.updateLocationButton.tintColor = AppTheme.color.main
-      default:
-        self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
-        self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
-      }
-    }).disposed(by: rx.disposeBag)
+    output?.didTapUpdateLocation
+      .drive(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        
+        let position = self.mapView.positionMode
+        switch position {
+        case .normal:
+          self.mapView.positionMode = .direction
+          self.updateLocationButton.tintColor = AppTheme.color.main
+        case .direction:
+          self.mapView.positionMode = .compass
+          self.updateLocationButton.setImage(Constant.compass.image, for: .normal)
+          self.updateLocationButton.tintColor = AppTheme.color.main
+        case .compass:
+          self.mapView.positionMode = .direction
+          self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
+          self.updateLocationButton.tintColor = AppTheme.color.main
+        default:
+          self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
+          self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
+        }
+      }).disposed(by: rx.disposeBag)
+    
+    output?.didTapUpdateStation
+      .subscribe(onNext: { [weak self] stations in
+        self?.removeMarkers()
+        
+        stations.forEach {
+          let lat = Double($0.stationLatitude) ?? 0.0
+          let lng = Double($0.stationLongitude) ?? 0.0
+          
+          self?.setupStationMarker(lat: lat, lng: lng)
+        }
+      }).disposed(by: rx.disposeBag)
     
   }
   
   //MARK:- Methods
   
-  func setupStationMarker(lat: Double, lng: Double) {
+  private func setupStationMarker(lat: Double, lng: Double) {
+    
     let marker = NMFMarker()
     marker.position = NMGLatLng(lat: lat, lng: lng)
     marker.mapView = self.mapView
+    
+    markers.append(marker)
   }
   
-  func updateCurrentMoveCamera(lat: Double, lng: Double) {
+  private func updateCurrentMoveCamera(lat: Double, lng: Double) {
     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng), zoomTo: 17)
     cameraUpdate.animation = .fly
     cameraUpdate.animationDuration = 0.5
     self.mapView.moveCamera(cameraUpdate)
   }
   
+  private func removeMarkers() {
+    markers.forEach { $0.mapView = nil }
+  }
+  
 }
 
 extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
+  
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
     print("LAT :", latlng.lat, "LNG :", latlng.lng)
   }
