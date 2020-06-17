@@ -8,8 +8,6 @@
 
 import UIKit
 import NMapsMap
-import SwiftEntryKit
-import Crashlytics
 
 class StationMapViewController: BaseViewController {
   
@@ -66,7 +64,7 @@ class StationMapViewController: BaseViewController {
     
     let searchImageView: UIImageView = {
       let view = UIImageView()
-      view.image = Constant.search.image?.withAlignmentRectInsets(UIEdgeInsets(top: -20, left: -20, bottom: -20, right: -20))
+      view.image = Constant.search.image?.withAlignmentRectInsets(UIEdgeInsets(top: -19, left: -19, bottom: -19, right: -19))
       view.contentMode = .scaleAspectFit
       view.tintColor = AppTheme.color.main
       return view
@@ -82,7 +80,7 @@ class StationMapViewController: BaseViewController {
       let button = UIButton()
       button.setTitle(Constant.search.title, for: .normal)
       button.setTitleColor(AppTheme.color.gray, for: .normal)
-      button.titleLabel?.font = AppTheme.font.custom(size: 14)
+      button.titleLabel?.font = AppTheme.font.custom(size: 15)
       button.contentHorizontalAlignment = .left
       return button
     }()
@@ -111,10 +109,9 @@ class StationMapViewController: BaseViewController {
     let button = UIButton()
     button.backgroundColor = AppTheme.color.white
     button.layer.cornerRadius = 12
-    button.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     button.setImage(Constant.refreshStation.image, for: .normal)
     button.tintColor = AppTheme.color.blueMagenta
-    button.layer.applyShadow(x: 0, y: -1)
+    button.layer.applyShadow()
     return button
   }()
   
@@ -122,7 +119,6 @@ class StationMapViewController: BaseViewController {
     let button = UIButton()
     button.backgroundColor = AppTheme.color.white
     button.layer.cornerRadius = 12
-    button.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     button.setImage(Constant.updateLocation.image, for: .normal)
     button.tintColor = AppTheme.color.blueMagenta
     button.layer.applyShadow()
@@ -166,7 +162,7 @@ class StationMapViewController: BaseViewController {
     }
     
     updateStationButton.snp.makeConstraints {
-      $0.bottom.equalTo(updateLocationButton.snp.top)
+      $0.bottom.equalTo(updateLocationButton.snp.top).offset(-8)
       $0.leading.equalTo(updateLocationButton.snp.leading)
       $0.size.equalTo(48)
     }
@@ -178,12 +174,14 @@ class StationMapViewController: BaseViewController {
     }
     
   }
-
+  
   override func bindViewModel() {
     super.bindViewModel()
     
     // Input
-    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
+    
+    let input = StationMapViewModel.Input(trigger: rx.viewDidAppear.mapToVoid(),
+                                          fetchBicycleListTrigger: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: updateStationButton.rx.tap.asObservable(),
                                           didTapUpdateLocation: updateLocationButton.rx.tap.asObservable())
     

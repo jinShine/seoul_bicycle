@@ -14,6 +14,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
     let trigger: Observable<Void>
+    let fetchBicycleListTrigger: Observable<Void>
     let didTapUpdateStation: Observable<Void>
     let didTapUpdateLocation: Observable<Void>
   }
@@ -59,7 +60,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .map { $0.status.row }
       .asObservable()
     
-    let fetchBicycleLists = Observable<[Station]>.concat([
+    let bicycleLists = Observable<[Station]>.concat([
         fetchBicycleList1,
         fetchBicycleList2,
         fetchBicycleList3
@@ -70,6 +71,9 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
         self.stationLists.removeAll(keepingCapacity: true)
         self.stationLists.append(contentsOf: $0 )}
       )
+    
+    let fetchBicycleLists = input.fetchBicycleListTrigger
+      .flatMap { bicycleLists }
     
     let updateLocation = locationInteractor
       .fetchLocation()
@@ -94,7 +98,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     .asDriver(onErrorJustReturn: currentCoordinate)
     
     let didTapUpdateStation = input.didTapUpdateStation
-      .flatMap { fetchBicycleLists }
+      .flatMap { bicycleLists }
       .asObservable()
     
     let didTapUpdateLocation = input.didTapUpdateLocation

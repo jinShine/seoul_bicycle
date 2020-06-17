@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import SwiftEntryKit
 
 class BaseViewController: UIViewController {
   
