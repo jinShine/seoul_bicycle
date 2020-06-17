@@ -25,7 +25,7 @@ class Application: NSObject {
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
       let viewModel = HomeTabBarViewModel()
-      window.rootViewController = self.navigator.navigate(to: .tabs(viewModel: viewModel))
+      window.rootViewController = self.navigator.get(for: .tabs(viewModel: viewModel))
       window.backgroundColor = .white
       window.makeKeyAndVisible()
     }

@@ -56,8 +56,8 @@ class StationMapViewController: BaseViewController {
   
   var markers = [NMFMarker]()
   
-  lazy var stationContainerView: UIView = {
-    let containerView = UIView()
+  lazy var stationContainerButton: UIButton = {
+    let containerView = UIButton()
     containerView.backgroundColor = AppTheme.color.white
     containerView.layer.cornerRadius = 10
     containerView.layer.applyShadow()
@@ -67,21 +67,24 @@ class StationMapViewController: BaseViewController {
       view.image = Constant.search.image?.withAlignmentRectInsets(UIEdgeInsets(top: -19, left: -19, bottom: -19, right: -19))
       view.contentMode = .scaleAspectFit
       view.tintColor = AppTheme.color.main
+      view.isUserInteractionEnabled = false
       return view
     }()
     
     let lineView: UIView = {
       let view = UIView()
       view.backgroundColor = AppTheme.color.separator
+      view.isUserInteractionEnabled = false
       return view
     }()
     
     let searchButton: UIButton = {
       let button = UIButton()
       button.setTitle(Constant.search.title, for: .normal)
-      button.setTitleColor(AppTheme.color.gray, for: .normal)
+      button.setTitleColor(AppTheme.color.lightGray, for: .normal)
       button.titleLabel?.font = AppTheme.font.custom(size: 15)
       button.contentHorizontalAlignment = .left
+      button.isUserInteractionEnabled = false
       return button
     }()
     
@@ -146,15 +149,14 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
-    [mapView, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
-    [stationContainerView].forEach { mapView.addSubview($0) }
+    [mapView, stationContainerButton, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
     
     mapView.snp.makeConstraints {
       $0.leading.trailing.top.equalToSuperview()
       $0.bottom.equalToSuperview().offset(-(self.tabBarController?.tabBar.frame.height ?? 0.0))
     }
     
-    stationContainerView.snp.makeConstraints {
+    stationContainerButton.snp.makeConstraints {
       $0.top.equalToSuperview().offset(view.topNotchHeight + 12)
       $0.leading.equalToSuperview().offset(16)
       $0.trailing.equalToSuperview().offset(-16)
@@ -180,10 +182,11 @@ class StationMapViewController: BaseViewController {
     
     // Input
     
-    let input = StationMapViewModel.Input(trigger: rx.viewDidAppear.mapToVoid(),
+    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                           fetchBicycleListTrigger: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: updateStationButton.rx.tap.asObservable(),
-                                          didTapUpdateLocation: updateLocationButton.rx.tap.asObservable())
+                                          didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
+                                          didTapStationContainer: stationContainerButton.rx.tap.asObservable())
     
     // Output
     let output = viewModel?.transform(input: input)
@@ -219,15 +222,16 @@ class StationMapViewController: BaseViewController {
         self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
       }).disposed(by: rx.disposeBag)
     
-    output?.locationForCameraMove.drive(onNext: { [weak self] (lat, lng) in
-      guard let self = self else { return }
-      
-      if let coordinate = self.viewModel?.currentCoordinate {
-        self.updateCurrentMoveCamera(lat: coordinate.lat, lng: coordinate.lng)
-      }
-    }).disposed(by: rx.disposeBag)
+    output?.locationForCameraMove
+      .drive(onNext: { [weak self] (lat, lng) in
+        guard let self = self else { return }
+        
+        if let coordinate = self.viewModel?.currentCoordinate {
+          self.updateCurrentMoveCamera(lat: coordinate.lat, lng: coordinate.lng)
+        }
+      }).disposed(by: rx.disposeBag)
     
-    output?.didTapUpdateLocation
+    output?.updateCurrentLocation
       .drive(onNext: { [weak self] _ in
         guard let self = self else { return }
         
@@ -250,7 +254,7 @@ class StationMapViewController: BaseViewController {
         }
       }).disposed(by: rx.disposeBag)
     
-    output?.didTapUpdateStation
+    output?.updateStation
       .subscribe(onNext: { [weak self] stations in
         self?.removeMarkers()
         
@@ -260,6 +264,12 @@ class StationMapViewController: BaseViewController {
           
           self?.setupStationMarker(lat: lat, lng: lng)
         }
+      }).disposed(by: rx.disposeBag)
+    
+    output?.showStationSearch
+      .drive(onNext: { [weak self] stations in
+        let viewModel = StationSearchViewModel(stationLists: stations)
+        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
       }).disposed(by: rx.disposeBag)
     
   }

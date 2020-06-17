@@ -17,6 +17,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let fetchBicycleListTrigger: Observable<Void>
     let didTapUpdateStation: Observable<Void>
     let didTapUpdateLocation: Observable<Void>
+    let didTapStationContainer: Observable<Void>
   }
   
   struct Output {
@@ -24,8 +25,9 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let fetchBicycleLists: Observable<[Station]>
     let updateLocation: Driver<((Double?, Double?), Error?)>
     let locationForCameraMove: Driver<(Double, Double)>
-    let didTapUpdateStation: Observable<[Station]>
-    let didTapUpdateLocation: Driver<Void>
+    let updateStation: Observable<[Station]>
+    let updateCurrentLocation: Driver<Void>
+    let showStationSearch: Driver<[Station]>
   }
   
   let locationInteractor: LocationUseCase
@@ -97,19 +99,24 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     .take(1)
     .asDriver(onErrorJustReturn: currentCoordinate)
     
-    let didTapUpdateStation = input.didTapUpdateStation
+    let updateStation = input.didTapUpdateStation
       .flatMap { bicycleLists }
       .asObservable()
     
-    let didTapUpdateLocation = input.didTapUpdateLocation
+    let updateCurrentLocation = input.didTapUpdateLocation
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
+    
+    let showStationSearch = input.didTapStationContainer
+      .map { self.stationLists }
+      .asDriver(onErrorJustReturn: [])
     
     return Output(locationGrantPermission: locationGrantPermission,
                   fetchBicycleLists: fetchBicycleLists,
                   updateLocation: updateLocation,
                   locationForCameraMove: locationForCameraMove,
-                  didTapUpdateStation: didTapUpdateStation,
-                  didTapUpdateLocation: didTapUpdateLocation)
+                  updateStation: updateStation,
+                  updateCurrentLocation: updateCurrentLocation,
+                  showStationSearch: showStationSearch)
   }
 }

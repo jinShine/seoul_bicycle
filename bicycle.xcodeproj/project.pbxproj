@@ -56,6 +56,9 @@
 		36DF35A12494646600EDC36D /* JeonggamDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36DF359F2494639100EDC36D /* JeonggamDisplay.ttf */; };
 		36DF35A32494652D00EDC36D /* ThemeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35A22494652D00EDC36D /* ThemeFont.swift */; };
 		36DF35A6249A473400EDC36D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DF35A5249A473400EDC36D /* GoogleService-Info.plist */; };
+		36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */; };
+		36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */; };
+		36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AE249A80D800EDC36D /* Transitionable.swift */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -138,6 +141,9 @@
 		36DF359F2494639100EDC36D /* JeonggamDisplay.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JeonggamDisplay.ttf; sourceTree = "<group>"; };
 		36DF35A22494652D00EDC36D /* ThemeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFont.swift; sourceTree = "<group>"; };
 		36DF35A5249A473400EDC36D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
+		36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewModel.swift; sourceTree = "<group>"; };
+		36DF35AE249A80D800EDC36D /* Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitionable.swift; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				367C2B68248A1580009111E7 /* Station Map */,
+				36DF35A8249A748A00EDC36D /* Station Search */,
 				367C2B67248A157A009111E7 /* User Information */,
 				367C2B5E248A0C46009111E7 /* Favorite */,
 				36C37F422488F48300DF3145 /* Main */,
@@ -383,6 +390,7 @@
 				36C37F042487DBEE00DF3145 /* AppDelegate.swift */,
 				36C37F3A2487F27500DF3145 /* Application.swift */,
 				36C37F3C2487F28100DF3145 /* Navigator.swift */,
+				36DF35AE249A80D800EDC36D /* Transitionable.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -444,6 +452,15 @@
 				36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		36DF35A8249A748A00EDC36D /* Station Search */ = {
+			isa = PBXGroup;
+			children = (
+				36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */,
+				36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */,
+			);
+			path = "Station Search";
 			sourceTree = "<group>";
 		};
 		3B461733A7689E1287DE884F /* Pods */ = {
@@ -736,7 +753,9 @@
 				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
 				36DF359824939D5E00EDC36D /* DebugPrint.swift in Sources */,
 				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
+				36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */,
 				367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */,
+				36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */,
 				36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */,
 				367C2B8C248E9DC7009111E7 /* AppTheme.swift in Sources */,
 				367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */,
@@ -752,6 +771,7 @@
 				367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */,
 				36DF359C2493A0DC00EDC36D /* StationModel.swift in Sources */,
 				36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */,
+				36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

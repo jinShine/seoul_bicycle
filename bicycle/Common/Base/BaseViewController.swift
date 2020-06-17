@@ -30,6 +30,10 @@ class BaseViewController: UIViewController {
     bindViewModel()
   }
   
+  deinit {
+    DLog(String(describing: self))
+  }
+  
   func setupUI() {
     
   }

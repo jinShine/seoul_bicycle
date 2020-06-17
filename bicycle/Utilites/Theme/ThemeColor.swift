@@ -17,7 +17,7 @@ struct ThemeColor {
   var sub: UIColor { UIColor.rgb(r: 255, g: 168, b: 0, a: 1)}
   var blueMagenta: UIColor { UIColor.rgb(r: 76, g: 75, b: 94, a: 1) }
   var separator: UIColor { UIColor.rgb(r: 235, g: 235, b: 235, a: 1) }
-  var lightGray: UIColor { UIColor.rgb(r: 216, g: 216, b: 216, a: 1) }
+  var lightGray: UIColor { UIColor.rgb(r: 199, g: 199, b: 212, a: 1) }
   var gray: UIColor { return UIColor.rgb(r: 128, g: 128, b: 128, a: 1) }
   
 }
