@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import NMapsMap
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //Naver Map
     NMFAuthManager.shared().clientId = AppConfiguration.current().naverAppId
+    
+    //Firebase
+    FirebaseApp.configure()
     
     return true
   }

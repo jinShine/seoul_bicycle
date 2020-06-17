@@ -9,6 +9,7 @@
 import UIKit
 import NMapsMap
 import SwiftEntryKit
+import Crashlytics
 
 class StationMapViewController: BaseViewController {
   
@@ -177,7 +178,7 @@ class StationMapViewController: BaseViewController {
     }
     
   }
-  
+
   override func bindViewModel() {
     super.bindViewModel()
     

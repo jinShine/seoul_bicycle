@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>468943559551-7fpqcv3fmhq8a0eq759gpvafmdan0t6t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.468943559551-7fpqcv3fmhq8a0eq759gpvafmdan0t6t</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAjev4OjpaikRjVk3ml0HFXpMFolxwPK80</string>
+	<key>GCM_SENDER_ID</key>
+	<string>468943559551</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.jinnify.bicycle</string>
+	<key>PROJECT_ID</key>
+	<string>seoul-bicycle</string>
+	<key>STORAGE_BUCKET</key>
+	<string>seoul-bicycle.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:468943559551:ios:939045a16f5abef640584a</string>
+	<key>DATABASE_URL</key>
+	<string>https://seoul-bicycle.firebaseio.com</string>
+</dict>
+</plist>

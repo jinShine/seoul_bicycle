@@ -55,6 +55,7 @@
 		36DF359C2493A0DC00EDC36D /* StationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF359B2493A0DC00EDC36D /* StationModel.swift */; };
 		36DF35A12494646600EDC36D /* JeonggamDisplay.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36DF359F2494639100EDC36D /* JeonggamDisplay.ttf */; };
 		36DF35A32494652D00EDC36D /* ThemeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35A22494652D00EDC36D /* ThemeFont.swift */; };
+		36DF35A6249A473400EDC36D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36DF35A5249A473400EDC36D /* GoogleService-Info.plist */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -136,6 +137,7 @@
 		36DF359E2493F01700EDC36D /* bicycle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bicycle.entitlements; sourceTree = "<group>"; };
 		36DF359F2494639100EDC36D /* JeonggamDisplay.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JeonggamDisplay.ttf; sourceTree = "<group>"; };
 		36DF35A22494652D00EDC36D /* ThemeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeFont.swift; sourceTree = "<group>"; };
+		36DF35A5249A473400EDC36D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -412,6 +414,7 @@
 				36C37F102487DBF100DF3145 /* Assets.xcassets */,
 				36DF359F2494639100EDC36D /* JeonggamDisplay.ttf */,
 				36C37F152487DBF100DF3145 /* Info.plist */,
+				36DF35A5249A473400EDC36D /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */,
 				36C37F112487DBF100DF3145 /* Assets.xcassets in Resources */,
 				36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */,
+				36DF35A6249A473400EDC36D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,7 +619,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bicycle/Pods-bicycle-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bicycle/Pods-bicycle-frameworks.sh\"\n\"${PODS_ROOT}/Fabric/run\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1FBD9824F1AD6768FBE2779A /* [CP] Check Pods Manifest.lock */ = {
@@ -924,6 +928,7 @@
 				CODE_SIGN_ENTITLEMENTS = bicycle/bicycle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CNMQE42DQF;
 				INFOPLIST_FILE = "$(SRCROOT)/bicycle/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

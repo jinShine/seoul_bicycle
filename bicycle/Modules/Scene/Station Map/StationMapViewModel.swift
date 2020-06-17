@@ -60,16 +60,16 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .asObservable()
     
     let fetchBicycleLists = Observable<[Station]>.concat([
-      fetchBicycleList1,
-      fetchBicycleList2,
-      fetchBicycleList3
-    ])
+        fetchBicycleList1,
+        fetchBicycleList2,
+        fetchBicycleList3
+      ])
       .catchErrorJustReturn([])
       .reduce([], accumulator: { $0 + $1 })
       .do(onNext: {
         self.stationLists.removeAll(keepingCapacity: true)
         self.stationLists.append(contentsOf: $0 )}
-    )
+      )
     
     let updateLocation = locationInteractor
       .fetchLocation()
