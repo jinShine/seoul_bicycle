@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import NMapsMap
 
 class StationMapViewController: BaseViewController {
@@ -43,9 +45,9 @@ class StationMapViewController: BaseViewController {
   
   lazy var mapView: NMFMapView = {
     let mapView = NMFMapView()
+    mapView.contentInset = UIEdgeInsets(top: self.tabBarController?.tabBar.frame.height ?? 0.0, left: 0, bottom: 0, right: 0)
     mapView.mapType = .basic
     mapView.isIndoorMapEnabled = true
-    mapView.setLayerGroup(NMF_LAYER_GROUP_BICYCLE, isEnabled: true)
     mapView.positionMode = .normal
     mapView.logoAlign = .rightBottom
     mapView.touchDelegate = self
@@ -128,6 +130,8 @@ class StationMapViewController: BaseViewController {
     return button
   }()
   
+  var rotateAnimationProperty: UIViewPropertyAnimator?
+  
   let viewModel: StationMapViewModel?
   let navigator: Navigator
   
@@ -166,13 +170,13 @@ class StationMapViewController: BaseViewController {
     updateStationButton.snp.makeConstraints {
       $0.bottom.equalTo(updateLocationButton.snp.top).offset(-8)
       $0.leading.equalTo(updateLocationButton.snp.leading)
-      $0.size.equalTo(48)
+      $0.size.equalTo(44)
     }
     
     updateLocationButton.snp.makeConstraints {
       $0.bottom.equalTo(mapView).offset(-20)
       $0.leading.equalToSuperview().offset(20)
-      $0.size.equalTo(48)
+      $0.size.equalTo(44)
     }
     
   }
@@ -182,9 +186,14 @@ class StationMapViewController: BaseViewController {
     
     // Input
     
+    let didTapUpdateLocation = updateStationButton.rx.tap
+      .do(onNext: { [weak self] _ in self?.rotateLoadingStart() })
+      .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
+      .mapToVoid()
+    
     let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                           fetchBicycleListTrigger: rx.viewWillAppear.mapToVoid(),
-                                          didTapUpdateStation: updateStationButton.rx.tap.asObservable(),
+                                          didTapUpdateStation: didTapUpdateLocation,
                                           didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
                                           didTapStationContainer: stationContainerButton.rx.tap.asObservable())
     
@@ -206,7 +215,7 @@ class StationMapViewController: BaseViewController {
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
-          self?.setupStationMarker(lat: lat, lng: lng)
+          self?.setupStationMarker(lat: lat, lng: lng, parkingCount: $0.parkingBikeTotCnt)
         }
       }).disposed(by: rx.disposeBag)
     
@@ -256,14 +265,17 @@ class StationMapViewController: BaseViewController {
     
     output?.updateStation
       .subscribe(onNext: { [weak self] stations in
+        self?.rotateLoadingStop()
         self?.removeMarkers()
         
         stations.forEach {
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
-          self?.setupStationMarker(lat: lat, lng: lng)
+          self?.setupStationMarker(lat: lat, lng: lng, parkingCount: $0.parkingBikeTotCnt)
         }
+        
+        print("", stations)
       }).disposed(by: rx.disposeBag)
     
     output?.showStationSearch
@@ -276,12 +288,21 @@ class StationMapViewController: BaseViewController {
   
   //MARK:- Methods
   
-  private func setupStationMarker(lat: Double, lng: Double) {
+  private func setupStationMarker(lat: Double, lng: Double, parkingCount: String) {
     
     let marker = NMFMarker()
     marker.position = NMGLatLng(lat: lat, lng: lng)
     marker.mapView = self.mapView
-    
+    marker.captionText = parkingCount
+    if parkingCount.count >= 2 {
+      marker.iconImage = NMFOverlayImage(image: UIImage(named: "Marker_2")!)
+    } else {
+      marker.iconImage = NMFOverlayImage(image: UIImage(named: "Marker_1")!)
+    }
+    marker.captionTextSize = 11
+    marker.captionAligns = [.topRight]
+    marker.captionOffset = -15
+
     markers.append(marker)
   }
   
@@ -294,6 +315,20 @@ class StationMapViewController: BaseViewController {
   
   private func removeMarkers() {
     markers.forEach { $0.mapView = nil }
+  }
+  
+  private func rotateLoadingStart() {
+    rotateAnimationProperty = UIViewPropertyAnimator
+      .runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.repeat, .curveEaseInOut], animations: {
+        self.updateStationButton.imageView?.transform = CGAffineTransform(rotationAngle: .pi)
+    }, completion: nil)
+    rotateAnimationProperty?.startAnimation()
+  }
+  
+  private func rotateLoadingStop() {
+    updateStationButton.imageView?.transform = .identity
+    rotateAnimationProperty?.stopAnimation(false)
+    rotateAnimationProperty?.finishAnimation(at: .current)
   }
   
 }

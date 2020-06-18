@@ -59,6 +59,8 @@
 		36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */; };
 		36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */; };
 		36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AE249A80D800EDC36D /* Transitionable.swift */; };
+		36DF35B3249B383700EDC36D /* StationMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35B2249B383700EDC36D /* StationMarker.swift */; };
+		36DF35B5249B384500EDC36D /* StationMarker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DF35B4249B384400EDC36D /* StationMarker.xib */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -144,6 +146,8 @@
 		36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewModel.swift; sourceTree = "<group>"; };
 		36DF35AE249A80D800EDC36D /* Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitionable.swift; sourceTree = "<group>"; };
+		36DF35B2249B383700EDC36D /* StationMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationMarker.swift; sourceTree = "<group>"; };
+		36DF35B4249B384400EDC36D /* StationMarker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StationMarker.xib; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +236,8 @@
 			children = (
 				367C2B6F248A17BC009111E7 /* StationMapViewController.swift */,
 				367C2B71248A17C4009111E7 /* StationMapViewModel.swift */,
+				36DF35B2249B383700EDC36D /* StationMarker.swift */,
+				36DF35B4249B384400EDC36D /* StationMarker.xib */,
 			);
 			path = "Station Map";
 			sourceTree = "<group>";
@@ -600,6 +606,7 @@
 				36C37F142487DBF100DF3145 /* LaunchScreen.storyboard in Resources */,
 				367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */,
 				36C37F112487DBF100DF3145 /* Assets.xcassets in Resources */,
+				36DF35B5249B384500EDC36D /* StationMarker.xib in Resources */,
 				36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */,
 				36DF35A6249A473400EDC36D /* GoogleService-Info.plist in Resources */,
 			);
@@ -747,6 +754,7 @@
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
+				36DF35B3249B383700EDC36D /* StationMarker.swift in Sources */,
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */,
