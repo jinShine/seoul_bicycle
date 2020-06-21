@@ -39,9 +39,10 @@ class StationMapViewController: BaseViewController {
       default: return ""
       }
     }
+    
   }
   
-  //MARK: - Properties
+  //MARK: - UI Properties
   
   lazy var mapView: NMFMapView = {
     let mapView = NMFMapView()
@@ -130,6 +131,17 @@ class StationMapViewController: BaseViewController {
     return button
   }()
   
+  lazy var markerInfo: UIView = {
+    if let view = Bundle.main.loadNibNamed(
+      "MarkerInfo", owner: self, options: nil
+      )?.first as? UIView {
+      return view
+    }
+    return UIView()
+  }()
+  
+  //MARK:- Properties
+  
   var rotateAnimationProperty: UIViewPropertyAnimator?
   
   let viewModel: StationMapViewModel?
@@ -153,7 +165,7 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
-    [mapView, stationContainerButton, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
+    [mapView, stationContainerButton, updateStationButton, updateLocationButton, markerInfo].forEach { view.addSubview($0) }
     
     mapView.snp.makeConstraints {
       $0.leading.trailing.top.equalToSuperview()
@@ -302,7 +314,31 @@ class StationMapViewController: BaseViewController {
     marker.captionTextSize = 11
     marker.captionAligns = [.topRight]
     marker.captionOffset = -15
-
+    
+    marker.touchHandler = { (overlay) -> Bool in
+      print("마커 터치", overlay as? NMFMarker)
+      
+      
+//      self.view.addSubview(self.markerInfo)
+      
+      
+      
+      //      let view = UIView()
+      //      view.backgroundColor = .white
+      //      self.view.addSubview(view)
+      
+      self.markerInfo.snp.makeConstraints {
+        $0.leading.equalToSuperview().offset(24)
+        $0.trailing.equalToSuperview().offset(-24)
+        $0.height.equalTo(100)
+        $0.centerY.equalTo(self.view.center.y - 100)
+      }
+      
+      self.updateCurrentMoveCamera(lat: lat, lng: lng)
+      
+      return true
+    }
+    
     markers.append(marker)
   }
   
@@ -319,9 +355,13 @@ class StationMapViewController: BaseViewController {
   
   private func rotateLoadingStart() {
     rotateAnimationProperty = UIViewPropertyAnimator
-      .runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.repeat, .curveEaseInOut], animations: {
-        self.updateStationButton.imageView?.transform = CGAffineTransform(rotationAngle: .pi)
-    }, completion: nil)
+      .runningPropertyAnimator(
+        withDuration: 0.5,
+        delay: 0,
+        options: [.repeat, .curveEaseInOut],
+        animations: {
+          self.updateStationButton.imageView?.transform = CGAffineTransform(rotationAngle: .pi)
+      }, completion: nil)
     rotateAnimationProperty?.startAnimation()
   }
   
