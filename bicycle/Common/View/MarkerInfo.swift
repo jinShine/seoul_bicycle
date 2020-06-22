@@ -11,7 +11,15 @@ import UIKit
 class MarkerInfo: UIView {
   
   enum Constant {
-    case like, likeFill
+    case like, likeFill, distance, parkingBicycle
+    
+    var title: String {
+      switch self {
+      case .distance: return "거리"
+      case .parkingBicycle: return "대여 가능 수"
+      default: return ""
+      }
+    }
     
     var image: UIImage? {
       switch self {
@@ -24,16 +32,11 @@ class MarkerInfo: UIView {
   
   @IBOutlet weak var contentsView: UIView!
   @IBOutlet weak var triangleView: UIImageView!
-  
   @IBOutlet weak var stationNameLabel: UILabel!
-  
-  
   @IBOutlet weak var distanceTitleLabel: UILabel!
   @IBOutlet weak var distanceLabel: UILabel!
   @IBOutlet weak var parkingBicycleTitleLabel: UILabel!
   @IBOutlet weak var parkingBicycleLabel: UILabel!
-  
-  
   @IBOutlet weak var likeButton: UIButton!
   
   override init(frame: CGRect) {
@@ -64,7 +67,7 @@ class MarkerInfo: UIView {
     stationNameLabel.font = AppTheme.font.custom(size: 15)
     stationNameLabel.textColor = AppTheme.color.blueMagenta
     
-    distanceTitleLabel.text = "거리"
+    distanceTitleLabel.text = Constant.distance.title
     distanceTitleLabel.textColor = AppTheme.color.gray
     distanceTitleLabel.font = AppTheme.font.custom(size: 11)
 
@@ -72,7 +75,7 @@ class MarkerInfo: UIView {
     distanceLabel.textColor = AppTheme.color.main
     distanceLabel.font = AppTheme.font.custom(size: 14)
     
-    parkingBicycleTitleLabel.text = "대여 가능 수"
+    parkingBicycleTitleLabel.text = Constant.parkingBicycle.title
     parkingBicycleTitleLabel.textColor = AppTheme.color.gray
     parkingBicycleTitleLabel.font = AppTheme.font.custom(size: 11)
     

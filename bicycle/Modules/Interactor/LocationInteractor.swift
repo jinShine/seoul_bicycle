@@ -12,7 +12,7 @@ import RxCocoa
 protocol LocationUseCase {
   func start() -> Observable<Bool>
   func fetchLocation() -> Observable<LocationDidUpdate>
-  func fetchDistacne(lat: Double, lng: Double) -> Double
+  func currentDistacne(from location: FromLocation) -> Double
 }
 
 class LocationInteractor: LocationUseCase {
@@ -31,9 +31,10 @@ class LocationInteractor: LocationUseCase {
     return locationManager.didUpdateLocation.asObservable()
   }
   
-  func fetchDistacne(lat: Double, lng: Double) -> Double {
-    let from = (lat, lng)
-    let current = (lat: locationManager.location?.coordinate.latitude, lng: locationManager.location?.coordinate.longitude)
+  func currentDistacne(from location: FromLocation) -> Double {
+    let from = (location.lat, location.lng)
+    let current = (lat: locationManager.location?.coordinate.latitude,
+                   lng: locationManager.location?.coordinate.longitude)
     return self.locationManager.distance(current: current, from: from)
   }
   

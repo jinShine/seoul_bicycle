@@ -68,12 +68,21 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
         fetchBicycleList3
       ])
       .catchErrorJustReturn([])
-//      .map { $0.map {locationInteractor.fetchDistacne(from: $0.distacne, lng: $0.distacne) }}
       .map {
-        $0.map { station -> Station in
-        let distance = self.locationInteractor.fetchDistacne(lat: Double(station.stationLatitude) ?? 0.0, lng: Double(station.stationLongitude) ?? 0.0)
-        return Station(rackTotCnt: station.rackTotCnt, stationName: station.stationName, parkingBikeTotCnt: station.parkingBikeTotCnt, shared: station.shared, stationLatitude: station.stationLatitude, stationLongitude: station.stationLongitude, stationId: station.stationId, distacne: distance)
-      }}
+        $0.map { [weak self] station -> Station in
+          let distance = self?.locationInteractor.currentDistacne(
+            from: (Double(station.stationLatitude), Double(station.stationLongitude))
+          )
+          return Station(rackTotCnt: station.rackTotCnt,
+                         stationName: station.stationName,
+                         parkingBikeTotCnt: station.parkingBikeTotCnt,
+                         shared: station.shared,
+                         stationLatitude: station.stationLatitude,
+                         stationLongitude: station.stationLongitude,
+                         stationId: station.stationId,
+                         distacne: distance)
+        }
+      }
       .reduce([], accumulator: { $0 + $1 })
       .do(onNext: {
         self.stationLists.removeAll(keepingCapacity: true)

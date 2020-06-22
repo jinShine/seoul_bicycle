@@ -360,7 +360,9 @@ class StationMapViewController: BaseViewController {
       $0.centerY.equalTo(self.view.center.y - 110)
     }
     
-    markerInfo.configure(stationName: station.stationName, distance: station.distacne ?? 0, parkingBicycle: station.parkingBikeTotCnt)
+    markerInfo.configure(stationName: station.stationName,
+                         distance: station.distacne ?? 0,
+                         parkingBicycle: station.parkingBikeTotCnt)
   }
   
   private func removeMarkerInfo() {
@@ -377,14 +379,13 @@ extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDel
   }
   
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+    removeMarkerInfo()
     
     //사용자의 제스처로 인해 카메라가 움직였을때 updateLocationButton 초기화
     if reason == NMFMapChangedByGesture {
       self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
       self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
     }
-    
-    removeMarkerInfo()
   }
   
 }
