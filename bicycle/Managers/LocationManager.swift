@@ -12,6 +12,8 @@ import CoreLocation
 
 typealias LocationDidUpdate = (location: CLLocation?, error: Error?)
 typealias LocationResponse = (location: CLLocation?, error: LocationError?)
+typealias CurrentLocation = (lat: Double?, lng: Double?)
+typealias FromLocation = (lat: Double?, lng: Double?)
 
 enum LocationError: Error {
   case authorizationDenied
@@ -25,6 +27,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
   var didUpdateLocation = PublishSubject<LocationDidUpdate>()
   var running = BehaviorSubject<Bool>(value: false)
   var permissionStatus = BehaviorSubject<Bool>(value: false)
+  var location: CLLocation?
   
   deinit {
     stopMonitoringUpdates()
@@ -73,18 +76,24 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     locationManager?.delegate = nil
     running.onNext(false)
   }
+  
+  func distance(current: CurrentLocation, from: FromLocation) -> Double {
+    return CLLocation(latitude: current.lat ?? 0.0, longitude: current.lng ?? 0.0)
+      .distance(from: CLLocation(latitude: from.lat ?? 0.0, longitude: from.lng ?? 0.0))
+  }
 
   //MARK: Location Manager Delegate
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     print("Error ", error)
     didUpdateLocation.onNext((nil, error))
+
   }
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    let location = locations.last
-    didUpdateLocation.onNext((location, nil))
-    print("didUpdateLocations :", location)
+    self.location = locations.last
+    didUpdateLocation.onNext((self.location, nil))
+    print("didUpdateLocations :", self.location)
   }
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -12,7 +12,7 @@ import UIKit
 //Sketch 스타일
 extension CALayer {
   func applyShadow (
-    color: UIColor = .black,
+    color: UIColor = .gray,
     alpha: Float = 0.5,
     x: CGFloat = 0,
     y: CGFloat = 2,

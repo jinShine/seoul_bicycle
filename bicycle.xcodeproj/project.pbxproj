@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		365F8494248FFC2A0023CAE3 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F8493248FFC290023CAE3 /* ToastView.swift */; };
 		365F8496249006200023CAE3 /* CALayer+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F8495249006200023CAE3 /* CALayer+Addition.swift */; };
+		365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */; };
+		365FA2DE24A06B82000FFEA5 /* MarkerInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */; };
 		366A94E0248FDA230076C56F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366A94DF248FDA230076C56F /* MapKit.framework */; };
 		367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */; };
 		367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B61248A101B009111E7 /* BaseViewModel.swift */; };
@@ -59,8 +61,6 @@
 		36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */; };
 		36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */; };
 		36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AE249A80D800EDC36D /* Transitionable.swift */; };
-		36DF35B3249B383700EDC36D /* MarkerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35B2249B383700EDC36D /* MarkerInfo.swift */; };
-		36DF35B5249B384500EDC36D /* MarkerInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DF35B4249B384400EDC36D /* MarkerInfo.xib */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -89,6 +89,8 @@
 		2B07272FC1AC75A257109B72 /* Pods-bicycleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycleTests.release.xcconfig"; path = "Target Support Files/Pods-bicycleTests/Pods-bicycleTests.release.xcconfig"; sourceTree = "<group>"; };
 		365F8493248FFC290023CAE3 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		365F8495249006200023CAE3 /* CALayer+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Addition.swift"; sourceTree = "<group>"; };
+		365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfo.swift; sourceTree = "<group>"; };
+		365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfo.xib; sourceTree = "<group>"; };
 		366A94DF248FDA230076C56F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		367C2B61248A101B009111E7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -146,8 +148,6 @@
 		36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewModel.swift; sourceTree = "<group>"; };
 		36DF35AE249A80D800EDC36D /* Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitionable.swift; sourceTree = "<group>"; };
-		36DF35B2249B383700EDC36D /* MarkerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfo.swift; sourceTree = "<group>"; };
-		36DF35B4249B384400EDC36D /* MarkerInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfo.xib; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -200,6 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				365F8493248FFC290023CAE3 /* ToastView.swift */,
+				365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */,
+				365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -236,8 +238,6 @@
 			children = (
 				367C2B6F248A17BC009111E7 /* StationMapViewController.swift */,
 				367C2B71248A17C4009111E7 /* StationMapViewModel.swift */,
-				36DF35B2249B383700EDC36D /* MarkerInfo.swift */,
-				36DF35B4249B384400EDC36D /* MarkerInfo.xib */,
 			);
 			path = "Station Map";
 			sourceTree = "<group>";
@@ -606,7 +606,7 @@
 				36C37F142487DBF100DF3145 /* LaunchScreen.storyboard in Resources */,
 				367C2B82248AC2AC009111E7 /* AppConfiguration.plist in Resources */,
 				36C37F112487DBF100DF3145 /* Assets.xcassets in Resources */,
-				36DF35B5249B384500EDC36D /* MarkerInfo.xib in Resources */,
+				365FA2DE24A06B82000FFEA5 /* MarkerInfo.xib in Resources */,
 				36C37F0C2487DBEF00DF3145 /* Main.storyboard in Resources */,
 				36DF35A6249A473400EDC36D /* GoogleService-Info.plist in Resources */,
 			);
@@ -754,7 +754,6 @@
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
-				36DF35B3249B383700EDC36D /* MarkerInfo.swift in Sources */,
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */,
@@ -774,6 +773,7 @@
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
 				36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
+				365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
 				36DF35A32494652D00EDC36D /* ThemeFont.swift in Sources */,
 				367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */,

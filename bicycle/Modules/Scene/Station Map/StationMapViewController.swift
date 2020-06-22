@@ -131,13 +131,9 @@ class StationMapViewController: BaseViewController {
     return button
   }()
   
-  lazy var markerInfo: UIView = {
-    if let view = Bundle.main.loadNibNamed(
-      "MarkerInfo", owner: self, options: nil
-      )?.first as? UIView {
-      return view
-    }
-    return UIView()
+  var markerInfo: MarkerInfo = {
+    let view = MarkerInfo()
+    return view
   }()
   
   //MARK:- Properties
@@ -165,7 +161,7 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
-    [mapView, stationContainerButton, updateStationButton, updateLocationButton, markerInfo].forEach { view.addSubview($0) }
+    [mapView, stationContainerButton, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
     
     mapView.snp.makeConstraints {
       $0.leading.trailing.top.equalToSuperview()
@@ -227,7 +223,7 @@ class StationMapViewController: BaseViewController {
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
-          self?.setupStationMarker(lat: lat, lng: lng, parkingCount: $0.parkingBikeTotCnt)
+          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
         }
       }).disposed(by: rx.disposeBag)
     
@@ -284,7 +280,7 @@ class StationMapViewController: BaseViewController {
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
-          self?.setupStationMarker(lat: lat, lng: lng, parkingCount: $0.parkingBikeTotCnt)
+          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
         }
         
         print("", stations)
@@ -300,13 +296,13 @@ class StationMapViewController: BaseViewController {
   
   //MARK:- Methods
   
-  private func setupStationMarker(lat: Double, lng: Double, parkingCount: String) {
+  private func setupStationMarker(lat: Double, lng: Double, station: Station) {
     
     let marker = NMFMarker()
     marker.position = NMGLatLng(lat: lat, lng: lng)
     marker.mapView = self.mapView
-    marker.captionText = parkingCount
-    if parkingCount.count >= 2 {
+    marker.captionText = station.parkingBikeTotCnt
+    if station.parkingBikeTotCnt.count >= 2 {
       marker.iconImage = NMFOverlayImage(image: UIImage(named: "Marker_2")!)
     } else {
       marker.iconImage = NMFOverlayImage(image: UIImage(named: "Marker_1")!)
@@ -316,25 +312,8 @@ class StationMapViewController: BaseViewController {
     marker.captionOffset = -15
     
     marker.touchHandler = { (overlay) -> Bool in
-      print("마커 터치", overlay as? NMFMarker)
-      
-      
-//      self.view.addSubview(self.markerInfo)
-      
-      
-      
-      //      let view = UIView()
-      //      view.backgroundColor = .white
-      //      self.view.addSubview(view)
-      
-      self.markerInfo.snp.makeConstraints {
-        $0.leading.equalToSuperview().offset(24)
-        $0.trailing.equalToSuperview().offset(-24)
-        $0.height.equalTo(100)
-        $0.centerY.equalTo(self.view.center.y - 100)
-      }
-      
       self.updateCurrentMoveCamera(lat: lat, lng: lng)
+      self.setupMarkerInfo(with: station)
       
       return true
     }
@@ -371,12 +350,30 @@ class StationMapViewController: BaseViewController {
     rotateAnimationProperty?.finishAnimation(at: .current)
   }
   
+  private func setupMarkerInfo(with station: Station) {
+    self.view.addSubview(self.markerInfo)
+
+    self.markerInfo.snp.makeConstraints {
+      $0.leading.equalToSuperview().offset(24)
+      $0.trailing.equalToSuperview().offset(-24)
+      $0.height.equalTo(120)
+      $0.centerY.equalTo(self.view.center.y - 110)
+    }
+    
+    markerInfo.configure(stationName: station.stationName, distance: station.distacne ?? 0, parkingBicycle: station.parkingBikeTotCnt)
+  }
+  
+  private func removeMarkerInfo() {
+    self.markerInfo.removeFromSuperview()
+  }
+  
 }
 
 extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
   
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
     print("LAT :", latlng.lat, "LNG :", latlng.lng)
+    removeMarkerInfo()
   }
   
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
@@ -386,6 +383,8 @@ extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDel
       self.updateLocationButton.setImage(Constant.updateLocation.image, for: .normal)
       self.updateLocationButton.tintColor = AppTheme.color.blueMagenta
     }
+    
+    removeMarkerInfo()
   }
   
 }

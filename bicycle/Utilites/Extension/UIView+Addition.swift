@@ -25,5 +25,24 @@ extension UIView {
       return UIApplication.shared.delegate?.window??.safeAreaInsets.top ?? 0
     }
   }
+}
+
+extension UIView {
+  
+  static var reuseIdentifier: String {
+      let nameSpaceClassName = NSStringFromClass(self)
+      guard let className = nameSpaceClassName.components(separatedBy: ".").last else {
+          return nameSpaceClassName
+      }
+      return className
+  }
+  
+  func loadNib() -> UIView? {
+    let name = String(describing: type(of: self))
+    guard let view = Bundle.main.loadNibNamed(name, owner: self, options: nil)?.first as? UIView else {
+      return nil
+    }
+    return view
+  }
   
 }

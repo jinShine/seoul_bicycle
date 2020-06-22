@@ -46,4 +46,5 @@ struct Station: Decodable {
   var stationLatitude: String   // 위도
   var stationLongitude: String  // 경도
   var stationId: String         // 대여소ID
+  var distacne: Double?
 }
