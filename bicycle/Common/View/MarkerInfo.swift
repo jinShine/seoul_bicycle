@@ -104,4 +104,12 @@ class MarkerInfo: UIView {
     }
     
   }
+  
+  func configureLikeImage(with isSelected: Bool) {
+    if isSelected {
+      self.likeButton.setImage(Constant.likeFill.image, for: .normal)
+    } else {
+      self.likeButton.setImage(Constant.like.image, for: .normal)
+    }
+  }
 }

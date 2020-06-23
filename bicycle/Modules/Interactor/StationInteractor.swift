@@ -8,6 +8,7 @@
 
 import RxSwift
 import RxCocoa
+import CoreData
 
 protocol StationUseCase {
   @discardableResult
@@ -18,8 +19,8 @@ protocol StationUseCase {
   
   var stations: [Station] { get set }
   
-  //  @discardableResult
-  //  func delete(station: Station) -> Observable<Station>
+  @discardableResult
+  func delete(station: Station) -> Observable<Void>
 }
 
 class StationInteractor: StationUseCase, AppGlobalType {
@@ -46,12 +47,36 @@ class StationInteractor: StationUseCase, AppGlobalType {
                 sortDescriptors: [NSSortDescriptor(key: "distance", ascending: true)])
       .do(onNext: { [weak self] in
         self?.stations.append(contentsOf: $0)
+                print("지워졌다!!!!!!!")
+                let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Station")
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+                do {
+                  try self?.coreDataStorage.context.execute(deleteRequest)
+                  try self?.coreDataStorage.context.save()
+                } catch {
+                    print ("There is an error in deleting records")
+                }
       })
   }
-  //
-  //  func delete(station: Station) -> Observable<Station> {
-  //
-  //  }
   
+  func delete(station: Station) -> Observable<Void> {
+    do {
+      try coreDataStorage.context.rx.delete(station)
+      return Observable.just(())
+    } catch {
+      return Observable.error(error)
+    }
+  }
+  
+  func removeAll() {
+    let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Station")
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+    do {
+      try self.coreDataStorage.context.execute(deleteRequest)
+      try self.coreDataStorage.context.save()
+    } catch {
+      print ("There is an error in deleting records")
+    }
+  }
   
 }

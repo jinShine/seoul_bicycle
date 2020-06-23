@@ -200,11 +200,16 @@ class StationMapViewController: BaseViewController {
       .mapToVoid()
     
     let didTapLikeInMarkerInfo = markerInfo.likeButton.rx.tap
-      .map { self.markerInfo.likeButton.tag }
-
+      //      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+      .scan(false, accumulator: { (last, _) in return !last })
+      .do(onNext: { [weak self] isSelected in
+        self?.markerInfo.configureLikeImage(with: isSelected)
+      })
+      .map { isSelected in (self.markerInfo.likeButton.tag, isSelected)}
+    
     
     let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
-                                          fetchBicycleListTrigger: rx.viewWillAppear.mapToVoid(),
+                                          fetchStationListTrigger: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: didTapUpdateLocation,
                                           didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
                                           didTapStationContainer: stationContainerButton.rx.tap.asObservable(),
@@ -220,10 +225,10 @@ class StationMapViewController: BaseViewController {
         }
       }).disposed(by: rx.disposeBag)
     
-    output?.fetchStationLists
-      .subscribe(onNext: { [weak self] stations in
+    output?.fetchStationList
+      .drive(onNext: { [weak self] stations in
         stations.forEach {
-
+          
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
@@ -275,8 +280,8 @@ class StationMapViewController: BaseViewController {
         }
       }).disposed(by: rx.disposeBag)
     
-    output?.updateStation
-      .subscribe(onNext: { [weak self] stations in
+    output?.updateStationList
+      .drive(onNext: { [weak self] stations in
         self?.rotateLoadingStop()
         self?.removeMarkers()
         self?.removeMarkerInfo()
@@ -291,16 +296,17 @@ class StationMapViewController: BaseViewController {
         print("", stations)
       }).disposed(by: rx.disposeBag)
     
-//    output?.showStationSearch
-//      .drive(onNext: { [weak self] stations in
-//        let viewModel = StationSearchViewModel(stationLists: stations)
-//        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
-//      }).disposed(by: rx.disposeBag)
+    //    output?.showStationSearch
+    //      .drive(onNext: { [weak self] stations in
+    //        let viewModel = StationSearchViewModel(stationLists: stations)
+    //        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
+    //      }).disposed(by: rx.disposeBag)
     
-//    output?.saveStation
-//      .drive(onNext: { _ in
-//        print("저장 성공")
-//      }).disposed(by: rx.disposeBag)
+    output?.saveAndDeleteStation
+      .drive(onNext: { _ in
+        // 업데이트 처리 해야됨!
+        
+      }).disposed(by: rx.disposeBag)
     
     output?.stationList
       .drive(onNext: { stations in
@@ -366,13 +372,28 @@ class StationMapViewController: BaseViewController {
   
   private func setupMarkerInfo(with station: Station) {
     view.addSubview(self.markerInfo)
-
+    
     markerInfo.snp.makeConstraints {
       $0.leading.equalToSuperview().offset(24)
       $0.trailing.equalToSuperview().offset(-24)
       $0.height.equalTo(120)
       $0.centerY.equalTo(self.view.center.y - 110)
     }
+    
+    //    markerInfo.likeButton.rx.tap
+    //      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+    //      .scan(false, accumulator: { (last, _) in return !last })
+    //      .do(onNext: { [weak self] isSelected in
+    //        self?.markerInfo.configureLikeImage(with: isSelected)
+    //      })
+    
+    //      .map { [weak self] in self?.viewModel?.stationInteractor.createStation(station: station) }
+    //    .subscribe(onNext: { _ in
+    //      print("선택쓰~")
+    //    })
+    //      .disposed(by: rx.disposeBag)
+    //
+    
     
     markerInfo.configure(tag: station.id ?? 0,
                          stationName: station.stationName,
