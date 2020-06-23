@@ -199,11 +199,16 @@ class StationMapViewController: BaseViewController {
       .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
       .mapToVoid()
     
+    let didTapLikeInMarkerInfo = markerInfo.likeButton.rx.tap
+      .map { self.markerInfo.likeButton.tag }
+
+    
     let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                           fetchBicycleListTrigger: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: didTapUpdateLocation,
                                           didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
-                                          didTapStationContainer: stationContainerButton.rx.tap.asObservable())
+                                          didTapStationContainer: stationContainerButton.rx.tap.asObservable(),
+                                          didTapLikeInMarkerInfo: didTapLikeInMarkerInfo)
     
     // Output
     let output = viewModel?.transform(input: input)
@@ -215,11 +220,10 @@ class StationMapViewController: BaseViewController {
         }
       }).disposed(by: rx.disposeBag)
     
-    output?.fetchBicycleLists
+    output?.fetchStationLists
       .subscribe(onNext: { [weak self] stations in
-        DLog(stations.count)
-        
         stations.forEach {
+
           let lat = Double($0.stationLatitude) ?? 0.0
           let lng = Double($0.stationLongitude) ?? 0.0
           
@@ -275,6 +279,7 @@ class StationMapViewController: BaseViewController {
       .subscribe(onNext: { [weak self] stations in
         self?.rotateLoadingStop()
         self?.removeMarkers()
+        self?.removeMarkerInfo()
         
         stations.forEach {
           let lat = Double($0.stationLatitude) ?? 0.0
@@ -286,12 +291,21 @@ class StationMapViewController: BaseViewController {
         print("", stations)
       }).disposed(by: rx.disposeBag)
     
-    output?.showStationSearch
-      .drive(onNext: { [weak self] stations in
-        let viewModel = StationSearchViewModel(stationLists: stations)
-        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
-      }).disposed(by: rx.disposeBag)
+//    output?.showStationSearch
+//      .drive(onNext: { [weak self] stations in
+//        let viewModel = StationSearchViewModel(stationLists: stations)
+//        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
+//      }).disposed(by: rx.disposeBag)
     
+//    output?.saveStation
+//      .drive(onNext: { _ in
+//        print("저장 성공")
+//      }).disposed(by: rx.disposeBag)
+    
+    output?.stationList
+      .drive(onNext: { stations in
+        print("dhdhdh", stations)
+      }).disposed(by: rx.disposeBag)
   }
   
   //MARK:- Methods
@@ -351,18 +365,20 @@ class StationMapViewController: BaseViewController {
   }
   
   private func setupMarkerInfo(with station: Station) {
-    self.view.addSubview(self.markerInfo)
+    view.addSubview(self.markerInfo)
 
-    self.markerInfo.snp.makeConstraints {
+    markerInfo.snp.makeConstraints {
       $0.leading.equalToSuperview().offset(24)
       $0.trailing.equalToSuperview().offset(-24)
       $0.height.equalTo(120)
       $0.centerY.equalTo(self.view.center.y - 110)
     }
     
-    markerInfo.configure(stationName: station.stationName,
+    markerInfo.configure(tag: station.id ?? 0,
+                         stationName: station.stationName,
                          distance: station.distacne ?? 0,
-                         parkingBicycle: station.parkingBikeTotCnt)
+                         parkingBicycle: station.parkingBikeTotCnt,
+                         like: station.like ?? false)
   }
   
   private func removeMarkerInfo() {

@@ -86,7 +86,8 @@ class MarkerInfo: UIView {
     likeButton.setImage(Constant.like.image, for: .normal)
   }
   
-  func configure(stationName: String, distance: Double, parkingBicycle: String) {
+  func configure(tag: Int, stationName: String, distance: Double, parkingBicycle: String, like: Bool) {
+    self.likeButton.tag = tag
     self.stationNameLabel.text = stationName
     self.parkingBicycleLabel.text = parkingBicycle
     
@@ -95,5 +96,12 @@ class MarkerInfo: UIView {
     } else {
       self.distanceLabel.text = String(format: "%dm", Int(distance))
     }
+    
+    if like {
+      self.likeButton.setImage(Constant.likeFill.image, for: .normal)
+    } else {
+      self.likeButton.setImage(Constant.like.image, for: .normal)
+    }
+    
   }
 }

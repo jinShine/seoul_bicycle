@@ -18,27 +18,34 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let didTapUpdateStation: Observable<Void>
     let didTapUpdateLocation: Observable<Void>
     let didTapStationContainer: Observable<Void>
+    let didTapLikeInMarkerInfo: Observable<Int>
   }
   
   struct Output {
     let locationGrantPermission: Driver<Bool>
-    let fetchBicycleLists: Observable<[Station]>
+    let fetchStationLists: Observable<[Station]>
     let updateLocation: Driver<((Double?, Double?), Error?)>
     let locationForCameraMove: Driver<(Double, Double)>
     let updateStation: Observable<[Station]>
     let updateCurrentLocation: Driver<Void>
-    let showStationSearch: Driver<[Station]>
+    //    let showStationSearch: Driver<[Station]>
+    //    let saveStation: Driver<Void>
+    let stationList: Driver<[Station]>
   }
   
   let locationInteractor: LocationUseCase
   let seoulBicycleInteractor: SeoulBicycleUseCase
+  let stationInteractor: StationUseCase
   
-  var stationLists: [Station] = []
+  var stationLists = BehaviorSubject<[Station]>(value: [])
   var currentCoordinate: (lat: Double, lng: Double) = (0.0, 0.0)
   
-  init(locationInteractor: LocationUseCase, seoulBicycleInteractor: SeoulBicycleUseCase) {
+  init(locationInteractor: LocationUseCase,
+       seoulBicycleInteractor: SeoulBicycleUseCase,
+       stationInteractor: StationUseCase) {
     self.locationInteractor = locationInteractor
     self.seoulBicycleInteractor = seoulBicycleInteractor
+    self.stationInteractor = stationInteractor
   }
   
   func transform(input: Input) -> Output {
@@ -62,35 +69,68 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .map { $0.status.row }
       .asObservable()
     
-    let bicycleLists = Observable<[Station]>.concat([
-        fetchBicycleList1,
-        fetchBicycleList2,
-        fetchBicycleList3
-      ])
+    let saveStations = Observable<[Station]>.concat([
+      fetchBicycleList1,
+      fetchBicycleList2,
+      fetchBicycleList3
+    ])
       .catchErrorJustReturn([])
-      .map {
-        $0.map { [weak self] station -> Station in
-          let distance = self?.locationInteractor.currentDistacne(
-            from: (Double(station.stationLatitude), Double(station.stationLongitude))
-          )
-          return Station(rackTotCnt: station.rackTotCnt,
-                         stationName: station.stationName,
-                         parkingBikeTotCnt: station.parkingBikeTotCnt,
-                         shared: station.shared,
-                         stationLatitude: station.stationLatitude,
-                         stationLongitude: station.stationLongitude,
-                         stationId: station.stationId,
-                         distacne: distance)
-        }
-      }
       .reduce([], accumulator: { $0 + $1 })
-      .do(onNext: {
-        self.stationLists.removeAll(keepingCapacity: true)
-        self.stationLists.append(contentsOf: $0 )}
-      )
+      .map {
+        return $0.enumerated().map { [weak self] (index, station) in
+          let distance = self?.locationInteractor.currentDistacne(
+            from: (Double(station.stationLatitude),
+                   Double(station.stationLongitude))
+          )
+          
+          let likeStatus = self?.stationInteractor.stations
+            .compactMap { $0.id }
+            .filter { $0 == index }
+            .first
+
+          if likeStatus == index {
+            self?.stationInteractor.createStation(station:
+              Station(id: index,
+                      rackTotCnt: station.rackTotCnt,
+                      stationName: station.stationName,
+                      parkingBikeTotCnt: station.parkingBikeTotCnt,
+                      shared: station.shared,
+                      stationLatitude: station.stationLatitude,
+                      stationLongitude: station.stationLongitude,
+                      stationId: station.stationId,
+                      distacne: distance,
+                      like: true)
+              )
+          } else {
+            self?.stationInteractor.createStation(station:
+              Station(id: index,
+                      rackTotCnt: station.rackTotCnt,
+                      stationName: station.stationName,
+                      parkingBikeTotCnt: station.parkingBikeTotCnt,
+                      shared: station.shared,
+                      stationLatitude: station.stationLatitude,
+                      stationLongitude: station.stationLongitude,
+                      stationId: station.stationId,
+                      distacne: distance,
+                      like: false)
+            )
+          }
+        }
+
+      }.mapToVoid()
+//    .do(onNext: { self.stationLists.onNext($0) })
     
-    let fetchBicycleLists = input.fetchBicycleListTrigger
-      .flatMap { bicycleLists }
+    //    .map { self.stationLists.onNext($0) }
+    //    .do(onNext: {
+    //      self.stationLists.onNext($0)
+    //      self.stationLists.removeAll(keepingCapacity: true)
+    //      self.stationLists.append(contentsOf: $0 )}
+    //    )
+    
+    let fetchStationLists = input.fetchBicycleListTrigger
+      .flatMap { saveStations }
+      .flatMap { self.stationInteractor.stationList() }
+      
     
     let updateLocation = locationInteractor
       .fetchLocation()
@@ -115,23 +155,34 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     .asDriver(onErrorJustReturn: currentCoordinate)
     
     let updateStation = input.didTapUpdateStation
-      .flatMap { bicycleLists }
-      .asObservable()
-    
+      .flatMap { saveStations }
+      .flatMap { self.stationInteractor.stationList() }
+
     let updateCurrentLocation = input.didTapUpdateLocation
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
     
     let showStationSearch = input.didTapStationContainer
       .map { self.stationLists }
-      .asDriver(onErrorJustReturn: [])
+      .asDriver(onErrorJustReturn: .init(value: []))
+    
+    //    let saveStation = input.didTapLikeInMarkerInfo
+    //      .filter { }
+    //      .withLatestFrom(self.stationLists)
+    
+    
+    //      .map { self.stationLists[$0] }
+    //      .map { self.stationInteractor.createStation(station: $0) }
+    //      .asDriver(onErrorJustReturn: ())
     
     return Output(locationGrantPermission: locationGrantPermission,
-                  fetchBicycleLists: fetchBicycleLists,
+                  fetchStationLists: fetchStationLists,
                   updateLocation: updateLocation,
                   locationForCameraMove: locationForCameraMove,
                   updateStation: updateStation,
                   updateCurrentLocation: updateCurrentLocation,
-                  showStationSearch: showStationSearch)
+                  //                  showStationSearch: showStationSearch,
+      //                  saveStation: saveStation,
+      stationList: stationInteractor.stationList().asDriver(onErrorJustReturn: []))
   }
 }

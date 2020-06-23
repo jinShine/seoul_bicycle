@@ -39,10 +39,9 @@ class HomeTabBarViewModel: BaseViewModel, ViewModelType {
     switch tabBarItem {
     case .favorite: return FavoriteViewModel()
     case .stationMap:
-      return StationMapViewModel(
-        locationInteractor: LocationInteractor(locationManager: LocationManager()),
-        seoulBicycleInteractor: SeoulBicycleInteractor(network: NetworkService())
-      )
+      return StationMapViewModel(locationInteractor: LocationInteractor(),
+                                 seoulBicycleInteractor: SeoulBicycleInteractor(),
+                                 stationInteractor: StationInteractor())
     case .userInfo: return UserInfoViewModel()
     }
   }

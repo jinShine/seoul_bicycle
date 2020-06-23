@@ -8,14 +8,17 @@
 
 import UIKit
 
-class Application: NSObject {
+class AppConstant: NSObject {
   
   var window: UIWindow?
   var navigator: Navigator
+  var coreData: CoreDataStorageable
+  var network: Networkable
   
   private override init() {
     self.navigator = Navigator.default
-    
+    self.coreData = CoreDataStorage.shared
+    self.network = NetworkService()
     super.init()
   }
   
@@ -30,8 +33,9 @@ class Application: NSObject {
       window.makeKeyAndVisible()
     }
   }
+  
 }
 
-extension Application {
-  static let shared = Application()
+extension AppConstant {
+  static let shared = AppConstant()
 }

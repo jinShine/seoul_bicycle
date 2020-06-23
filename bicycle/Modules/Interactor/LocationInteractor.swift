@@ -15,11 +15,11 @@ protocol LocationUseCase {
   func currentDistacne(from location: FromLocation) -> Double
 }
 
-class LocationInteractor: LocationUseCase {
+class LocationInteractor: LocationUseCase, AppGlobalType {
   
   let locationManager: LocationManager
   
-  init(locationManager: LocationManager) {
+  init(locationManager: LocationManager = LocationManager()) {
     self.locationManager = locationManager
   }
   

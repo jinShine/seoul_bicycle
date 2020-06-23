@@ -11,6 +11,10 @@
 		365F8496249006200023CAE3 /* CALayer+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F8495249006200023CAE3 /* CALayer+Addition.swift */; };
 		365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */; };
 		365FA2DE24A06B82000FFEA5 /* MarkerInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */; };
+		365FA2E024A0E594000FFEA5 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2DF24A0E594000FFEA5 /* CoreDataStorage.swift */; };
+		365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */; };
+		365FA2E724A108D3000FFEA5 /* AppGlobalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */; };
+		365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */; };
 		366A94E0248FDA230076C56F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366A94DF248FDA230076C56F /* MapKit.framework */; };
 		367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */; };
 		367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B61248A101B009111E7 /* BaseViewModel.swift */; };
@@ -42,7 +46,7 @@
 		36C37F142487DBF100DF3145 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36C37F122487DBF100DF3145 /* LaunchScreen.storyboard */; };
 		36C37F1F2487DBF100DF3145 /* bicycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F1E2487DBF100DF3145 /* bicycleTests.swift */; };
 		36C37F2A2487DBF100DF3145 /* bicycleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F292487DBF100DF3145 /* bicycleUITests.swift */; };
-		36C37F3B2487F27500DF3145 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3A2487F27500DF3145 /* Application.swift */; };
+		36C37F3B2487F27500DF3145 /* AppConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3A2487F27500DF3145 /* AppConstant.swift */; };
 		36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3C2487F28100DF3145 /* Navigator.swift */; };
 		36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F452489076300DF3145 /* HomeTabBarController.swift */; };
 		36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */; };
@@ -91,6 +95,10 @@
 		365F8495249006200023CAE3 /* CALayer+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Addition.swift"; sourceTree = "<group>"; };
 		365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfo.swift; sourceTree = "<group>"; };
 		365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfo.xib; sourceTree = "<group>"; };
+		365FA2DF24A0E594000FFEA5 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Setup.swift"; sourceTree = "<group>"; };
+		365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobalType.swift; sourceTree = "<group>"; };
+		365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInteractor.swift; sourceTree = "<group>"; };
 		366A94DF248FDA230076C56F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		367C2B61248A101B009111E7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -128,7 +136,7 @@
 		36C37F252487DBF100DF3145 /* bicycleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bicycleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C37F292487DBF100DF3145 /* bicycleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bicycleUITests.swift; sourceTree = "<group>"; };
 		36C37F2B2487DBF100DF3145 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		36C37F3A2487F27500DF3145 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		36C37F3A2487F27500DF3145 /* AppConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstant.swift; sourceTree = "<group>"; };
 		36C37F3C2487F28100DF3145 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		36C37F452489076300DF3145 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleAPI.swift; sourceTree = "<group>"; };
@@ -206,6 +214,34 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		365FA2E424A106E6000FFEA5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */,
+				36C37F3A2487F27500DF3145 /* AppConstant.swift */,
+				365FA2E524A106FB000FFEA5 /* Navigator */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		365FA2E524A106FB000FFEA5 /* Navigator */ = {
+			isa = PBXGroup;
+			children = (
+				36C37F3C2487F28100DF3145 /* Navigator.swift */,
+				36DF35AE249A80D800EDC36D /* Transitionable.swift */,
+			);
+			path = Navigator;
+			sourceTree = "<group>";
+		};
+		365FA2EC24A11844000FFEA5 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				365FA2DF24A0E594000FFEA5 /* CoreDataStorage.swift */,
+				36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
 		36776D502489092F005A8C9F /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +301,7 @@
 		367C2B79248A23D9009111E7 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				365FA2EC24A11844000FFEA5 /* CoreDataStorage */,
 				367C2B7A248A23EF009111E7 /* AuthManager.swift */,
 				367C2B91248EA468009111E7 /* LocationManager.swift */,
 			);
@@ -320,6 +357,7 @@
 			children = (
 				367C2B96248EB6C7009111E7 /* LocationInteractor.swift */,
 				36DF35992493A04A00EDC36D /* SeoulBicycleInteractor.swift */,
+				365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -367,7 +405,6 @@
 				367C2B7E248ABD95009111E7 /* Configuration */,
 				367C2B75248A1C9B009111E7 /* Utilites */,
 				36C37F442488F4B600DF3145 /* Resources */,
-				36C37F0D2487DBEF00DF3145 /* bicycle.xcdatamodeld */,
 			);
 			path = bicycle;
 			sourceTree = "<group>";
@@ -394,9 +431,8 @@
 			isa = PBXGroup;
 			children = (
 				36C37F042487DBEE00DF3145 /* AppDelegate.swift */,
-				36C37F3A2487F27500DF3145 /* Application.swift */,
-				36C37F3C2487F28100DF3145 /* Navigator.swift */,
-				36DF35AE249A80D800EDC36D /* Transitionable.swift */,
+				365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */,
+				365FA2E424A106E6000FFEA5 /* Core */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -643,7 +679,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bicycle/Pods-bicycle-frameworks.sh\"\n\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bicycle/Pods-bicycle-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1FBD9824F1AD6768FBE2779A /* [CP] Check Pods Manifest.lock */ = {
@@ -736,8 +772,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				365FA2E724A108D3000FFEA5 /* AppGlobalType.swift in Sources */,
 				367C2B89248E7F44009111E7 /* UIView+Addition.swift in Sources */,
-				36C37F3B2487F27500DF3145 /* Application.swift in Sources */,
+				36C37F3B2487F27500DF3145 /* AppConstant.swift in Sources */,
 				367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */,
 				36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */,
 				367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */,
@@ -753,7 +790,9 @@
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
+				365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
+				365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */,
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */,
@@ -766,6 +805,7 @@
 				36C37F0F2487DBEF00DF3145 /* bicycle.xcdatamodeld in Sources */,
 				367C2B8C248E9DC7009111E7 /* AppTheme.swift in Sources */,
 				367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */,
+				365FA2E024A0E594000FFEA5 /* CoreDataStorage.swift in Sources */,
 				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
 				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
 				367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */,

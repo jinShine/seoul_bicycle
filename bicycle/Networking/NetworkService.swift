@@ -11,9 +11,6 @@ import Moya
 import Alamofire
 
 protocol Networkable {
-  //  func request<T: Decodable>(to router: SeoulBicycleAPI,
-  //                             decoder: T.Type,
-  //                             completion: @escaping (NetworkDataResponse) -> Void)
   func buildRequest(to router: SeoulBicycleAPI) -> Single<NetworkDataResponse>
 }
 

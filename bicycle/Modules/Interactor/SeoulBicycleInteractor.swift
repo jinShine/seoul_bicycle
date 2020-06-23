@@ -14,16 +14,14 @@ protocol SeoulBicycleUseCase {
   func fetchBicycleList(start: Int, last: Int) -> Single<RentStationStatus>
 }
 
-class SeoulBicycleInteractor: SeoulBicycleUseCase {
+class SeoulBicycleInteractor: SeoulBicycleUseCase, AppGlobalType {
   
-  let network: Networkable
-  
-  init(network: Networkable) {
-    self.network = network
+  private var service: Networkable {
+    return appConstant.network
   }
-  
+
   func fetchBicycleList(start: Int, last: Int) -> Single<RentStationStatus> {
-    return network.buildRequest(to: .bicycleList(start: start, last: last))
+    return service.buildRequest(to: .bicycleList(start: start, last: last))
       .map { response in
         return try JSONDecoder().decode(RentStationStatus.self, from: response.jsonData ?? Data())
     }
