@@ -14,7 +14,7 @@ target 'bicycle' do
   pod 'Moya/RxSwift', '~> 14.0'
   pod 'RxViewController'
   pod 'NSObject+Rx'
-  pod "RxCoreData", "~> 1.0.0"
+  pod "RxCoreData"
 
   # auto layout
   pod 'SnapKit', '~> 5.0.0'

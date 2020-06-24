@@ -40,7 +40,7 @@ struct StationResult: Decodable {
   }
 }
 
-struct Station: Decodable, Equatable {
+struct Station: Decodable {
   var id: Int?
   var rackTotCnt: String        // 거치대개수
   var stationName: String       // 대여소이름
@@ -49,24 +49,35 @@ struct Station: Decodable, Equatable {
   var stationLatitude: String   // 위도
   var stationLongitude: String  // 경도
   var stationId: String         // 대여소ID
-  var distacne: Double?
+  var distance: String?
   var like: Bool? = false
+  
+  init() {
+    id = 0
+    rackTotCnt = ""
+    stationName = ""
+    parkingBikeTotCnt = ""
+    shared = ""
+    stationLatitude = ""
+    stationLongitude = ""
+    stationId = ""
+    distance = ""
+    like = false
+  }
 }
 
-func == (lhs: Station, rhs: Station) -> Bool {
-    return lhs.id == rhs.id
-}
+extension Station: Equatable, Identifiable { }
 
 extension Station: Persistable {
   
   var identity: String {
-    return "id"
+    return "\(id)"
   }
   
   public static var entityName: String {
     return "Station"
   }
-
+  
   static var primaryAttributeName: String {
     return "id"
   }
@@ -77,25 +88,25 @@ extension Station: Persistable {
     parkingBikeTotCnt = entity.value(forKey: "parkingCount") as! String
     stationLatitude = entity.value(forKey: "latitude") as! String
     stationLongitude = entity.value(forKey: "longitude") as! String
-    distacne = entity.value(forKey: "distance") as? Double
+    distance = entity.value(forKey: "distance") as? String
     rackTotCnt = entity.value(forKey: "rackCount") as! String
     shared = entity.value(forKey: "shared") as! String
     stationId = entity.value(forKey: "stationId") as! String
     like = entity.value(forKey: "like") as? Bool
   }
-
+  
   func update(_ entity: NSManagedObject) {
     entity.setValue(id, forKey: "id")
     entity.setValue(stationName, forKey: "name")
     entity.setValue(parkingBikeTotCnt, forKey: "parkingCount")
     entity.setValue(stationLatitude, forKey: "latitude")
     entity.setValue(stationLongitude, forKey: "longitude")
-    entity.setValue(distacne, forKey: "distance")
+    entity.setValue(distance, forKey: "distance")
     entity.setValue(rackTotCnt, forKey: "rackCount")
     entity.setValue(shared, forKey: "shared")
     entity.setValue(stationId, forKey: "stationId")
     entity.setValue(like, forKey: "like")
-
+    
     do {
       try entity.managedObjectContext?.save()
     } catch {

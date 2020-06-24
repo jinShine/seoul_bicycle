@@ -30,9 +30,9 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let updateCurrentLocation: Driver<Void>
     //    let showStationSearch: Driver<[Station]>
     //    let fetchStationList: Driver<[Station]>
-    let saveAndDeleteStation: Driver<Void>
+    let saveAndDeleteStation: Driver<[Station]>
     //    let deleteStation: Driver<Void>
-    let stationList: Driver<[Station]>
+    let syncLikeStation: Driver<[Station]>
   }
   
   let locationInteractor: LocationUseCase
@@ -81,41 +81,23 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .map {
         $0.enumerated().map { [weak self] (index, station) -> Station in
           
-          let distance = self?.locationInteractor.currentDistacne(
-            from: (Double(station.stationLatitude),
-                   Double(station.stationLongitude))
-          )
-          
-          let likeIndex = self?.stationInteractor.stations
-            .compactMap { $0.id }
-            .filter { $0 == index }
-            .first
-          
+          let distance = self?.getDistanceFrom(lat: Double(station.stationLatitude), lng: Double(station.stationLongitude))
+          let likeIndex = self?.likeIndex(for: index)
           if likeIndex == index {
-            return Station(id: index,
-                           rackTotCnt: station.rackTotCnt,
-                           stationName: station.stationName,
-                           parkingBikeTotCnt: station.parkingBikeTotCnt,
-                           shared: station.shared,
-                           stationLatitude: station.stationLatitude,
-                           stationLongitude: station.stationLongitude,
-                           stationId: station.stationId,
-                           distacne: distance,
-                           like: true)
-          } else {
-            return Station(id: index,
-                           rackTotCnt: station.rackTotCnt,
-                           stationName: station.stationName,
-                           parkingBikeTotCnt: station.parkingBikeTotCnt,
-                           shared: station.shared,
-                           stationLatitude: station.stationLatitude,
-                           stationLongitude: station.stationLongitude,
-                           stationId: station.stationId,
-                           distacne: distance,
-                           like: false)
+            print("오 index", index)
           }
+          
+          var stationTemp = station
+          stationTemp.id = index
+          stationTemp.distance = distance
+          stationTemp.like = likeIndex == index ? true : false
+          
+          return stationTemp
         }
-    }.do(onNext: { self.stationList.append(contentsOf: $0) })
+    }.do(onNext: {
+      self.stationList.removeAll(keepingCapacity: true)
+      self.stationList.append(contentsOf: $0) }
+    )
     
     let fetchStationList = input.fetchStationListTrigger
       .flatMap { stationListData }
@@ -144,7 +126,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     .asDriver(onErrorJustReturn: currentCoordinate)
     
     let updateStationList = input.didTapUpdateStation
-      .flatMap { stationListData }
+      .flatMapLatest { stationListData }
       .asDriver(onErrorJustReturn: [])
     
     let updateCurrentLocation = input.didTapUpdateLocation
@@ -152,17 +134,26 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .asDriver(onErrorJustReturn: ())
     
     let saveAndDeleteStation = input.didTapLikeInMarkerInfo
-      .map { (tag, isSelected) in
-        return (isSelected, self.stationList[tag])
-      }
+      .map { (tag, isSelected) in (isSelected, self.stationList[tag]) }
       .map ({ (isSelected, station) in
         if isSelected {
-          self.stationInteractor.createStation(station: station)
+          var stationTemp = station
+          stationTemp.like = true
+          self.stationInteractor.createStation(station: stationTemp)
         } else {
           self.stationInteractor.delete(station: station)
         }
-      }))
-      .asDriver(onErrorJustReturn: ())
+      })
+      .do(onNext: {
+        print("삭제된 데이터", $0)
+      })
+      .flatMapLatest { self.stationInteractor.likeStationList() }
+      .flatMapLatest { _ in stationListData }
+      .asDriver(onErrorJustReturn: [])
+    
+    let syncLikeStation = stationInteractor
+      .likeStationList()
+      .asDriver(onErrorJustReturn: [])
     
     
     return Output(locationGrantPermission: locationGrantPermission,
@@ -173,7 +164,27 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
                   updateCurrentLocation: updateCurrentLocation,
                   //                  showStationSearch: showStationSearch,
       saveAndDeleteStation: saveAndDeleteStation,
-      //                        deleteStation: deleteStation,
-      stationList: stationInteractor.stationList().asDriver(onErrorJustReturn: []))
+      syncLikeStation: syncLikeStation)
+  }
+  
+  private func getDistanceFrom(lat: Double?, lng: Double?) -> String {
+    let distanceFromCurrent = self.locationInteractor.currentDistacne(from: (lat, lng))
+    
+    var distance = ""
+    
+    if distanceFromCurrent > 1000 {
+      distance = String(format: "%.1fkm", distanceFromCurrent / 1000)
+    } else {
+      distance = String(format: "%dm", Int(distanceFromCurrent))
+    }
+    
+    return distance
+  }
+  
+  private func likeIndex(for index: Int) -> Int? {
+    return self.stationInteractor.likeStations
+      .filter { $0.id == index }
+      .first?.id
+    
   }
 }

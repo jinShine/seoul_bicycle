@@ -200,11 +200,17 @@ class StationMapViewController: BaseViewController {
       .mapToVoid()
     
     let didTapLikeInMarkerInfo = markerInfo.likeButton.rx.tap
-      //      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
-      .scan(false, accumulator: { (last, _) in return !last })
-      .do(onNext: { [weak self] isSelected in
-        self?.markerInfo.configureLikeImage(with: isSelected)
-      })
+      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+      .map {
+        if self.markerInfo.likeButton.currentImage!.isEqual(MarkerInfo.Constant.like.image) {
+          return true
+        } else {
+          return false
+        }
+    }
+    .do(onNext: { [weak self] isSelected in
+      self?.markerInfo.configureLikeImage(with: isSelected)
+    })
       .map { isSelected in (self.markerInfo.likeButton.tag, isSelected)}
     
     
@@ -303,14 +309,22 @@ class StationMapViewController: BaseViewController {
     //      }).disposed(by: rx.disposeBag)
     
     output?.saveAndDeleteStation
-      .drive(onNext: { _ in
-        // 업데이트 처리 해야됨!
+      .drive(onNext: { [weak self] stations in
+        self?.removeMarkers()
+        self?.removeMarkerInfo()
+        
+        stations.forEach {
+          let lat = Double($0.stationLatitude) ?? 0.0
+          let lng = Double($0.stationLongitude) ?? 0.0
+          
+          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
+        }
         
       }).disposed(by: rx.disposeBag)
     
-    output?.stationList
+    output?.syncLikeStation
       .drive(onNext: { stations in
-        print("dhdhdh", stations)
+//        print("List", stations)
       }).disposed(by: rx.disposeBag)
   }
   
@@ -397,7 +411,7 @@ class StationMapViewController: BaseViewController {
     
     markerInfo.configure(tag: station.id ?? 0,
                          stationName: station.stationName,
-                         distance: station.distacne ?? 0,
+                         distance: station.distance ?? "",
                          parkingBicycle: station.parkingBikeTotCnt,
                          like: station.like ?? false)
   }

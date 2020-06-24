@@ -117,7 +117,7 @@ DEPENDENCIES:
   - "NSObject+Rx"
   - RAMAnimatedTabBarController
   - RxCocoa (~> 5)
-  - RxCoreData (~> 1.0.0)
+  - RxCoreData
   - RxDataSources (~> 4.0)
   - RxSwift (~> 5)
   - RxViewController
@@ -191,6 +191,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
 
-PODFILE CHECKSUM: 6108d1e1476fe83562c2cd115c320db2df4f791e
+PODFILE CHECKSUM: f5f134d31345de3af9a3009019e5f0e4cdbf437f
 
 COCOAPODS: 1.9.0
