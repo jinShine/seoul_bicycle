@@ -299,7 +299,7 @@ class StationMapViewController: BaseViewController {
     
     output?.showStationSearch
       .drive(onNext: { [weak self] stations in
-        let viewModel = StationSearchViewModel(stationLists: stations)
+        let viewModel = StationSearchViewModel(stationLists: Observable.just([SectionStation(model: 0, items: stations)]))
         self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
       }).disposed(by: rx.disposeBag)
     

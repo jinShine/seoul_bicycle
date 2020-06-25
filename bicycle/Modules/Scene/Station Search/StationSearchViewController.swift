@@ -9,7 +9,10 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 import NMapsMap
+
+typealias SectionStation = AnimatableSectionModel<Int, Station>
 
 class StationSearchViewController: BaseViewController {
   
@@ -58,6 +61,16 @@ class StationSearchViewController: BaseViewController {
     return view
   }()
   
+  lazy var tableView: BaseTableView = {
+    let tableView = BaseTableView(frame: .zero, style: .plain)
+//    tableView.delegate = self
+//    tableView.dataSource = self
+    tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+//    tableView.register(MemoListCell.classForCoder(),
+//                       forCellReuseIdentifier: MemoListCell.reuseIdentifier)
+    return tableView
+  }()
+  
   let viewModel: StationSearchViewModel?
   let navigator: Navigator
   
@@ -87,7 +100,7 @@ class StationSearchViewController: BaseViewController {
     
     searchTextField.text = ""
     
-    [searchTextField, dismissButton, lineView].forEach { view.addSubview($0) }
+    [searchTextField, dismissButton, lineView, tableView].forEach { view.addSubview($0) }
     
     searchTextField.snp.makeConstraints {
       $0.top.equalToSuperview().offset(view.topNotchHeight + 12)
@@ -108,21 +121,38 @@ class StationSearchViewController: BaseViewController {
       $0.trailing.equalToSuperview().offset(-view.center.x)
       $0.height.equalTo(1)
     }
+    
+    tableView.snp.makeConstraints {
+      $0.top.equalTo(lineView.snp.bottom)
+      $0.leading.trailing.bottom.equalToSuperview()
+    }
   }
   
   override func bindViewModel() {
     super.bindViewModel()
     
+    let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+      cell.textLabel?.text = "\(indexPath)"
+      return cell
+    })
+    
     // Input
-    let input = StationSearchViewModel.Input(didTapDismiss: dismissButton.rx.tap.asObservable())
+    let input = StationSearchViewModel.Input(
+      trigger: rx.viewWillAppear.mapToVoid(),
+      didTapDismiss: dismissButton.rx.tap.asObservable()
+    )
     
     // Output
     let output = viewModel?.transform(input: input)
     
+    output?.fetchStationList
+      .bind(to: tableView.rx.items(dataSource: datasource))
+      .disposed(by: rx.disposeBag)
+    
     output?.dismiss.drive(onNext: { _ in
       self.navigator.dismiss(sender: self, animated: true)
     }).disposed(by: rx.disposeBag)
-    
     
   }
   

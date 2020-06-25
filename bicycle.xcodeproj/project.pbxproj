@@ -15,6 +15,7 @@
 		365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */; };
 		365FA2E724A108D3000FFEA5 /* AppGlobalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */; };
 		365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */; };
+		3660D8B424A4EE7F0029AE11 /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */; };
 		366A94E0248FDA230076C56F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366A94DF248FDA230076C56F /* MapKit.framework */; };
 		367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */; };
 		367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 367C2B61248A101B009111E7 /* BaseViewModel.swift */; };
@@ -99,6 +100,7 @@
 		365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Setup.swift"; sourceTree = "<group>"; };
 		365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobalType.swift; sourceTree = "<group>"; };
 		365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInteractor.swift; sourceTree = "<group>"; };
+		3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		366A94DF248FDA230076C56F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		367C2B5F248A0C6F009111E7 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		367C2B61248A101B009111E7 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				367C2B61248A101B009111E7 /* BaseViewModel.swift */,
 				367C2B73248A1A58009111E7 /* BaseViewController.swift */,
 				367C2B7C248A32A6009111E7 /* BaseNavigationController.swift */,
+				3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				365FA2E024A0E594000FFEA5 /* CoreDataStorage.swift in Sources */,
 				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
 				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
+				3660D8B424A4EE7F0029AE11 /* BaseTableView.swift in Sources */,
 				367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */,
 				36DF359524939CE300EDC36D /* SeoulBicycleErrorModel.swift in Sources */,
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
@@ -1007,7 +1011,7 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.bicycle;
 				PRODUCT_NAME = bicycle;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1030,7 +1034,7 @@
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.bicycle;
 				PRODUCT_NAME = bicycle;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -9,28 +9,34 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class StationSearchViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
+    let trigger: Observable<Void>
     let didTapDismiss: Observable<Void>
   }
   
   struct Output {
+    let fetchStationList: Observable<[SectionStation]>
     let dismiss: Driver<Void>
   }
   
-  let stationLists: [Station]
+  let stationLists: Observable<[SectionStation]>
   
-  init(stationLists: [Station]) {
+  init(stationLists: Observable<[SectionStation]>) {
     self.stationLists = stationLists
   }
   
   func transform(input: Input) -> Output {
+    
+    let fetchStationList = stationLists
 
     let dismisss = input.didTapDismiss.mapToVoid()
       .asDriver(onErrorJustReturn: ())
     
-    return Output(dismiss: dismisss)
+    return Output(fetchStationList: fetchStationList,
+                  dismiss: dismisss)
   }
 }

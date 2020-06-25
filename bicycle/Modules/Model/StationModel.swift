@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import RxCoreData
+import RxDataSources
 
 struct RentStationStatus: Decodable {
   var status: StationStatus
@@ -68,7 +69,7 @@ func == (lhs: Station, rhs: Station) -> Bool {
   return lhs.stationId == rhs.stationId
 }
 
-extension Station: Equatable { }
+extension Station: Equatable, IdentifiableType { }
 
 extension Station: Persistable {
   
