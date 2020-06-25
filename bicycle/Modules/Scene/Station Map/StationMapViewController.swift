@@ -46,7 +46,9 @@ class StationMapViewController: BaseViewController {
   
   lazy var mapView: NMFMapView = {
     let mapView = NMFMapView()
-    mapView.contentInset = UIEdgeInsets(top: self.tabBarController?.tabBar.frame.height ?? 0.0, left: 0, bottom: 0, right: 0)
+    mapView.contentInset = UIEdgeInsets(
+      top: self.tabBarController?.tabBar.frame.height ?? 0.0, left: 0, bottom: 0, right: 0
+    )
     mapView.mapType = .basic
     mapView.isIndoorMapEnabled = true
     mapView.positionMode = .normal
@@ -67,7 +69,9 @@ class StationMapViewController: BaseViewController {
     
     let searchImageView: UIImageView = {
       let view = UIImageView()
-      view.image = Constant.search.image?.withAlignmentRectInsets(UIEdgeInsets(top: -19, left: -19, bottom: -19, right: -19))
+      view.image = Constant.search.image?.withAlignmentRectInsets(
+        UIEdgeInsets(top: -19, left: -19, bottom: -19, right: -19)
+      )
       view.contentMode = .scaleAspectFit
       view.tintColor = AppTheme.color.main
       view.isUserInteractionEnabled = false
@@ -97,12 +101,14 @@ class StationMapViewController: BaseViewController {
       $0.top.leading.bottom.equalToSuperview()
       $0.width.equalTo(searchImageView.snp.height)
     }
+    
     lineView.snp.makeConstraints {
       $0.leading.equalTo(searchImageView.snp.trailing)
       $0.centerY.equalTo(searchImageView)
       $0.height.equalTo(searchImageView.snp.height).dividedBy(2)
       $0.width.equalTo(1)
     }
+    
     searchButton.snp.makeConstraints {
       $0.leading.equalTo(lineView.snp.trailing).offset(16)
       $0.top.bottom.trailing.equalToSuperview()
@@ -201,24 +207,20 @@ class StationMapViewController: BaseViewController {
     
     let didTapLikeInMarkerInfo = markerInfo.likeButton.rx.tap
       .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
-      .map {
-        if self.markerInfo.likeButton.currentImage!.isEqual(MarkerInfo.Constant.like.image) {
-          return true
-        } else {
-          return false
-        }
+      .map { self.markerInfo.likeButton.currentImage!.isEqual(MarkerInfo.Constant.like.image) ? true : false }
+      .do(onNext: { self.markerInfo.configureLikeImage(with: $0) })
+      .map { isSelected -> (Station, Bool) in
+        let station = self.viewModel?.stationList.first(where: {
+          $0.stationName == self.markerInfo.stationNameLabel.text!
+        })
+        return (station ?? Station(), isSelected)
     }
-    .do(onNext: { [weak self] isSelected in
-      self?.markerInfo.configureLikeImage(with: isSelected)
-    })
-      .map { isSelected in (self.markerInfo.likeButton.tag, isSelected)}
-    
     
     let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                           fetchStationListTrigger: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: didTapUpdateLocation,
                                           didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
-                                          didTapStationContainer: stationContainerButton.rx.tap.asObservable(),
+                                          didTapStationSearch: stationContainerButton.rx.tap.asObservable(),
                                           didTapLikeInMarkerInfo: didTapLikeInMarkerInfo)
     
     // Output
@@ -234,11 +236,7 @@ class StationMapViewController: BaseViewController {
     output?.fetchStationList
       .drive(onNext: { [weak self] stations in
         stations.forEach {
-          
-          let lat = Double($0.stationLatitude) ?? 0.0
-          let lng = Double($0.stationLongitude) ?? 0.0
-          
-          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
+          self?.setupStationMarker(with: $0)
         }
       }).disposed(by: rx.disposeBag)
     
@@ -293,44 +291,39 @@ class StationMapViewController: BaseViewController {
         self?.removeMarkerInfo()
         
         stations.forEach {
-          let lat = Double($0.stationLatitude) ?? 0.0
-          let lng = Double($0.stationLongitude) ?? 0.0
-          
-          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
+          self?.setupStationMarker(with: $0)
         }
         
         print("", stations)
       }).disposed(by: rx.disposeBag)
     
-    //    output?.showStationSearch
-    //      .drive(onNext: { [weak self] stations in
-    //        let viewModel = StationSearchViewModel(stationLists: stations)
-    //        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
-    //      }).disposed(by: rx.disposeBag)
+    output?.showStationSearch
+      .drive(onNext: { [weak self] stations in
+        let viewModel = StationSearchViewModel(stationLists: stations)
+        self?.navigator.show(scene: .stationSearch(viewModel: viewModel), sender: self, animated: false)
+      }).disposed(by: rx.disposeBag)
     
     output?.saveAndDeleteStation
       .drive(onNext: { [weak self] stations in
         self?.removeMarkers()
-        self?.removeMarkerInfo()
         
         stations.forEach {
-          let lat = Double($0.stationLatitude) ?? 0.0
-          let lng = Double($0.stationLongitude) ?? 0.0
-          
-          self?.setupStationMarker(lat: lat, lng: lng, station: $0)
+          self?.setupStationMarker(with: $0)
         }
-        
       }).disposed(by: rx.disposeBag)
     
     output?.syncLikeStation
       .drive(onNext: { stations in
-//        print("List", stations)
+        //        print("List", stations)
       }).disposed(by: rx.disposeBag)
   }
   
   //MARK:- Methods
   
-  private func setupStationMarker(lat: Double, lng: Double, station: Station) {
+  private func setupStationMarker(with station: Station) {
+    
+    let lat = Double(station.stationLatitude) ?? 0.0
+    let lng = Double(station.stationLongitude) ?? 0.0
     
     let marker = NMFMarker()
     marker.position = NMGLatLng(lat: lat, lng: lng)
@@ -394,26 +387,7 @@ class StationMapViewController: BaseViewController {
       $0.centerY.equalTo(self.view.center.y - 110)
     }
     
-    //    markerInfo.likeButton.rx.tap
-    //      .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
-    //      .scan(false, accumulator: { (last, _) in return !last })
-    //      .do(onNext: { [weak self] isSelected in
-    //        self?.markerInfo.configureLikeImage(with: isSelected)
-    //      })
-    
-    //      .map { [weak self] in self?.viewModel?.stationInteractor.createStation(station: station) }
-    //    .subscribe(onNext: { _ in
-    //      print("선택쓰~")
-    //    })
-    //      .disposed(by: rx.disposeBag)
-    //
-    
-    
-    markerInfo.configure(tag: station.id ?? 0,
-                         stationName: station.stationName,
-                         distance: station.distance ?? "",
-                         parkingBicycle: station.parkingBikeTotCnt,
-                         like: station.like ?? false)
+    markerInfo.configure(with: station)
   }
   
   private func removeMarkerInfo() {

@@ -86,19 +86,19 @@ class MarkerInfo: UIView {
     likeButton.setImage(Constant.like.image, for: .normal)
   }
   
-  func configure(tag: Int, stationName: String, distance: String, parkingBicycle: String, like: Bool) {
-    self.likeButton.tag = tag
-    self.stationNameLabel.text = stationName
-    self.parkingBicycleLabel.text = parkingBicycle
+  func configure(with station: Station) {
     
-    self.distanceLabel.text = distance
+    self.stationNameLabel.text = station.stationName
+    self.parkingBicycleLabel.text = station.parkingBikeTotCnt
+    
+    self.distanceLabel.text = station.distance
 //    if distance > 1000 {
 //      self.distanceLabel.text = String(format: "%.1fkm", distance / 1000)
 //    } else {
 //      self.distanceLabel.text = String(format: "%dm", Int(distance))
 //    }
-    
-    if like {
+//
+    if station.like ?? false {
       self.likeButton.setImage(Constant.likeFill.image, for: .normal)
     } else {
       self.likeButton.setImage(Constant.like.image, for: .normal)

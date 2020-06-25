@@ -41,7 +41,6 @@ struct StationResult: Decodable {
 }
 
 struct Station: Decodable {
-  var id: Int?
   var rackTotCnt: String        // 거치대개수
   var stationName: String       // 대여소이름
   var parkingBikeTotCnt: String // 자전거주차총건수
@@ -53,7 +52,6 @@ struct Station: Decodable {
   var like: Bool? = false
   
   init() {
-    id = 0
     rackTotCnt = ""
     stationName = ""
     parkingBikeTotCnt = ""
@@ -66,12 +64,16 @@ struct Station: Decodable {
   }
 }
 
-extension Station: Equatable, Identifiable { }
+func == (lhs: Station, rhs: Station) -> Bool {
+  return lhs.stationId == rhs.stationId
+}
+
+extension Station: Equatable { }
 
 extension Station: Persistable {
   
   var identity: String {
-    return "\(id)"
+    return stationId
   }
   
   public static var entityName: String {
@@ -79,11 +81,10 @@ extension Station: Persistable {
   }
   
   static var primaryAttributeName: String {
-    return "id"
+    return "stationId"
   }
   
   init(entity: NSManagedObject) {
-    id = entity.value(forKey: "id") as? Int
     stationName = entity.value(forKey: "name") as! String
     parkingBikeTotCnt = entity.value(forKey: "parkingCount") as! String
     stationLatitude = entity.value(forKey: "latitude") as! String
@@ -96,7 +97,6 @@ extension Station: Persistable {
   }
   
   func update(_ entity: NSManagedObject) {
-    entity.setValue(id, forKey: "id")
     entity.setValue(stationName, forKey: "name")
     entity.setValue(parkingBikeTotCnt, forKey: "parkingCount")
     entity.setValue(stationLatitude, forKey: "latitude")

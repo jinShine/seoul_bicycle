@@ -17,8 +17,8 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let fetchStationListTrigger: Observable<Void>
     let didTapUpdateStation: Observable<Void>
     let didTapUpdateLocation: Observable<Void>
-    let didTapStationContainer: Observable<Void>
-    let didTapLikeInMarkerInfo: Observable<(Int, Bool)>
+    let didTapStationSearch: Observable<Void>
+    let didTapLikeInMarkerInfo: Observable<(Station, Bool)>
   }
   
   struct Output {
@@ -28,11 +28,9 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let locationForCameraMove: Driver<(Double, Double)>
     let updateStationList: Driver<[Station]>
     let updateCurrentLocation: Driver<Void>
-    //    let showStationSearch: Driver<[Station]>
-    //    let fetchStationList: Driver<[Station]>
+    let showStationSearch: Driver<[Station]>
     let saveAndDeleteStation: Driver<[Station]>
-    //    let deleteStation: Driver<Void>
-    let syncLikeStation: Driver<[Station]>
+    let syncLikeStation: Driver<Void>
   }
   
   let locationInteractor: LocationUseCase
@@ -79,18 +77,15 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     ]).catchErrorJustReturn([])
       .reduce([], accumulator: { $0 + $1 })
       .map {
-        $0.enumerated().map { [weak self] (index, station) -> Station in
+        $0.map { [weak self] station -> Station in
           
           let distance = self?.getDistanceFrom(lat: Double(station.stationLatitude), lng: Double(station.stationLongitude))
-          let likeIndex = self?.likeIndex(for: index)
-          if likeIndex == index {
-            print("오 index", index)
-          }
+          
+          let likeStation = self?.stationInteractor.likeStations.first(where: { $0 == station })
           
           var stationTemp = station
-          stationTemp.id = index
           stationTemp.distance = distance
-          stationTemp.like = likeIndex == index ? true : false
+          stationTemp.like = likeStation == station ? true : false
           
           return stationTemp
         }
@@ -133,9 +128,12 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
     
+    let showStationSearch = input.didTapStationSearch
+      .map { self.stationList }
+      .asDriver(onErrorJustReturn: [])
+    
     let saveAndDeleteStation = input.didTapLikeInMarkerInfo
-      .map { (tag, isSelected) in (isSelected, self.stationList[tag]) }
-      .map ({ (isSelected, station) in
+      .map ({ (station, isSelected ) in
         if isSelected {
           var stationTemp = station
           stationTemp.like = true
@@ -144,16 +142,13 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
           self.stationInteractor.delete(station: station)
         }
       })
-      .do(onNext: {
-        print("삭제된 데이터", $0)
-      })
-      .flatMapLatest { self.stationInteractor.likeStationList() }
       .flatMapLatest { _ in stationListData }
       .asDriver(onErrorJustReturn: [])
     
     let syncLikeStation = stationInteractor
       .likeStationList()
-      .asDriver(onErrorJustReturn: [])
+      .mapToVoid()
+      .asDriver(onErrorJustReturn: ())
     
     
     return Output(locationGrantPermission: locationGrantPermission,
@@ -162,9 +157,9 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
                   locationForCameraMove: locationForCameraMove,
                   updateStationList: updateStationList,
                   updateCurrentLocation: updateCurrentLocation,
-                  //                  showStationSearch: showStationSearch,
-      saveAndDeleteStation: saveAndDeleteStation,
-      syncLikeStation: syncLikeStation)
+                  showStationSearch: showStationSearch,
+                  saveAndDeleteStation: saveAndDeleteStation,
+                  syncLikeStation: syncLikeStation)
   }
   
   private func getDistanceFrom(lat: Double?, lng: Double?) -> String {
@@ -179,12 +174,5 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     }
     
     return distance
-  }
-  
-  private func likeIndex(for index: Int) -> Int? {
-    return self.stationInteractor.likeStations
-      .filter { $0.id == index }
-      .first?.id
-    
   }
 }

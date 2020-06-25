@@ -49,16 +49,12 @@ class StationInteractor: StationUseCase, AppGlobalType {
       .do(onNext: { [weak self] in
         self?.likeStations.removeAll(keepingCapacity: true)
         self?.likeStations.append(contentsOf: $0)
-        
-        print("지워졌다!!!!!!!", $0)
-//        self?.removeAll()
       })
   }
   
   func delete(station: Station) -> Observable<Station> {
     do {
       _ = try coreDataStorage.context.rx.delete(station)
-//      self.likeStations.removeAll(where: { $0 == station })
       return Observable.just(station)
     } catch {
       return Observable.error(error)
