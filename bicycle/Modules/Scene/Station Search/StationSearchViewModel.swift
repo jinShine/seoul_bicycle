@@ -14,12 +14,12 @@ import RxDataSources
 class StationSearchViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
-    let trigger: Observable<Void>
+    let searchQuery: Observable<String>
     let didTapDismiss: Observable<Void>
   }
   
   struct Output {
-    let fetchStationList: Observable<[SectionStation]>
+    let searchedStation: Observable<[SectionStation]>
     let dismiss: Driver<Void>
   }
   
@@ -31,12 +31,21 @@ class StationSearchViewModel: BaseViewModel, ViewModelType {
   
   func transform(input: Input) -> Output {
     
-    let fetchStationList = stationLists
-
+    let searchedStation = Observable<[SectionStation]>
+      .combineLatest(stationLists, input.searchQuery) { (list, query) in
+        return list.map {
+          let station = $0.items.filter {
+            $0.stationName.contains(query)
+          }
+          
+          return SectionStation(model: 0, items: station)
+        }
+    }
+    
     let dismisss = input.didTapDismiss.mapToVoid()
       .asDriver(onErrorJustReturn: ())
     
-    return Output(fetchStationList: fetchStationList,
+    return Output(searchedStation: searchedStation,
                   dismiss: dismisss)
   }
 }

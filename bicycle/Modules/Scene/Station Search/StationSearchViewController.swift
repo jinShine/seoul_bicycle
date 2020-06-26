@@ -133,20 +133,22 @@ class StationSearchViewController: BaseViewController {
     
     let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = "\(indexPath)"
+      cell.textLabel?.text = station.stationName
       return cell
     })
     
+    let searchQuery = searchTextField.rx.text
+      .orEmpty
+      .asObservable()
+    
     // Input
-    let input = StationSearchViewModel.Input(
-      trigger: rx.viewWillAppear.mapToVoid(),
-      didTapDismiss: dismissButton.rx.tap.asObservable()
-    )
+    let input = StationSearchViewModel.Input(searchQuery: searchQuery,
+                                             didTapDismiss: dismissButton.rx.tap.asObservable())
     
     // Output
     let output = viewModel?.transform(input: input)
     
-    output?.fetchStationList
+    output?.searchedStation
       .bind(to: tableView.rx.items(dataSource: datasource))
       .disposed(by: rx.disposeBag)
     
