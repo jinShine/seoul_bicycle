@@ -67,6 +67,6 @@ class SearchedStationCell: BaseTableViewCell {
   
   func configure(with station: Station) {
     nameLabel.text = station.stationName
-    distanceLabel.text = station.distance
+    distanceLabel.text = station.distance?.toMeter
   }
 }

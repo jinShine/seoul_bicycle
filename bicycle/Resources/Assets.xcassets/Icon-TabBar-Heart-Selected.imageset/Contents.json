@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Icon-User.png",
+      "filename" : "Icon-Heart.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Icon-User@2x.png",
+      "filename" : "Icon-Heart@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Icon-User@3x.png",
+      "filename" : "Icon-Heart@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

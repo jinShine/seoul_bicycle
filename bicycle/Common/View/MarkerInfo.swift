@@ -90,14 +90,8 @@ class MarkerInfo: UIView {
     
     self.stationNameLabel.text = station.stationName
     self.parkingBicycleLabel.text = station.parkingBikeTotCnt
-    
-    self.distanceLabel.text = station.distance
-//    if distance > 1000 {
-//      self.distanceLabel.text = String(format: "%.1fkm", distance / 1000)
-//    } else {
-//      self.distanceLabel.text = String(format: "%dm", Int(distance))
-//    }
-//
+    self.distanceLabel.text = station.distance?.toMeter
+
     if station.like ?? false {
       self.likeButton.setImage(Constant.likeFill.image, for: .normal)
     } else {

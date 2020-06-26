@@ -49,7 +49,7 @@ struct Station: Decodable {
   var stationLatitude: String   // 위도
   var stationLongitude: String  // 경도
   var stationId: String         // 대여소ID
-  var distance: String?
+  var distance: Double?
   var like: Bool? = false
   
   init() {
@@ -60,7 +60,7 @@ struct Station: Decodable {
     stationLatitude = ""
     stationLongitude = ""
     stationId = ""
-    distance = ""
+    distance = 0.0
     like = false
   }
 }
@@ -90,7 +90,7 @@ extension Station: Persistable {
     parkingBikeTotCnt = entity.value(forKey: "parkingCount") as! String
     stationLatitude = entity.value(forKey: "latitude") as! String
     stationLongitude = entity.value(forKey: "longitude") as! String
-    distance = entity.value(forKey: "distance") as? String
+    distance = entity.value(forKey: "distance") as? Double
     rackTotCnt = entity.value(forKey: "rackCount") as! String
     shared = entity.value(forKey: "shared") as! String
     stationId = entity.value(forKey: "stationId") as! String

@@ -34,9 +34,9 @@ class StationSearchViewModel: BaseViewModel, ViewModelType {
     let searchedStation = Observable<[SectionStation]>
       .combineLatest(stationLists, input.searchQuery) { (list, query) in
         return list.map {
-          let station = $0.items.filter {
-            $0.stationName.contains(query)
-          }
+          let station = $0.items
+            .filter { $0.stationName.contains(query) }
+            .sorted { $0.distance ?? 0.0 < $1.distance ?? 0.0 }
           
           return SectionStation(model: 0, items: station)
         }

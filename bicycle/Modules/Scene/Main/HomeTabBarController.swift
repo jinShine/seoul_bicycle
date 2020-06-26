@@ -19,9 +19,9 @@ enum HomeTabBarItem: Int {
   var animation: RAMItemAnimation {
       var animation: RAMItemAnimation
       switch self {
-      case .favorite: animation = RAMFlipLeftTransitionItemAnimations()
+      case .favorite: animation = RAMBounceAnimation()
       case .stationMap: animation = RAMBounceAnimation()
-      case .userInfo: animation = RAMRightRotationAnimation()
+      case .userInfo: animation = RAMBounceAnimation()
       }
     
       return animation
@@ -29,7 +29,7 @@ enum HomeTabBarItem: Int {
   
   var image: UIImage? {
     switch self {
-    case .favorite: return UIImage(named: "Icon-TabBar-Star")
+    case .favorite: return UIImage(named: "Icon-TabBar-Heart")
     case .stationMap: return UIImage(named: "Icon-TabBar-Cycle")
     case .userInfo: return UIImage(named: "Icon-TabBar-User")
     }
@@ -52,6 +52,7 @@ enum HomeTabBarItem: Int {
   func getController(viewModel: BaseViewModel, navigator: Navigator) -> UIViewController {
     let vc = controller(viewModel: viewModel, navigator: navigator)
     let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
+//    item.selectedImage = UIImage(named: "Icon-TabBar-Heart-Selected")
     item.animation = animation
     vc.tabBarItem = item
     
@@ -82,7 +83,10 @@ class HomeTabBarController: RAMAnimatedTabBarController {
   }
   
   func setupUI() {
-    
+    self.tabBar.barTintColor = .white
+
+//    tabBar.tintColor = AppTheme.color.main
+//    tabBar.isTranslucent = false
   }
   
   func bind() {

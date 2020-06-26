@@ -129,6 +129,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .asDriver(onErrorJustReturn: ())
     
     let showStationSearch = input.didTapStationSearch
+      .filter { !self.stationList.isEmpty }
       .map { self.stationList }
       .asDriver(onErrorJustReturn: [])
     
@@ -162,17 +163,17 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
                   syncLikeStation: syncLikeStation)
   }
   
-  private func getDistanceFrom(lat: Double?, lng: Double?) -> String {
-    let distanceFromCurrent = self.locationInteractor.currentDistacne(from: (lat, lng))
+  private func getDistanceFrom(lat: Double?, lng: Double?) -> Double {
+    return self.locationInteractor.currentDistacne(from: (lat, lng))
     
-    var distance = ""
-    
-    if distanceFromCurrent > 1000 {
-      distance = String(format: "%.1fkm", distanceFromCurrent / 1000)
-    } else {
-      distance = String(format: "%dm", Int(distanceFromCurrent))
-    }
-    
-    return distance
+//    var distance = ""
+//
+//    if distanceFromCurrent > 1000 {
+//      distance = String(format: "%.1fkm", distanceFromCurrent / 1000)
+//    } else {
+//      distance = String(format: "%dm", Int(distanceFromCurrent))
+//    }
+//
+//    return distance
   }
 }
