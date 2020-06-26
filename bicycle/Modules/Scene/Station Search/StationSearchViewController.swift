@@ -63,9 +63,8 @@ class StationSearchViewController: BaseViewController {
   
   lazy var tableView: BaseTableView = {
     let tableView = BaseTableView(frame: .zero, style: .plain)
-    tableView.register(SearchedStationCell.classForCoder(), forCellReuseIdentifier: "cell")
-//    tableView.register(MemoListCell.classForCoder(),
-//                       forCellReuseIdentifier: MemoListCell.reuseIdentifier)
+    tableView.register(SearchedStationCell.classForCoder(),
+                       forCellReuseIdentifier: SearchedStationCell.reuseIdentifier)
     return tableView
   }()
   
@@ -130,51 +129,58 @@ class StationSearchViewController: BaseViewController {
     super.bindViewModel()
     
     let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchedStationCell else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchedStationCell.reuseIdentifier, for: indexPath) as? SearchedStationCell else { return UITableViewCell() }
       
-      //fix -> configure
       cell.configure(with: station)
       
       return cell
     })
     
-    // Input
+    Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
+      .subscribe(onNext: { (indexPath, station) in
+        self.navigator.dismiss(sender: self, animated: false) {
+          print("DISMISS!!!!!")
+          AppNotificationCenter.viewDismiss.post(object: station)
+        }
+      }).disposed(by: rx.disposeBag)
+  
+  // Input
+  
+  let searchQuery = searchTextField.rx.text
+    .orEmpty
+    .asObservable()
+  
+  let input = StationSearchViewModel.Input(searchQuery: searchQuery,
+                                           didTapDismiss: dismissButton.rx.tap.asObservable())
+  
+  // Output
+  
+  let output = viewModel?.transform(input: input)
+  
+  output?.searchedStation
+  .bind(to: tableView.rx.items(dataSource: datasource))
+  .disposed(by: rx.disposeBag)
+  
+  output?.dismiss.drive(onNext: { _ in
+  self.navigator.dismiss(sender: self, animated: true)
+  }).disposed(by: rx.disposeBag)
+  
+}
 
-    let searchQuery = searchTextField.rx.text
-      .orEmpty
-      .asObservable()
-    
-    let input = StationSearchViewModel.Input(searchQuery: searchQuery,
-                                             didTapDismiss: dismissButton.rx.tap.asObservable())
-    
-    // Output
-    
-    let output = viewModel?.transform(input: input)
-    
-    output?.searchedStation
-      .bind(to: tableView.rx.items(dataSource: datasource))
-      .disposed(by: rx.disposeBag)
-    
-    output?.dismiss.drive(onNext: { _ in
-      self.navigator.dismiss(sender: self, animated: true)
-    }).disposed(by: rx.disposeBag)
-    
+//MARK:- Methods
+
+private func animateView() {
+  
+  // line view
+  self.lineView.snp.updateConstraints {
+    $0.leading.equalToSuperview().offset(24)
+    $0.trailing.equalToSuperview().offset(-24)
   }
   
-  //MARK:- Methods
-  
-  private func animateView() {
-    
-    // line view
-    self.lineView.snp.updateConstraints {
-      $0.leading.equalToSuperview().offset(24)
-      $0.trailing.equalToSuperview().offset(-24)
-    }
-    
-    UIView.animate(withDuration: 0.35) {
-      self.view.layoutIfNeeded()
-    }
+  UIView.animate(withDuration: 0.35) {
+    self.view.layoutIfNeeded()
   }
+}
 }
 
 

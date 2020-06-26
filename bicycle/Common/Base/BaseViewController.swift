@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SnapKit
 import SwiftEntryKit
 
@@ -14,7 +16,6 @@ class BaseViewController: UIViewController {
   
   lazy var toastView: ToastView = {
     let view = ToastView()
-    
     self.view.addSubview(view)
     view.snp.makeConstraints {
       $0.width.equalToSuperview()

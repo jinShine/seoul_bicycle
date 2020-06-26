@@ -16,7 +16,6 @@ class SearchedStationCell: BaseTableViewCell {
     var image: UIImage? {
       switch self {
       case .indicator: return UIImage(named: "Icon-Indicator-Right")
-      default: return nil
       }
     }
   }

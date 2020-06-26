@@ -226,6 +226,18 @@ class StationMapViewController: BaseViewController {
     // Output
     let output = viewModel?.transform(input: input)
     
+    AppNotificationCenter.viewDismiss.addObserver()
+      .bind { object in
+        guard let station = object as? Station else { return }
+        
+        let lat = Double(station.stationLatitude) ?? 0.0
+        let lng = Double(station.stationLongitude) ?? 0.0
+        
+        self.updateCurrentMoveCamera(lat: lat, lng: lng)
+        self.setupMarkerInfo(with: station)
+        
+      }.disposed(by: rx.disposeBag)
+    
     output?.locationGrantPermission
       .drive(onNext: { [weak self] status in
         if !status {
@@ -249,6 +261,7 @@ class StationMapViewController: BaseViewController {
         
         let lat = coordinator.0 ?? 37.5666805
         let lng = coordinator.1 ?? 126.9784147
+        
         self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
       }).disposed(by: rx.disposeBag)
     

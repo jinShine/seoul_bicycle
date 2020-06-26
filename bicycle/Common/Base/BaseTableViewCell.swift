@@ -24,6 +24,7 @@ class BaseTableViewCell: UITableViewCell {
   
   func setupUI() {
     
+    selectionStyle = .none
   }
   
 }

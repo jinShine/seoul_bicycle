@@ -53,6 +53,7 @@
 		36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */; };
 		36D293A724A5A7A400C7155F /* SearchedStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293A624A5A7A400C7155F /* SearchedStationCell.swift */; };
 		36D293A924A5A88300C7155F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293A824A5A88300C7155F /* BaseTableViewCell.swift */; };
+		36D293AB24A5DFE300C7155F /* Notification+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293AA24A5DFE300C7155F /* Notification+Rx.swift */; };
 		36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */; };
 		36DF358D2493944100EDC36D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358C2493944100EDC36D /* NetworkService.swift */; };
 		36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358E2493949400EDC36D /* NetworkResponse.swift */; };
@@ -146,6 +147,7 @@
 		36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleAPI.swift; sourceTree = "<group>"; };
 		36D293A624A5A7A400C7155F /* SearchedStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedStationCell.swift; sourceTree = "<group>"; };
 		36D293A824A5A88300C7155F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		36D293AA24A5DFE300C7155F /* Notification+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Rx.swift"; sourceTree = "<group>"; };
 		36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+SeoulBicycle.swift"; sourceTree = "<group>"; };
 		36DF358C2493944100EDC36D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		36DF358E2493949400EDC36D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				367C2B77248A1FA3009111E7 /* Obervable+Operator.swift */,
+				36D293AA24A5DFE300C7155F /* Notification+Rx.swift */,
 			);
 			path = RxSwift;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				367C2B60248A0C6F009111E7 /* FavoriteViewController.swift in Sources */,
 				365FA2E024A0E594000FFEA5 /* CoreDataStorage.swift in Sources */,
 				367C2B78248A1FA3009111E7 /* Obervable+Operator.swift in Sources */,
+				36D293AB24A5DFE300C7155F /* Notification+Rx.swift in Sources */,
 				367C2B7D248A32A6009111E7 /* BaseNavigationController.swift in Sources */,
 				3660D8B424A4EE7F0029AE11 /* BaseTableView.swift in Sources */,
 				367C2B80248AC28E009111E7 /* AppConfiguration.swift in Sources */,
