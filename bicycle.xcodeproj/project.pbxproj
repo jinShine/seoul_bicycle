@@ -51,6 +51,8 @@
 		36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F3C2487F28100DF3145 /* Navigator.swift */; };
 		36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C37F452489076300DF3145 /* HomeTabBarController.swift */; };
 		36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */; };
+		36D293A724A5A7A400C7155F /* SearchedStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293A624A5A7A400C7155F /* SearchedStationCell.swift */; };
+		36D293A924A5A88300C7155F /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293A824A5A88300C7155F /* BaseTableViewCell.swift */; };
 		36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */; };
 		36DF358D2493944100EDC36D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358C2493944100EDC36D /* NetworkService.swift */; };
 		36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358E2493949400EDC36D /* NetworkResponse.swift */; };
@@ -142,6 +144,8 @@
 		36C37F3C2487F28100DF3145 /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		36C37F452489076300DF3145 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		36C4537524936E1D00164052 /* SeoulBicycleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBicycleAPI.swift; sourceTree = "<group>"; };
+		36D293A624A5A7A400C7155F /* SearchedStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedStationCell.swift; sourceTree = "<group>"; };
+		36D293A824A5A88300C7155F /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+SeoulBicycle.swift"; sourceTree = "<group>"; };
 		36DF358C2493944100EDC36D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		36DF358E2493949400EDC36D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				367C2B73248A1A58009111E7 /* BaseViewController.swift */,
 				367C2B7C248A32A6009111E7 /* BaseNavigationController.swift */,
 				3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */,
+				36D293A824A5A88300C7155F /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 			children = (
 				36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */,
 				36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */,
+				36D293A624A5A7A400C7155F /* SearchedStationCell.swift */,
 			);
 			path = "Station Search";
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
 				365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */,
+				36D293A724A5A7A400C7155F /* SearchedStationCell.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
 				365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */,
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
@@ -820,6 +827,7 @@
 				365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
 				36DF35A32494652D00EDC36D /* ThemeFont.swift in Sources */,
+				36D293A924A5A88300C7155F /* BaseTableViewCell.swift in Sources */,
 				367C2B97248EB6C7009111E7 /* LocationInteractor.swift in Sources */,
 				36DF359C2493A0DC00EDC36D /* StationModel.swift in Sources */,
 				36C4537624936E1D00164052 /* SeoulBicycleAPI.swift in Sources */,

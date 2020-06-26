@@ -63,9 +63,7 @@ class StationSearchViewController: BaseViewController {
   
   lazy var tableView: BaseTableView = {
     let tableView = BaseTableView(frame: .zero, style: .plain)
-//    tableView.delegate = self
-//    tableView.dataSource = self
-    tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
+    tableView.register(SearchedStationCell.classForCoder(), forCellReuseIdentifier: "cell")
 //    tableView.register(MemoListCell.classForCoder(),
 //                       forCellReuseIdentifier: MemoListCell.reuseIdentifier)
     return tableView
@@ -132,20 +130,25 @@ class StationSearchViewController: BaseViewController {
     super.bindViewModel()
     
     let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-      cell.textLabel?.text = station.stationName
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? SearchedStationCell else { return UITableViewCell() }
+      
+      //fix -> configure
+      cell.configure(with: station)
+      
       return cell
     })
     
+    // Input
+
     let searchQuery = searchTextField.rx.text
       .orEmpty
       .asObservable()
     
-    // Input
     let input = StationSearchViewModel.Input(searchQuery: searchQuery,
                                              didTapDismiss: dismissButton.rx.tap.asObservable())
     
     // Output
+    
     let output = viewModel?.transform(input: input)
     
     output?.searchedStation
