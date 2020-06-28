@@ -70,11 +70,10 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .map { $0.status.row }
       .asObservable()
     
-    let stationListData = Observable<[Station]>.concat([
-      fetchStations1,
-      fetchStations2,
-      fetchStations3
-    ]).catchErrorJustReturn([])
+    let stationListData = Observable<[Station]>
+      .concat([fetchStations1, fetchStations2, fetchStations3])
+      .catchErrorJustReturn([])
+      .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
       .reduce([], accumulator: { $0 + $1 })
       .map {
         $0.map { [weak self] station -> Station in
@@ -89,7 +88,8 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
           
           return stationTemp
         }
-    }.do(onNext: {
+    }
+    .do(onNext: {
       self.stationList.removeAll(keepingCapacity: true)
       self.stationList.append(contentsOf: $0) }
     )
@@ -165,15 +165,5 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   private func getDistanceFrom(lat: Double?, lng: Double?) -> Double {
     return self.locationInteractor.currentDistacne(from: (lat, lng))
-    
-//    var distance = ""
-//
-//    if distanceFromCurrent > 1000 {
-//      distance = String(format: "%.1fkm", distanceFromCurrent / 1000)
-//    } else {
-//      distance = String(format: "%dm", Int(distanceFromCurrent))
-//    }
-//
-//    return distance
   }
 }

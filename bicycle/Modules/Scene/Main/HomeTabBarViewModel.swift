@@ -37,7 +37,7 @@ class HomeTabBarViewModel: BaseViewModel, ViewModelType {
   
   func viewModel(for tabBarItem: HomeTabBarItem) -> BaseViewModel {
     switch tabBarItem {
-    case .favorite: return FavoriteViewModel()
+    case .favorite: return FavoriteViewModel(stationInteractor: StationInteractor())
     case .stationMap:
       return StationMapViewModel(locationInteractor: LocationInteractor(),
                                  seoulBicycleInteractor: SeoulBicycleInteractor(),

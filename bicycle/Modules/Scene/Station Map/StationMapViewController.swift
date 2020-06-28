@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import NMapsMap
 
-let updatedDate: PublishSubject = PublishSubject<String>()
+let updatedDate: BehaviorSubject = BehaviorSubject<String>(value: "")
 
 class StationMapViewController: BaseViewController {
   
@@ -331,7 +331,7 @@ class StationMapViewController: BaseViewController {
           self?.setupStationMarker(with: $0)
         }
         
-        print("", stations)
+        DLog(stations)
       }).disposed(by: rx.disposeBag)
     
     output?.showStationSearch

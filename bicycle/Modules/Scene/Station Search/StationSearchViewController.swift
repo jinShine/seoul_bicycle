@@ -63,6 +63,8 @@ class StationSearchViewController: BaseViewController {
   
   lazy var tableView: BaseTableView = {
     let tableView = BaseTableView(frame: .zero, style: .plain)
+    tableView.estimatedRowHeight = 100
+    tableView.rowHeight = UITableView.automaticDimension
     tableView.register(SearchedStationCell.classForCoder(),
                        forCellReuseIdentifier: SearchedStationCell.reuseIdentifier)
     return tableView
@@ -184,6 +186,3 @@ class StationSearchViewController: BaseViewController {
     }
   }
 }
-
-
-

@@ -9,16 +9,73 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class FavoriteViewController: BaseViewController {
   
-  let button1 = UIButton()
+  //MARK: - Constant
   
-  let viewModel: BaseViewModel
+  enum Constant {
+    case naviTitle, naviBackground
+    
+    var title: String {
+      switch self {
+      case .naviTitle: return "즐겨찾기"
+      default: return ""
+      }
+    }
+    
+    var image: UIImage? {
+      switch self {
+      case .naviBackground: return UIImage(named: "Header-Background")
+      default: return nil
+      }
+    }
+  }
+  
+  //MARK: - Properties
+  
+  let navigationView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "Header-Background")
+    return imageView
+  }()
+  
+  let naviTitle: UILabel = {
+    let label = UILabel()
+    label.text = Constant.naviTitle.title
+    label.font = AppTheme.font.custom(size: 32)
+    label.textColor = AppTheme.color.white
+    return label
+  }()
+  
+  let updatedDateLabel: UILabel = {
+    let label = UILabel()
+    label.text = ""
+    label.font = AppTheme.font.custom(size: 12)
+    label.textColor = AppTheme.color.subline
+    return label
+  }()
+  
+  lazy var tableView: BaseTableView = {
+    let tableView = BaseTableView(frame: .zero, style: .plain)
+    tableView.delegate = self
+    tableView.refreshControl = UIRefreshControl()
+    tableView.refreshControl?.tintColor = AppTheme.color.white
+    tableView.separatorStyle = .none
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
+    tableView.tableHeaderView = View(height: 1)
+    tableView.tableFooterView = UIView()
+    tableView.register(FavoriteCell.classForCoder(),
+                       forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
+    return tableView
+  }()
+  
+  let viewModel: FavoriteViewModel?
   let navigator: Navigator
   
   init(viewModel: BaseViewModel, navigator: Navigator) {
-    self.viewModel = viewModel
+    self.viewModel = viewModel as? FavoriteViewModel
     self.navigator = navigator
     super.init(nibName: nil, bundle: nil)
   }
@@ -26,23 +83,101 @@ class FavoriteViewController: BaseViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+
+  override func setupUI() {
+    super.setupUI()
     
-    print("Favorite")
+    view.backgroundColor = AppTheme.color.subWhite
     
-    view.addSubview(button1)
-    button1.setTitle("123", for: .normal)
-    button1.setTitleColor(.black, for: .normal)
+    [navigationView, tableView].forEach { view.addSubview($0) }
+    [naviTitle, updatedDateLabel].forEach { navigationView.addSubview($0) }
     
-    button1.snp.makeConstraints {
-      $0.center.equalToSuperview()
+    navigationView.snp.makeConstraints {
+      $0.top.leading.trailing.equalToSuperview()
+      $0.height.equalTo(268)
     }
     
-    button1.rx.tap.subscribe(onNext: { _ in
-      print(12312312312312312)
-    }).disposed(by: rx.disposeBag)
+    naviTitle.snp.makeConstraints {
+      $0.bottom.equalToSuperview().offset(-130)
+      $0.leading.equalToSuperview().offset(24)
+      $0.trailing.equalToSuperview().offset(-24)
+    }
+    
+    updatedDateLabel.snp.makeConstraints {
+      $0.top.equalTo(naviTitle.snp.bottom).offset(14)
+      $0.leading.equalTo(naviTitle)
+    }
+    
+    tableView.snp.makeConstraints {
+      $0.top.equalTo(navigationView.snp.bottom).offset(-80)
+      $0.bottom.equalToSuperview().offset(-50)
+      $0.leading.trailing.equalToSuperview()
+    }
   }
+  
+  override func bindViewModel() {
+    super.bindViewModel()
 
+    // Input
+    
+    let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(
+      configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
+        guard let cell = tableView.dequeueReusableCell(
+          withIdentifier: FavoriteCell.reuseIdentifier, for: indexPath
+        ) as? FavoriteCell else { return UITableViewCell() }
+        
+        cell.configure(with: station)
+        
+        return cell
+    })
+    
+    updatedDate.subscribe(onNext: { date in
+      self.updatedDateLabel.text = date
+    }).disposed(by: rx.disposeBag)
+    
+    let refresh = tableView.refreshControl!.rx
+      .controlEvent(.valueChanged)
+      .mapToVoid()
+    
+    let input = FavoriteViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
+                                        refresh: refresh)
+    
+    // Output
+    
+    let output = viewModel?.transform(input: input)
+      
+    output?.likeStationList
+      .bind(to: tableView.rx.items(dataSource: datasource))
+      .disposed(by: rx.disposeBag)
+    
+    output?.isLoading
+      .drive(onNext: { [weak self] isLoading in
+        self?.tableView.refreshControl?.endRefreshing()
+      })
+      .disposed(by: rx.disposeBag)
+    
+  }
+}
+
+extension FavoriteViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return UITableView.automaticDimension
+  }
+}
+
+public class View: UIView {
+
+convenience init(width: CGFloat) {
+    self.init(frame: CGRect(x: 0, y: 0, width: width, height: 0))
+    snp.makeConstraints { (make) in
+        make.width.equalTo(width)
+    }
+}
+
+convenience init(height: CGFloat) {
+    self.init(frame: CGRect(x: 0, y: 0, width: 0, height: height))
+    snp.makeConstraints { (make) in
+        make.height.equalTo(height)
+    }
+}
 }
