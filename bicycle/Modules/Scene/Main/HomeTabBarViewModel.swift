@@ -24,10 +24,10 @@ class HomeTabBarViewModel: BaseViewModel, ViewModelType {
     
     let tabBarItems = loggedIn.map { (loggedIn) -> [HomeTabBarItem] in
       if loggedIn {
-        return [.favorite, .stationMap, .userInfo]
+        return [.stationMap, .favorite, .userInfo]
       } else {
         // 나중에 변경
-        return [.favorite, .stationMap, .userInfo]
+        return [.stationMap, .favorite, .userInfo]
       }
     }.asDriver(onErrorJustReturn: [])
     

@@ -14,13 +14,13 @@ import RxViewController
 import NSObject_Rx
 
 enum HomeTabBarItem: Int {
-  case favorite, stationMap, userInfo
+  case stationMap, favorite, userInfo
   
   var animation: RAMItemAnimation {
       var animation: RAMItemAnimation
       switch self {
-      case .favorite: animation = RAMBounceAnimation()
       case .stationMap: animation = RAMBounceAnimation()
+      case .favorite: animation = RAMBounceAnimation()
       case .userInfo: animation = RAMBounceAnimation()
       }
     
@@ -29,19 +29,19 @@ enum HomeTabBarItem: Int {
   
   var image: UIImage? {
     switch self {
-    case .favorite: return UIImage(named: "Icon-TabBar-Heart")
     case .stationMap: return UIImage(named: "Icon-TabBar-Cycle")
+    case .favorite: return UIImage(named: "Icon-TabBar-Heart")
     case .userInfo: return UIImage(named: "Icon-TabBar-User")
     }
   }
   
   private func controller(viewModel: BaseViewModel, navigator: Navigator) -> UIViewController {
     switch self {
-    case .favorite:
-      let vc = FavoriteViewController(viewModel: viewModel, navigator: navigator)
-      return BaseNavigationController(rootViewController: vc)
     case .stationMap:
       let vc = StationMapViewController(viewModel: viewModel, navigator: navigator)
+      return BaseNavigationController(rootViewController: vc)
+    case .favorite:
+      let vc = FavoriteViewController(viewModel: viewModel, navigator: navigator)
       return BaseNavigationController(rootViewController: vc)
     case .userInfo:
       let vc = UserInfoViewController(viewModel: viewModel, navigator: navigator)
@@ -52,7 +52,6 @@ enum HomeTabBarItem: Int {
   func getController(viewModel: BaseViewModel, navigator: Navigator) -> UIViewController {
     let vc = controller(viewModel: viewModel, navigator: navigator)
     let item = RAMAnimatedTabBarItem(title: nil, image: image, tag: rawValue)
-//    item.selectedImage = UIImage(named: "Icon-TabBar-Heart-Selected")
     item.animation = animation
     vc.tabBarItem = item
     
@@ -81,12 +80,11 @@ class HomeTabBarController: RAMAnimatedTabBarController {
     setupUI()
     bind()
   }
-  
-  func setupUI() {
-    self.tabBar.barTintColor = .white
 
-//    tabBar.tintColor = AppTheme.color.main
-//    tabBar.isTranslucent = false
+  func setupUI() {
+    tabBar.barTintColor = .white
+    
+//    setSelectIndex(from: , to: )
   }
   
   func bind() {
@@ -95,7 +93,7 @@ class HomeTabBarController: RAMAnimatedTabBarController {
     
     // Output
     let output = viewModel?.transform(input: input)
-    
+
     output?.tabBarItems.drive(onNext: { [weak self] tabBarItems in
       if let self = self {
         let controllers = tabBarItems.map {
@@ -106,5 +104,6 @@ class HomeTabBarController: RAMAnimatedTabBarController {
     }).disposed(by: rx.disposeBag)
     
   }
-  
 }
+
+
