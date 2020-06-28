@@ -11,9 +11,11 @@ import RxSwift
 import RxCocoa
 import NMapsMap
 
+let updatedDate: PublishSubject = PublishSubject<String>()
+
 class StationMapViewController: BaseViewController {
   
-  //MARK: - Constant
+  //MARK: - ConstantupdatedDate
   
   enum Constant {
     case search, locationError, locationUpdateError,
@@ -143,6 +145,15 @@ class StationMapViewController: BaseViewController {
     return view
   }()
   
+  var updatedDateLabel: UILabel = {
+    let label = UILabel()
+    label.text = ""
+    label.font = AppTheme.font.custom(size: 11)
+    label.textColor = AppTheme.color.blueMagenta
+    label.textAlignment = .right
+    return label
+  }()
+  
   //MARK:- Properties
   
   var rotateAnimationProperty: UIViewPropertyAnimator?
@@ -168,7 +179,7 @@ class StationMapViewController: BaseViewController {
   override func setupUI() {
     super.setupUI()
     
-    [mapView, stationContainerButton, updateStationButton, updateLocationButton].forEach { view.addSubview($0) }
+    [mapView, stationContainerButton, updateStationButton, updateLocationButton, updatedDateLabel].forEach { view.addSubview($0) }
     
     mapView.snp.makeConstraints {
       $0.leading.trailing.top.equalToSuperview()
@@ -194,6 +205,11 @@ class StationMapViewController: BaseViewController {
       $0.size.equalTo(44)
     }
     
+    updatedDateLabel.snp.makeConstraints {
+      $0.top.equalTo(stationContainerButton.snp.bottom).offset(4)
+      $0.trailing.equalTo(stationContainerButton)
+      $0.leading.equalTo(stationContainerButton)
+    }
   }
   
   override func bindViewModel() {
@@ -216,6 +232,10 @@ class StationMapViewController: BaseViewController {
         })
         return (station ?? Station(), isSelected)
     }
+
+    updatedDate.subscribe(onNext: { date in
+      self.updatedDateLabel.text = date
+    }).disposed(by: rx.disposeBag)
     
     let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                           fetchStationListTrigger: rx.viewWillAppear.mapToVoid(),
@@ -248,6 +268,7 @@ class StationMapViewController: BaseViewController {
       }).disposed(by: rx.disposeBag)
     
     output?.fetchStationList
+      .do(onNext: { _ in updatedDate.onNext(Date().current) })
       .drive(onNext: { [weak self] stations in
         stations.forEach {
           self?.setupStationMarker(with: $0)
@@ -300,6 +321,7 @@ class StationMapViewController: BaseViewController {
       }).disposed(by: rx.disposeBag)
     
     output?.updateStationList
+      .do(onNext: { _ in updatedDate.onNext(Date().current) })
       .drive(onNext: { [weak self] stations in
         self?.rotateLoadingStop()
         self?.removeMarkers()

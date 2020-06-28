@@ -64,10 +64,10 @@ class ToastView: UIView {
   }
   
   func show(image status: Status, message: String, position: EKAttributes = .topFloat) {
-    toast(status: status, message: message)
+    toast(status: status, message: message, position: position)
   }
   
-  private func toast(status: Status, message: String, position: EKAttributes = .topFloat) {
+  private func toast(status: Status, message: String, position: EKAttributes) {
     switch status {
     case .success:
       statusImage.image = Status.success.image

@@ -18,3 +18,16 @@ extension Double {
     }
   }
 }
+
+extension Date {
+  
+  var current: String {
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .medium
+    dateFormatter.locale = Locale(identifier: "ko_KR")
+    dateFormatter.dateFormat = "a h시 mm분에 업데이트 됨"
+    return dateFormatter.string(from: date)
+  }
+}
