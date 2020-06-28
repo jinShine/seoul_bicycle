@@ -92,6 +92,7 @@ class StationMapViewController: BaseViewController {
       button.titleLabel?.font = AppTheme.font.custom(size: 15)
       button.contentHorizontalAlignment = .left
       button.isUserInteractionEnabled = false
+      button.tag = Constant.search.hashValue
       return button
     }()
     
@@ -235,8 +236,9 @@ class StationMapViewController: BaseViewController {
         
         self.updateCurrentMoveCamera(lat: lat, lng: lng)
         self.setupMarkerInfo(with: station)
-        
-      }.disposed(by: rx.disposeBag)
+        self.setupSearchButton(with: station)
+      }
+    .disposed(by: rx.disposeBag)
     
     output?.locationGrantPermission
       .drive(onNext: { [weak self] status in
@@ -407,17 +409,36 @@ class StationMapViewController: BaseViewController {
     self.markerInfo.removeFromSuperview()
   }
   
+  private func setupSearchButton(with station: Station) {
+    if let searchButton =  self.stationContainerButton.findSubView(with: Constant.search.hashValue) as? UIButton {
+      searchButton.setTitle(station.stationName, for: .normal)
+      searchButton.setTitleColor(AppTheme.color.blueMagenta, for: .normal)
+    }
+  }
+  
+  private func initSearchButton() {
+    if let searchButton =  self.stationContainerButton.findSubView(with: Constant.search.hashValue) as? UIButton {
+      searchButton.setTitle(Constant.search.title, for: .normal)
+      searchButton.setTitleColor(AppTheme.color.lightGray, for: .normal)
+    }
+  }
+  
+  private func reset() {
+    initSearchButton()
+    removeMarkerInfo()
+  }
+  
 }
 
 extension StationMapViewController: NMFMapViewOptionDelegate, NMFMapViewTouchDelegate, NMFMapViewCameraDelegate {
   
   func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
     print("LAT :", latlng.lat, "LNG :", latlng.lng)
-    removeMarkerInfo()
+    reset()
   }
   
   func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
-    removeMarkerInfo()
+    reset()
     
     //사용자의 제스처로 인해 카메라가 움직였을때 updateLocationButton 초기화
     if reason == NMFMapChangedByGesture {

@@ -46,3 +46,10 @@ extension UIView {
   }
   
 }
+
+extension UIView {
+
+  func findSubView(with tag: Int) -> UIView? {
+    return self.subviews.first { $0.tag == tag }
+  }
+}

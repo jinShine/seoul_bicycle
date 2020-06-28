@@ -83,8 +83,6 @@ class HomeTabBarController: RAMAnimatedTabBarController {
 
   func setupUI() {
     tabBar.barTintColor = .white
-    
-//    setSelectIndex(from: , to: )
   }
   
   func bind() {
