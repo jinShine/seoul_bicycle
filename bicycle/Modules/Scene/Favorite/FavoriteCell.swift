@@ -90,8 +90,6 @@ class FavoriteCell: BaseTableViewCell {
     let button = UIButton()
     button.imageView?.contentMode = .scaleAspectFit
     button.setImage(Constant.likeFill.image, for: .normal)
-//    button.backgroundColor = AppTheme.color.white
-//    button.tintColor = AppTheme.color.blueMagenta
     return button
   }()
   

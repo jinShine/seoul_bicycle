@@ -13,6 +13,8 @@ import SnapKit
 
 class EmptyView: UIView {
   
+  //MARK: - Constant
+  
   enum Constant {
     case stateImage, stateTitle, stateSub, stateButton
     
@@ -31,6 +33,8 @@ class EmptyView: UIView {
       }
     }
   }
+  
+  //MARK: - UI Properties
   
   let emptyImageView: UIImageView = {
     let imageView = UIImageView()
@@ -68,6 +72,10 @@ class EmptyView: UIView {
     return button
   }()
   
+  //MARK: - Properties
+  
+  let onClicked: PublishSubject = PublishSubject<Void>()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupUI()
@@ -79,7 +87,7 @@ class EmptyView: UIView {
   }
   
   private func setupUI() {
-    [emptyImageView, titleLabel, subLabel, okButton].forEach {
+    [emptyImageView, titleLabel, subLabel].forEach {
       addSubview($0)
     }
     
@@ -100,15 +108,6 @@ class EmptyView: UIView {
       $0.top.equalTo(titleLabel.snp.bottom).offset(8)
       $0.leading.equalTo(titleLabel)
       $0.trailing.equalTo(titleLabel)
-    }
-    
-    okButton.layer.cornerRadius = 27.5
-    okButton.layer.masksToBounds = false
-    okButton.snp.makeConstraints {
-      $0.top.equalTo(subLabel.snp.bottom).offset(30)
-      $0.leading.equalTo(titleLabel)
-      $0.trailing.equalTo(titleLabel)
-      $0.height.equalTo(55)
     }
   }
 }

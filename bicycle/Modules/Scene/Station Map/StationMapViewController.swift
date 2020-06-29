@@ -215,6 +215,8 @@ class StationMapViewController: BaseViewController {
     
     // Input
     
+    let viewWillAppear = rx.viewWillAppear.mapToVoid()
+    
     let didTapUpdateLocation = updateStationButton.rx.tap
       .do(onNext: { [weak self] _ in self?.rotateLoadingStart() })
       .throttle(.seconds(2), latest: false, scheduler: MainScheduler.instance)
@@ -230,16 +232,17 @@ class StationMapViewController: BaseViewController {
       .do(onNext: { self.markerInfo.configureLikeImage(with: $0) })
       .map { isSelected -> (Bool, String) in (isSelected, self.markerInfo.stationNameLabel.text ?? "") }
     
-    let input = StationMapViewModel.Input(viewWillAppear: rx.viewWillAppear.mapToVoid(),
+    let input = StationMapViewModel.Input(viewWillAppear: viewWillAppear,
                                           didTapUpdateStation: didTapUpdateLocation,
                                           didTapMoveLocation: updateLocationButton.rx.tap.asObservable(),
                                           didTapStationSearch: stationContainerButton.rx.tap.asObservable(),
                                           didTapLikeInMarkerInfo: didTapLikeInMarkerInfo)
     
     // Output
+    
     let output = viewModel?.transform(input: input)
     
-    AppNotificationCenter.viewDismiss.addObserver()
+    AppNotificationCenter.stationDidReceive.addObserver()
       .bind { object in
         guard let station = object as? Station else { return }
         

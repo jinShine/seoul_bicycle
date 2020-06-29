@@ -10,13 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RAMAnimatedTabBarController
 
 class FavoriteViewController: BaseViewController {
   
   //MARK: - Constant
   
   enum Constant {
-    case naviTitle, naviBackground
+    case naviTitle, naviBackground, refresh
     
     var title: String {
       switch self {
@@ -28,6 +29,7 @@ class FavoriteViewController: BaseViewController {
     var image: UIImage? {
       switch self {
       case .naviBackground: return UIImage(named: "Header-Background")
+      case .refresh: return UIImage(named: "Icon-Navi-Refresh")
       default: return nil
       }
     }
@@ -40,6 +42,14 @@ class FavoriteViewController: BaseViewController {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "Header-Background")
     return imageView
+  }()
+  
+  let refreshButton: UIButton = {
+    let button = UIButton()
+    button.imageView?.contentMode = .scaleAspectFit
+    button.setImage(Constant.refresh.image, for: .normal)
+    button.tintColor = AppTheme.color.white
+    return button
   }()
   
   let naviTitle: UILabel = {
@@ -89,12 +99,19 @@ class FavoriteViewController: BaseViewController {
     
     view.backgroundColor = AppTheme.color.subWhite
     
-    [navigationView, tableView].forEach { view.addSubview($0) }
+    [navigationView, tableView, refreshButton].forEach { view.addSubview($0) }
     [naviTitle, updatedDateLabel].forEach { navigationView.addSubview($0) }
     
     navigationView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(268)
+    }
+    
+    refreshButton.snp.makeConstraints {
+      $0.top.equalToSuperview().offset(view.hasTopNotch ? 54 : 24)
+      $0.trailing.equalToSuperview().offset(-20)
+      $0.width.equalTo(26)
+      $0.height.equalTo(20)
     }
     
     naviTitle.snp.makeConstraints {
@@ -131,12 +148,12 @@ class FavoriteViewController: BaseViewController {
         return cell
     })
 
-    let refresh = tableView.refreshControl!.rx
-      .controlEvent(.valueChanged)
-      .mapToVoid()
+    let refresh = tableView.refreshControl!.rx.controlEvent(.valueChanged).mapToVoid()
+    let didTapRefresh = refreshButton.rx.tap.asObservable()
     
     let input = FavoriteViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
-                                        refresh: refresh)
+                                        refresh: refresh,
+                                        didTapRefresh: didTapRefresh)
     
     // Output
     
@@ -168,6 +185,15 @@ class FavoriteViewController: BaseViewController {
           self.emptyView.removeFromSuperview()
         }
       }).disposed(by: rx.disposeBag)
+    
+    Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
+      .subscribe(onNext: { (indexPath, station) in
+        if let tabBar = self.tabBarController as? RAMAnimatedTabBarController {
+          tabBar.setSelectIndex(from: 1, to: 0)
+          AppNotificationCenter.stationDidReceive.post(object: station)
+        }
+      }).disposed(by: rx.disposeBag)
+
   }
 }
 

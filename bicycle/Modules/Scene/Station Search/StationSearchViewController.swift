@@ -36,7 +36,7 @@ class StationSearchViewController: BaseViewController {
     }
   }
   
-  //MARK: - Properties
+  //MARK: - UI Properties
   
   let searchTextField: UITextField = {
     let textField = UITextField()
@@ -144,7 +144,7 @@ class StationSearchViewController: BaseViewController {
     Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
       .subscribe(onNext: { (indexPath, station) in
         self.navigator.dismiss(sender: self, animated: false) {
-          AppNotificationCenter.viewDismiss.post(object: station)
+          AppNotificationCenter.stationDidReceive.post(object: station)
         }
       }).disposed(by: rx.disposeBag)
     

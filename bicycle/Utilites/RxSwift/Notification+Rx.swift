@@ -25,11 +25,11 @@ extension NotificationCenterProtocol {
 }
 
 enum AppNotificationCenter: NotificationCenterProtocol {
-  case viewDismiss
+  case stationDidReceive
   
   var name: Notification.Name {
     switch self {
-    case .viewDismiss: return Notification.Name("viewDismiss")
+    case .stationDidReceive: return Notification.Name("stationDidReceive")
     }
   }
 }

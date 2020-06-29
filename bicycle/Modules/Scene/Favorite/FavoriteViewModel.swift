@@ -15,6 +15,7 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   struct Input {
     let trigger: Observable<Void>
     let refresh: Observable<Void>
+    let didTapRefresh: Observable<Void>
   }
   
   struct Output {
@@ -38,7 +39,7 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
     let isLoading = onLoading.asDriver(onErrorJustReturn: false)
     
     let likeStationList = Observable<Void>
-      .merge([input.trigger, input.refresh])
+      .merge([input.trigger, input.refresh, input.didTapRefresh])
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
       .flatMap { self.appConstant.repository.stationList }
       .map { $0.filter { $0.like == true} }
