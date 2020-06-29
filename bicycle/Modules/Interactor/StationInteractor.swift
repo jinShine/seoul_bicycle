@@ -24,7 +24,7 @@ protocol StationUseCase {
   func delete(station: Station) -> Observable<Station>
 }
 
-class StationInteractor: StationUseCase, AppGlobalType {
+class StationInteractor: StationUseCase, AppGlobalRepositoryType {
   
   var likeStations: [Station] = []
   

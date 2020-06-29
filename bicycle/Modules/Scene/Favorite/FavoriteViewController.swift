@@ -34,6 +34,7 @@ class FavoriteViewController: BaseViewController {
   }
   
   //MARK: - Properties
+  let emptyView = EmptyView()
   
   let navigationView: UIImageView = {
     let imageView = UIImageView()
@@ -64,7 +65,6 @@ class FavoriteViewController: BaseViewController {
     tableView.refreshControl?.tintColor = AppTheme.color.white
     tableView.separatorStyle = .none
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 24, right: 0)
-    tableView.tableHeaderView = View(height: 1)
     tableView.tableFooterView = UIView()
     tableView.register(FavoriteCell.classForCoder(),
                        forCellReuseIdentifier: FavoriteCell.reuseIdentifier)
@@ -119,8 +119,8 @@ class FavoriteViewController: BaseViewController {
     super.bindViewModel()
 
     // Input
-    
-    let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(
+
+    let datasource = RxTableViewSectionedAnimatedDataSource<SectionStation>(
       configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
         guard let cell = tableView.dequeueReusableCell(
           withIdentifier: FavoriteCell.reuseIdentifier, for: indexPath
@@ -130,11 +130,7 @@ class FavoriteViewController: BaseViewController {
         
         return cell
     })
-    
-    updatedDate.subscribe(onNext: { date in
-      self.updatedDateLabel.text = date
-    }).disposed(by: rx.disposeBag)
-    
+
     let refresh = tableView.refreshControl!.rx
       .controlEvent(.valueChanged)
       .mapToVoid()
@@ -145,7 +141,7 @@ class FavoriteViewController: BaseViewController {
     // Output
     
     let output = viewModel?.transform(input: input)
-      
+    
     output?.likeStationList
       .bind(to: tableView.rx.items(dataSource: datasource))
       .disposed(by: rx.disposeBag)
@@ -153,31 +149,31 @@ class FavoriteViewController: BaseViewController {
     output?.isLoading
       .drive(onNext: { [weak self] isLoading in
         self?.tableView.refreshControl?.endRefreshing()
-      })
-      .disposed(by: rx.disposeBag)
+      }).disposed(by: rx.disposeBag)
     
+    output?.updatedDate
+      .drive(onNext: { date in
+        self.updatedDateLabel.text = date
+      }).disposed(by: rx.disposeBag)
+    
+    output?.isEmpty
+      .drive(onNext: { isEmpty in
+        if isEmpty {
+          self.view.addSubview(self.emptyView)
+          self.emptyView.snp.makeConstraints {
+            $0.top.equalTo(self.navigationView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+          }
+        } else {
+          self.emptyView.removeFromSuperview()
+        }
+      }).disposed(by: rx.disposeBag)
   }
 }
 
 extension FavoriteViewController: UITableViewDelegate {
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
   }
-}
-
-public class View: UIView {
-
-convenience init(width: CGFloat) {
-    self.init(frame: CGRect(x: 0, y: 0, width: width, height: 0))
-    snp.makeConstraints { (make) in
-        make.width.equalTo(width)
-    }
-}
-
-convenience init(height: CGFloat) {
-    self.init(frame: CGRect(x: 0, y: 0, width: 0, height: height))
-    snp.makeConstraints { (make) in
-        make.height.equalTo(height)
-    }
-}
 }

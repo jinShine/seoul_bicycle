@@ -10,15 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class StationMapViewModel: BaseViewModel, ViewModelType {
+class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   
   struct Input {
-    let trigger: Observable<Void>
-    let fetchStationListTrigger: Observable<Void>
+    let viewWillAppear: Observable<Void>
     let didTapUpdateStation: Observable<Void>
-    let didTapUpdateLocation: Observable<Void>
+    let didTapMoveLocation: Observable<Void>
     let didTapStationSearch: Observable<Void>
-    let didTapLikeInMarkerInfo: Observable<(Station, Bool)>
+    let didTapLikeInMarkerInfo: Observable<(Bool, String)>
   }
   
   struct Output {
@@ -31,14 +30,14 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
     let showStationSearch: Driver<[Station]>
     let saveAndDeleteStation: Driver<[Station]>
     let syncLikeStation: Driver<Void>
+    let updatedDate: Driver<String>
   }
   
   let locationInteractor: LocationUseCase
   let seoulBicycleInteractor: SeoulBicycleUseCase
   let stationInteractor: StationUseCase
-  
   var stationList: [Station] = []
-  var currentCoordinate: (lat: Double, lng: Double) = (0.0, 0.0)
+  var currentCooredinate = BehaviorSubject<(Double, Double)>(value: (0.0, 0.0))
   
   init(locationInteractor: LocationUseCase,
        seoulBicycleInteractor: SeoulBicycleUseCase,
@@ -50,81 +49,46 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
   
   func transform(input: Input) -> Output {
     
+    let onUpdatedDate = appConstant.repository.updatedDate
+    
     let locationGrantPermission = locationInteractor
       .start()
       .asDriver(onErrorJustReturn: false)
-    
-    let fetchStations1 = seoulBicycleInteractor
-      .fetchBicycleList(start: 1, last: 1000)
-      .map { $0.status.row }
-      .asObservable()
-    
-    let fetchStations2 = seoulBicycleInteractor
-      .fetchBicycleList(start: 1001, last: 2000)
-      .map { $0.status.row }
-      .asObservable()
-    
-    // 2000개 이상 Station이 생겼는지 확인해보기~
-    let fetchStations3 = seoulBicycleInteractor
-      .fetchBicycleList(start: 2001, last: 3000)
-      .map { $0.status.row }
-      .asObservable()
-    
-    let stationListData = Observable<[Station]>
-      .concat([fetchStations1, fetchStations2, fetchStations3])
-      .catchErrorJustReturn([])
+
+    let stationListData = seoulBicycleInteractor
+      .fetchStations()
+      .map { $0.map { [weak self] station in self?.makeModel(for: station) ?? Station() } }
+      .do(onNext: { self.update(with: $0) })
+      .do(onNext: { self.appConstant.repository.stationList.onNext($0) })
+      
+
+    let fetchStationList = input.viewWillAppear
+      .do(onNext: { _ in onUpdatedDate.onNext(Date().current) })
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
-      .reduce([], accumulator: { $0 + $1 })
-      .map {
-        $0.map { [weak self] station -> Station in
-          
-          let distance = self?.getDistanceFrom(lat: Double(station.stationLatitude), lng: Double(station.stationLongitude))
-          
-          let likeStation = self?.stationInteractor.likeStations.first(where: { $0 == station })
-          
-          var stationTemp = station
-          stationTemp.distance = distance
-          stationTemp.like = likeStation == station ? true : false
-          
-          return stationTemp
-        }
-    }
-    .do(onNext: {
-      self.stationList.removeAll(keepingCapacity: true)
-      self.stationList.append(contentsOf: $0) }
-    )
-    
-    let fetchStationList = input.fetchStationListTrigger
       .flatMap { stationListData }
       .asDriver(onErrorJustReturn: [])
     
     let updateLocation = locationInteractor
       .fetchLocation()
-      .map { (location, error) -> ((Double?, Double?), Error?) in
-        
+      .map { [weak self] (location, error) -> ((Double?, Double?), Error?) in
         let lat = location?.coordinate.latitude ?? 0.0
         let lng = location?.coordinate.longitude ?? 0.0
-        
-        self.currentCoordinate = (lat, lng)
-        
+        self?.currentCooredinate.onNext((lat, lng))
         return ((lat, lng), error)
-    }
-    .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
-    
-    let locationForCameraMove = locationInteractor
-      .fetchLocation()
-      .map { (location, _) in
-        return (location?.coordinate.latitude ?? self.currentCoordinate.lat,
-                location?.coordinate.longitude ?? self.currentCoordinate.lng)
-    }
-    .take(1)
-    .asDriver(onErrorJustReturn: currentCoordinate)
+      }.asDriver(onErrorJustReturn: ((37.5666805, 126.9784147), nil))
+
+    let updateLocationForCameraMove = locationInteractor
+      .currentLocation()
+      .map { ($0 ?? 37.5666805 , $1 ?? 126.9784147) }
+      .take(1)
+      .asDriver(onErrorJustReturn: ((37.5666805, 126.9784147)))
     
     let updateStationList = input.didTapUpdateStation
+      .do(onNext: { _ in onUpdatedDate.onNext(Date().current) })
       .flatMapLatest { stationListData }
       .asDriver(onErrorJustReturn: [])
     
-    let updateCurrentLocation = input.didTapUpdateLocation
+    let updateCurrentLocation = input.didTapMoveLocation
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
     
@@ -134,7 +98,8 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
       .asDriver(onErrorJustReturn: [])
     
     let saveAndDeleteStation = input.didTapLikeInMarkerInfo
-      .map ({ (station, isSelected ) in
+      .map { (isSelected, name) in
+        let station = self.stationList.first { $0.stationName == name } ?? Station()
         if isSelected {
           var stationTemp = station
           stationTemp.like = true
@@ -142,28 +107,54 @@ class StationMapViewModel: BaseViewModel, ViewModelType {
         } else {
           self.stationInteractor.delete(station: station)
         }
-      })
+      }
       .flatMapLatest { _ in stationListData }
       .asDriver(onErrorJustReturn: [])
-    
+
     let syncLikeStation = stationInteractor
       .likeStationList()
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
-    
-    
+        
     return Output(locationGrantPermission: locationGrantPermission,
                   fetchStationList: fetchStationList,
                   updateLocation: updateLocation,
-                  locationForCameraMove: locationForCameraMove,
+                  locationForCameraMove: updateLocationForCameraMove,
                   updateStationList: updateStationList,
                   updateCurrentLocation: updateCurrentLocation,
                   showStationSearch: showStationSearch,
                   saveAndDeleteStation: saveAndDeleteStation,
-                  syncLikeStation: syncLikeStation)
+                  syncLikeStation: syncLikeStation,
+                  updatedDate: onUpdatedDate.asDriver(onErrorJustReturn: ""))
   }
+  
+}
+
+//MARK:- Action Methods
+
+extension StationMapViewModel {
   
   private func getDistanceFrom(lat: Double?, lng: Double?) -> Double {
     return self.locationInteractor.currentDistacne(from: (lat, lng))
   }
+  
+  private func makeModel(for station: Station) -> Station {
+    let distance = getDistanceFrom(lat: Double(station.stationLatitude),
+                                         lng: Double(station.stationLongitude))
+    
+    let likeStation = stationInteractor.likeStations.first(where: { $0 == station })
+    
+    var stationTemp = station
+    stationTemp.distance = distance
+    stationTemp.like = likeStation == station ? true : false
+    
+    return stationTemp
+  }
+
+  private func update(with stations: [Station]) {
+    appConstant.repository.stationList.onNext(stations)
+    stationList.removeAll(keepingCapacity: true)
+    stationList.append(contentsOf: stations)
+  }
+  
 }

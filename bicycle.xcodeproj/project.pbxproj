@@ -13,7 +13,7 @@
 		365FA2DE24A06B82000FFEA5 /* MarkerInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */; };
 		365FA2E024A0E594000FFEA5 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2DF24A0E594000FFEA5 /* CoreDataStorage.swift */; };
 		365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */; };
-		365FA2E724A108D3000FFEA5 /* AppGlobalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */; };
+		365FA2E724A108D3000FFEA5 /* AppGlobalRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2E624A108D3000FFEA5 /* AppGlobalRepositoryType.swift */; };
 		365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */; };
 		3660D8B424A4EE7F0029AE11 /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */; };
 		366A94E0248FDA230076C56F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 366A94DF248FDA230076C56F /* MapKit.framework */; };
@@ -56,6 +56,7 @@
 		36D293AB24A5DFE300C7155F /* Notification+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293AA24A5DFE300C7155F /* Notification+Rx.swift */; };
 		36D293AD24A647BA00C7155F /* Common+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293AC24A647BA00C7155F /* Common+Addition.swift */; };
 		36D293AF24A8F5A600C7155F /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293AE24A8F5A600C7155F /* FavoriteCell.swift */; };
+		36D293B124A9AE9F00C7155F /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293B024A9AE9F00C7155F /* AppRepository.swift */; };
 		36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */; };
 		36DF358D2493944100EDC36D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358C2493944100EDC36D /* NetworkService.swift */; };
 		36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358E2493949400EDC36D /* NetworkResponse.swift */; };
@@ -71,6 +72,7 @@
 		36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */; };
 		36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */; };
 		36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AE249A80D800EDC36D /* Transitionable.swift */; };
+		36F343EC24A9FD7400902024 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343EB24A9FD7400902024 /* EmptyView.swift */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -103,7 +105,7 @@
 		365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkerInfo.xib; sourceTree = "<group>"; };
 		365FA2DF24A0E594000FFEA5 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		365FA2E224A103E7000FFEA5 /* AppDelegate+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Setup.swift"; sourceTree = "<group>"; };
-		365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobalType.swift; sourceTree = "<group>"; };
+		365FA2E624A108D3000FFEA5 /* AppGlobalRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGlobalRepositoryType.swift; sourceTree = "<group>"; };
 		365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInteractor.swift; sourceTree = "<group>"; };
 		3660D8B324A4EE7F0029AE11 /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		366A94DF248FDA230076C56F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -152,6 +154,7 @@
 		36D293AA24A5DFE300C7155F /* Notification+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Rx.swift"; sourceTree = "<group>"; };
 		36D293AC24A647BA00C7155F /* Common+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Common+Addition.swift"; sourceTree = "<group>"; };
 		36D293AE24A8F5A600C7155F /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		36D293B024A9AE9F00C7155F /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+SeoulBicycle.swift"; sourceTree = "<group>"; };
 		36DF358C2493944100EDC36D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		36DF358E2493949400EDC36D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 		36DF35AA249A74B100EDC36D /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewModel.swift; sourceTree = "<group>"; };
 		36DF35AE249A80D800EDC36D /* Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitionable.swift; sourceTree = "<group>"; };
+		36F343EB24A9FD7400902024 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +228,7 @@
 				365F8493248FFC290023CAE3 /* ToastView.swift */,
 				365FA2DB24A06B79000FFEA5 /* MarkerInfo.swift */,
 				365FA2DD24A06B82000FFEA5 /* MarkerInfo.xib */,
+				36F343EB24A9FD7400902024 /* EmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,8 +236,9 @@
 		365FA2E424A106E6000FFEA5 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				365FA2E624A108D3000FFEA5 /* AppGlobalType.swift */,
+				365FA2E624A108D3000FFEA5 /* AppGlobalRepositoryType.swift */,
 				36C37F3A2487F27500DF3145 /* AppConstant.swift */,
+				36D293B024A9AE9F00C7155F /* AppRepository.swift */,
 				365FA2E524A106FB000FFEA5 /* Navigator */,
 			);
 			path = Core;
@@ -790,7 +796,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				365FA2E724A108D3000FFEA5 /* AppGlobalType.swift in Sources */,
+				365FA2E724A108D3000FFEA5 /* AppGlobalRepositoryType.swift in Sources */,
 				367C2B89248E7F44009111E7 /* UIView+Addition.swift in Sources */,
 				36C37F3B2487F27500DF3145 /* AppConstant.swift in Sources */,
 				367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */,
@@ -802,6 +808,7 @@
 				367C2B62248A101B009111E7 /* BaseViewModel.swift in Sources */,
 				36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */,
 				365F8496249006200023CAE3 /* CALayer+Addition.swift in Sources */,
+				36F343EC24A9FD7400902024 /* EmptyView.swift in Sources */,
 				365F8494248FFC2A0023CAE3 /* ToastView.swift in Sources */,
 				36DF358D2493944100EDC36D /* NetworkService.swift in Sources */,
 				367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */,
@@ -809,6 +816,7 @@
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
 				367C2B64248A1070009111E7 /* ViewModelType.swift in Sources */,
 				367C2B7B248A23EF009111E7 /* AuthManager.swift in Sources */,
+				36D293B124A9AE9F00C7155F /* AppRepository.swift in Sources */,
 				365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */,
 				36D293A724A5A7A400C7155F /* SearchedStationCell.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,

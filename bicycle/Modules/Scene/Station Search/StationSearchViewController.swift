@@ -130,7 +130,7 @@ class StationSearchViewController: BaseViewController {
   override func bindViewModel() {
     super.bindViewModel()
     
-    let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(
+    let datasource = RxTableViewSectionedAnimatedDataSource<SectionStation>(
       configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
         guard let cell = tableView.dequeueReusableCell(
           withIdentifier: SearchedStationCell.reuseIdentifier, for: indexPath

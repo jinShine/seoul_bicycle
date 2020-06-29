@@ -11,7 +11,7 @@ import UIKit
 import NMapsMap
 import Firebase
 
-extension AppDelegate: AppGlobalType {
+extension AppDelegate: AppGlobalRepositoryType {
   
   func setup(application: UIApplication,
              launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {

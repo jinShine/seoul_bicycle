@@ -8,14 +8,15 @@
 
 import UIKit
 
-protocol AppGlobalType {
+protocol AppGlobalRepositoryType {
   
   var appConstant: AppConstant { get }
   var network: Networkable { get }
   var coreData: CoreDataStorageable { get }
+  var repository: AppRepository { get }
 }
 
-extension AppGlobalType {
+extension AppGlobalRepositoryType {
   
   var appConstant: AppConstant {
     return AppConstant.shared
@@ -27,6 +28,10 @@ extension AppGlobalType {
   
   var coreData: CoreDataStorageable {
     return appConstant.coreData
+  }
+  
+  var repository: AppRepository {
+    appConstant.repository
   }
 
 }

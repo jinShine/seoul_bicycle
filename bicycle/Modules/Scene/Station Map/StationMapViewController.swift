@@ -11,8 +11,6 @@ import RxSwift
 import RxCocoa
 import NMapsMap
 
-let updatedDate: BehaviorSubject = BehaviorSubject<String>(value: "")
-
 class StationMapViewController: BaseViewController {
   
   //MARK: - ConstantupdatedDate
@@ -224,23 +222,17 @@ class StationMapViewController: BaseViewController {
     
     let didTapLikeInMarkerInfo = markerInfo.likeButton.rx.tap
       .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
-      .map { self.markerInfo.likeButton.currentImage!.isEqual(MarkerInfo.Constant.like.image) ? true : false }
+      .map { [weak self] () -> Bool in
+          let currentImage = self?.markerInfo.likeButton.currentImage
+          guard let isSelected = currentImage?.isEqual(MarkerInfo.Constant.like.image) else { return false }
+          return isSelected
+      }
       .do(onNext: { self.markerInfo.configureLikeImage(with: $0) })
-      .map { isSelected -> (Station, Bool) in
-        let station = self.viewModel?.stationList.first(where: {
-          $0.stationName == self.markerInfo.stationNameLabel.text!
-        })
-        return (station ?? Station(), isSelected)
-    }
-
-    updatedDate.subscribe(onNext: { date in
-      self.updatedDateLabel.text = date
-    }).disposed(by: rx.disposeBag)
+      .map { isSelected -> (Bool, String) in (isSelected, self.markerInfo.stationNameLabel.text ?? "") }
     
-    let input = StationMapViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
-                                          fetchStationListTrigger: rx.viewWillAppear.mapToVoid(),
+    let input = StationMapViewModel.Input(viewWillAppear: rx.viewWillAppear.mapToVoid(),
                                           didTapUpdateStation: didTapUpdateLocation,
-                                          didTapUpdateLocation: updateLocationButton.rx.tap.asObservable(),
+                                          didTapMoveLocation: updateLocationButton.rx.tap.asObservable(),
                                           didTapStationSearch: stationContainerButton.rx.tap.asObservable(),
                                           didTapLikeInMarkerInfo: didTapLikeInMarkerInfo)
     
@@ -268,7 +260,6 @@ class StationMapViewController: BaseViewController {
       }).disposed(by: rx.disposeBag)
     
     output?.fetchStationList
-      .do(onNext: { _ in updatedDate.onNext(Date().current) })
       .drive(onNext: { [weak self] stations in
         stations.forEach {
           self?.setupStationMarker(with: $0)
@@ -284,17 +275,12 @@ class StationMapViewController: BaseViewController {
         
         let lat = coordinator.0 ?? 37.5666805
         let lng = coordinator.1 ?? 126.9784147
-        
         self?.mapView.locationOverlay.location = NMGLatLng(lat: lat, lng: lng)
       }).disposed(by: rx.disposeBag)
     
     output?.locationForCameraMove
       .drive(onNext: { [weak self] (lat, lng) in
-        guard let self = self else { return }
-        
-        if let coordinate = self.viewModel?.currentCoordinate {
-          self.updateCurrentMoveCamera(lat: coordinate.lat, lng: coordinate.lng)
-        }
+        self?.updateCurrentMoveCamera(lat: lat, lng: lng)
       }).disposed(by: rx.disposeBag)
     
     output?.updateCurrentLocation
@@ -321,17 +307,14 @@ class StationMapViewController: BaseViewController {
       }).disposed(by: rx.disposeBag)
     
     output?.updateStationList
-      .do(onNext: { _ in updatedDate.onNext(Date().current) })
       .drive(onNext: { [weak self] stations in
         self?.rotateLoadingStop()
         self?.removeMarkers()
         self?.removeMarkerInfo()
-        
+        DLog(stations)
         stations.forEach {
           self?.setupStationMarker(with: $0)
         }
-        
-        DLog(stations)
       }).disposed(by: rx.disposeBag)
     
     output?.showStationSearch
@@ -353,6 +336,12 @@ class StationMapViewController: BaseViewController {
       .drive(onNext: { stations in
         //        print("List", stations)
       }).disposed(by: rx.disposeBag)
+    
+    output?.updatedDate
+      .drive(onNext: { [weak self] date in
+        self?.updatedDateLabel.text = date
+      }).disposed(by: rx.disposeBag)
+    
   }
   
   //MARK:- Methods

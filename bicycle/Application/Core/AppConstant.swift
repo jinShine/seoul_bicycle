@@ -15,11 +15,13 @@ class AppConstant: NSObject {
   var navigator: Navigator
   var coreData: CoreDataStorageable
   var network: Networkable
+  var repository: AppRepository
   
   private override init() {
     self.navigator = Navigator.default
     self.coreData = CoreDataStorage.shared
     self.network = NetworkService()
+    self.repository = AppRepository()
     super.init()
   }
   

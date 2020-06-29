@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class FavoriteViewModel: BaseViewModel, ViewModelType {
+class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   
   struct Input {
     let trigger: Observable<Void>
@@ -20,6 +20,8 @@ class FavoriteViewModel: BaseViewModel, ViewModelType {
   struct Output {
     let likeStationList: Observable<[SectionStation]>
     let isLoading: Driver<Bool>
+    let isEmpty: Driver<Bool>
+    let updatedDate: Driver<String>
   }
   
   let stationInteractor: StationUseCase
@@ -30,19 +32,25 @@ class FavoriteViewModel: BaseViewModel, ViewModelType {
   
   func transform(input: Input) -> Output {
     
+    let onEmptyView = PublishSubject<Bool>()
+    let onUpdatedDate = appConstant.repository.updatedDate
     let onLoading = PublishSubject<Bool>()
+    let isLoading = onLoading.asDriver(onErrorJustReturn: false)
     
     let likeStationList = Observable<Void>
       .merge([input.trigger, input.refresh])
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+      .flatMap { self.appConstant.repository.stationList }
+      .map { $0.filter { $0.like == true} }
+      .do(onNext: { $0.isEmpty ? onEmptyView.onNext(true) : onEmptyView.onNext(false) })
+      .do(onNext: { _ in onUpdatedDate.onNext(Date().current)})
       .do(onNext: { _ in onLoading.onNext(true) })
-      .flatMap { self.stationInteractor.likeStationList() }
       .map { [SectionStation(model: 0, items: $0)] }
       .asObservable()
     
-    
-
     return Output(likeStationList: likeStationList,
-                  isLoading: onLoading.asDriver(onErrorJustReturn: false))
+                  isLoading: isLoading,
+                  isEmpty: onEmptyView.asDriver(onErrorJustReturn: false),
+                  updatedDate: onUpdatedDate.asDriver(onErrorJustReturn: ""))
   }
 }
