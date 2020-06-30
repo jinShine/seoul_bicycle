@@ -169,6 +169,11 @@ class StationMapViewController: BaseViewController {
     fatalError("init(coder:) has not been implemented")
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    self.removeMarkerInfo()
+  }
+  
   deinit {
     mapView.removeCameraDelegate(delegate: self)
     mapView.removeOptionDelegate(delegate: self)
@@ -245,7 +250,6 @@ class StationMapViewController: BaseViewController {
     AppNotificationCenter.stationDidReceive.addObserver()
       .bind { object in
         guard let station = object as? Station else { return }
-        
         let lat = Double(station.stationLatitude) ?? 0.0
         let lng = Double(station.stationLongitude) ?? 0.0
         
@@ -334,12 +338,7 @@ class StationMapViewController: BaseViewController {
           self?.setupStationMarker(with: $0)
         }
       }).disposed(by: rx.disposeBag)
-    
-    output?.syncLikeStation
-      .drive(onNext: { stations in
-        //        print("List", stations)
-      }).disposed(by: rx.disposeBag)
-    
+
     output?.updatedDate
       .drive(onNext: { [weak self] date in
         self?.updatedDateLabel.text = date

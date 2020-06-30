@@ -13,4 +13,5 @@ class AppRepository {
   
   var updatedDate: BehaviorSubject = BehaviorSubject<String>(value: "")
   var stationList: BehaviorSubject = BehaviorSubject<[Station]>(value: [])
+  var currentLocation: (lat: Double, lng: Double) = (0.0, 0.0)
 }

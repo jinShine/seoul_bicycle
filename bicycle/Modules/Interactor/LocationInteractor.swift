@@ -16,7 +16,7 @@ protocol LocationUseCase {
   func currentDistacne(from location: FromLocation) -> Double
 }
 
-class LocationInteractor: LocationUseCase {
+class LocationInteractor: LocationUseCase, AppGlobalRepositoryType {
   
   let locationManager: LocationManager
   
@@ -34,17 +34,18 @@ class LocationInteractor: LocationUseCase {
   
   func currentLocation() -> Observable<CurrentLocation> {
     return locationManager.didUpdateLocation
-      .map { (location, _) in
+      .map { [weak self] (location, _) in
         let lat = location?.coordinate.latitude
         let lng = location?.coordinate.longitude
+        self?.appConstant.repository.currentLocation = (lat ?? 0.0, lng ?? 0.0)
         return (lat, lng)
     }
   }
 
   func currentDistacne(from location: FromLocation) -> Double {
     let from = (location.lat, location.lng)
-    let current = (lat: locationManager.location?.coordinate.latitude,
-                   lng: locationManager.location?.coordinate.longitude)
+    let current = (lat: appConstant.repository.currentLocation.lat,
+                   lng: appConstant.repository.currentLocation.lng)
     return self.locationManager.distance(current: current, from: from)
   }
   

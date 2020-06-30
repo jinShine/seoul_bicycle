@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class FavoriteCell: BaseTableViewCell {
   
@@ -35,6 +37,7 @@ class FavoriteCell: BaseTableViewCell {
     imageView.backgroundColor = AppTheme.color.white
     imageView.layer.cornerRadius = 10
     imageView.layer.masksToBounds = false
+    imageView.isUserInteractionEnabled = true
     return imageView
   }()
   
@@ -92,8 +95,7 @@ class FavoriteCell: BaseTableViewCell {
     button.setImage(Constant.likeFill.image, for: .normal)
     return button
   }()
-  
-  
+
   override func setupUI() {
     super.setupUI()
     

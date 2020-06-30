@@ -93,7 +93,7 @@ class FavoriteViewController: BaseViewController {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   override func setupUI() {
     super.setupUI()
     
@@ -134,26 +134,33 @@ class FavoriteViewController: BaseViewController {
   
   override func bindViewModel() {
     super.bindViewModel()
-
+    
     // Input
-
+    
     let datasource = RxTableViewSectionedAnimatedDataSource<SectionStation>(
       configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
         guard let cell = tableView.dequeueReusableCell(
           withIdentifier: FavoriteCell.reuseIdentifier, for: indexPath
-        ) as? FavoriteCell else { return UITableViewCell() }
+          ) as? FavoriteCell else { return UITableViewCell() }
         
         cell.configure(with: station)
         
         return cell
     })
-
+    
     let refresh = tableView.refreshControl!.rx.controlEvent(.valueChanged).mapToVoid()
     let didTapRefresh = refreshButton.rx.tap.asObservable()
     
+    let didTapLike = Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
+      .map { (indexPath, station) -> (FavoriteCell, Station) in
+        let cell = self.tableView.cellForRow(at: indexPath) as! FavoriteCell
+        return (cell, station)
+      }.flatMap { cell, station in cell.likeButton.rx.tap.map { station } }
+
     let input = FavoriteViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                         refresh: refresh,
-                                        didTapRefresh: didTapRefresh)
+                                        didTapRefresh: didTapRefresh,
+                                        didTapLike: didTapLike)
     
     // Output
     
@@ -186,14 +193,18 @@ class FavoriteViewController: BaseViewController {
         }
       }).disposed(by: rx.disposeBag)
     
-    Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
-      .subscribe(onNext: { (indexPath, station) in
+    output?.removeLike
+      .drive(onNext: { _ in
+        print("오오오오오오")
+      }).disposed(by: rx.disposeBag)
+    
+    tableView.rx.modelSelected(Station.self)
+      .subscribe(onNext: { (station) in
         if let tabBar = self.tabBarController as? RAMAnimatedTabBarController {
-          tabBar.setSelectIndex(from: 1, to: 0)
+          tabBar.setSelectIndex(from: HomeTabBarItem.favorite.rawValue, to: HomeTabBarItem.stationMap.rawValue)
           AppNotificationCenter.stationDidReceive.post(object: station)
         }
       }).disposed(by: rx.disposeBag)
-
   }
 }
 

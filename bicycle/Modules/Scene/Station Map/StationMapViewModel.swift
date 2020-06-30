@@ -29,7 +29,6 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
     let updateCurrentLocation: Driver<Void>
     let showStationSearch: Driver<[Station]>
     let saveAndDeleteStation: Driver<[Station]>
-    let syncLikeStation: Driver<Void>
     let updatedDate: Driver<String>
   }
   
@@ -55,12 +54,14 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
       .start()
       .asDriver(onErrorJustReturn: false)
 
-    let stationListData = seoulBicycleInteractor
-      .fetchStations()
-      .map { $0.map { [weak self] station in self?.makeModel(for: station) ?? Station() } }
+    let stationListData = Observable.combineLatest(seoulBicycleInteractor.fetchStations(), stationInteractor.readLikeStation())
+      .map { (allStation, likedStation) in
+        allStation.map { station in
+          self.remakeModel(for: station, with: likedStation)
+        }
+      }
       .do(onNext: { self.update(with: $0) })
       .do(onNext: { self.appConstant.repository.stationList.onNext($0) })
-      
 
     let fetchStationList = input.viewWillAppear
       .do(onNext: { _ in onUpdatedDate.onNext(Date().current) })
@@ -100,6 +101,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
     let saveAndDeleteStation = input.didTapLikeInMarkerInfo
       .map { (isSelected, name) in
         let station = self.stationList.first { $0.stationName == name } ?? Station()
+        
         if isSelected {
           var stationTemp = station
           stationTemp.like = true
@@ -110,11 +112,6 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
       }
       .flatMapLatest { _ in stationListData }
       .asDriver(onErrorJustReturn: [])
-
-    let syncLikeStation = stationInteractor
-      .likeStationList()
-      .mapToVoid()
-      .asDriver(onErrorJustReturn: ())
         
     return Output(locationGrantPermission: locationGrantPermission,
                   fetchStationList: fetchStationList,
@@ -124,7 +121,6 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
                   updateCurrentLocation: updateCurrentLocation,
                   showStationSearch: showStationSearch,
                   saveAndDeleteStation: saveAndDeleteStation,
-                  syncLikeStation: syncLikeStation,
                   updatedDate: onUpdatedDate.asDriver(onErrorJustReturn: ""))
   }
   
@@ -138,21 +134,18 @@ extension StationMapViewModel {
     return self.locationInteractor.currentDistacne(from: (lat, lng))
   }
   
-  private func makeModel(for station: Station) -> Station {
-    let distance = getDistanceFrom(lat: Double(station.stationLatitude),
-                                         lng: Double(station.stationLongitude))
-    
-    let likeStation = stationInteractor.likeStations.first(where: { $0 == station })
+  private func remakeModel(for station: Station, with likes: [Station]) -> Station {
+  
+    let distance = self.getDistanceFrom(lat: Double(station.stationLatitude), lng: Double(station.stationLongitude))
+    let likedStation = likes.first(where: { $0 == station })
     
     var stationTemp = station
     stationTemp.distance = distance
-    stationTemp.like = likeStation == station ? true : false
-    
+    stationTemp.like = likedStation == station ? true : false
     return stationTemp
   }
 
   private func update(with stations: [Station]) {
-    appConstant.repository.stationList.onNext(stations)
     stationList.removeAll(keepingCapacity: true)
     stationList.append(contentsOf: stations)
   }

@@ -12,13 +12,13 @@ import CoreData
 
 protocol StationUseCase {
   
-  var likeStations: [Station] { get set }
+//  var likeStations: [Station] { get set }
   
   @discardableResult
   func createStation(station: Station) -> Observable<Void>
   
   @discardableResult
-  func likeStationList() -> Observable<[Station]>
+  func readLikeStation() -> Observable<[Station]>
   
   @discardableResult
   func delete(station: Station) -> Observable<Station>
@@ -41,15 +41,11 @@ class StationInteractor: StationUseCase, AppGlobalRepositoryType {
     }
   }
   
-  func likeStationList() -> Observable<[Station]> {
+  func readLikeStation() -> Observable<[Station]> {
     return coreDataStorage.context.rx
       .entities(Station.self,
                 predicate: nil,
                 sortDescriptors: [NSSortDescriptor(key: "distance", ascending: true)])
-      .do(onNext: { [weak self] in
-        self?.likeStations.removeAll(keepingCapacity: true)
-        self?.likeStations.append(contentsOf: $0)
-      })
   }
   
   func delete(station: Station) -> Observable<Station> {
