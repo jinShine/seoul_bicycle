@@ -11,8 +11,19 @@ import RxSwift
 import RxCocoa
 import SnapKit
 import SwiftEntryKit
+import NVActivityIndicatorView
 
 class BaseViewController: UIViewController {
+  
+  lazy var activityIndicator: NVActivityIndicatorView = {
+    let indicatorView = NVActivityIndicatorView(frame: .zero, type: .ballSpinFadeLoader, color: AppTheme.color.main)
+    self.view.addSubview(indicatorView)
+    indicatorView.snp.makeConstraints {
+      $0.center.equalToSuperview()
+      $0.size.equalTo(44)
+    }
+    return indicatorView
+  }()
   
   lazy var toastView: ToastView = {
     let view = ToastView()

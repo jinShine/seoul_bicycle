@@ -96,7 +96,7 @@ class FavoriteViewController: BaseViewController {
   
   override func setupUI() {
     super.setupUI()
-    
+    activityIndicator.startAnimating()
     view.backgroundColor = AppTheme.color.subWhite
     
     [navigationView, tableView, refreshButton].forEach { view.addSubview($0) }

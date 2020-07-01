@@ -25,6 +25,7 @@ target 'bicycle' do
   # ui
   pod 'RAMAnimatedTabBarController'
   pod 'SwiftEntryKit', '1.2.3'
+  pod 'NVActivityIndicatorView'
 
   # naver map
   pod 'NMapsMap'
