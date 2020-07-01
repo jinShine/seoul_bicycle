@@ -96,7 +96,7 @@ class FavoriteViewController: BaseViewController {
   
   override func setupUI() {
     super.setupUI()
-    activityIndicator.startAnimating()
+    
     view.backgroundColor = AppTheme.color.subWhite
     
     [navigationView, tableView, refreshButton].forEach { view.addSubview($0) }
@@ -137,14 +137,13 @@ class FavoriteViewController: BaseViewController {
     
     // Input
     
-    let datasource = RxTableViewSectionedAnimatedDataSource<SectionStation>(
+    let datasource = RxTableViewSectionedReloadDataSource<SectionStation>(
       configureCell: { (datasource, tableView, indexPath, station) -> UITableViewCell in
         guard let cell = tableView.dequeueReusableCell(
           withIdentifier: FavoriteCell.reuseIdentifier, for: indexPath
           ) as? FavoriteCell else { return UITableViewCell() }
         
         cell.configure(with: station)
-        
         return cell
     })
     
@@ -172,7 +171,12 @@ class FavoriteViewController: BaseViewController {
     
     output?.isLoading
       .drive(onNext: { [weak self] isLoading in
-        self?.tableView.refreshControl?.endRefreshing()
+        if isLoading {
+          self?.loadingStart()
+        } else {
+          self?.loadingStop()
+          self?.tableView.refreshControl?.endRefreshing()
+        }
       }).disposed(by: rx.disposeBag)
     
     output?.updatedDate

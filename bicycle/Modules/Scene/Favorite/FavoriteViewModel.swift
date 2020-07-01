@@ -57,10 +57,11 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
     let likeStationList = Observable<Void>
       .merge([input.trigger, input.refresh, input.didTapRefresh])
       .observeOn(ConcurrentDispatchQueueScheduler(qos: .default))
+      .do(onNext: { _ in onLoading.onNext(true) })
       .flatMap { stationListData }
+      .do(onNext: { _ in onLoading.onNext(false) })
       .do(onNext: { $0.isEmpty ? onEmptyView.onNext(true) : onEmptyView.onNext(false) })
       .do(onNext: { _ in onUpdatedDate.onNext(Date().current)})
-      .do(onNext: { _ in onLoading.onNext(true) })
       .map { [SectionStation(model: 0, items: $0)] }
       .asObservable()
     
