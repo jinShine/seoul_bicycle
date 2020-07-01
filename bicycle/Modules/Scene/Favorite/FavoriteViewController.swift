@@ -44,14 +44,6 @@ class FavoriteViewController: BaseViewController {
     return imageView
   }()
   
-  let refreshButton: UIButton = {
-    let button = UIButton()
-    button.imageView?.contentMode = .scaleAspectFit
-    button.setImage(Constant.refresh.image, for: .normal)
-    button.tintColor = AppTheme.color.white
-    return button
-  }()
-  
   let naviTitle: UILabel = {
     let label = UILabel()
     label.text = Constant.naviTitle.title
@@ -99,19 +91,12 @@ class FavoriteViewController: BaseViewController {
     
     view.backgroundColor = AppTheme.color.subWhite
     
-    [navigationView, tableView, refreshButton].forEach { view.addSubview($0) }
+    [navigationView, tableView].forEach { view.addSubview($0) }
     [naviTitle, updatedDateLabel].forEach { navigationView.addSubview($0) }
     
     navigationView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(268)
-    }
-    
-    refreshButton.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(view.hasTopNotch ? 54 : 24)
-      $0.trailing.equalToSuperview().offset(-20)
-      $0.width.equalTo(26)
-      $0.height.equalTo(20)
     }
     
     naviTitle.snp.makeConstraints {
@@ -148,7 +133,6 @@ class FavoriteViewController: BaseViewController {
     })
     
     let refresh = tableView.refreshControl!.rx.controlEvent(.valueChanged).mapToVoid()
-    let didTapRefresh = refreshButton.rx.tap.asObservable()
     
     let didTapLike = Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
       .map { (indexPath, station) -> (FavoriteCell, Station) in
@@ -158,7 +142,6 @@ class FavoriteViewController: BaseViewController {
 
     let input = FavoriteViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
                                         refresh: refresh,
-                                        didTapRefresh: didTapRefresh,
                                         didTapLike: didTapLike)
     
     // Output
