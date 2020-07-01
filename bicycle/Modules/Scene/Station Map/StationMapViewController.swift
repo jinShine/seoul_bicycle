@@ -332,8 +332,6 @@ class StationMapViewController: BaseViewController {
     
     output?.saveAndDeleteStation
       .drive(onNext: { [weak self] stations in
-        self?.removeMarkers()
-        
         stations.forEach {
           self?.setupStationMarker(with: $0)
         }

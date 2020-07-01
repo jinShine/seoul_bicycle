@@ -132,7 +132,7 @@
 		367C2B8F248E9E51009111E7 /* UIColor+Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Addition.swift"; sourceTree = "<group>"; };
 		367C2B91248EA468009111E7 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		367C2B96248EB6C7009111E7 /* LocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInteractor.swift; sourceTree = "<group>"; };
-		36C37F012487DBEE00DF3145 /* bicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36C37F012487DBEE00DF3145 /* 따릉해.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "따릉해.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36C37F042487DBEE00DF3145 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36C37F0B2487DBEF00DF3145 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		36C37F0E2487DBEF00DF3145 /* bicycle.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bicycle.xcdatamodel; sourceTree = "<group>"; };
@@ -366,6 +366,7 @@
 		367C2B93248EB69E009111E7 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				36F343EF24AC9DE500902024 /* Login */,
 				367C2B68248A1580009111E7 /* Station Map */,
 				36DF35A8249A748A00EDC36D /* Station Search */,
 				367C2B67248A157A009111E7 /* User Information */,
@@ -409,7 +410,7 @@
 		36C37F022487DBEE00DF3145 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36C37F012487DBEE00DF3145 /* bicycle.app */,
+				36C37F012487DBEE00DF3145 /* 따릉해.app */,
 				36C37F1A2487DBF100DF3145 /* bicycleTests.xctest */,
 				36C37F252487DBF100DF3145 /* bicycleUITests.xctest */,
 			);
@@ -529,6 +530,13 @@
 			path = "Station Search";
 			sourceTree = "<group>";
 		};
+		36F343EF24AC9DE500902024 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		3B461733A7689E1287DE884F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,7 +580,7 @@
 			);
 			name = bicycle;
 			productName = bicycle;
-			productReference = 36C37F012487DBEE00DF3145 /* bicycle.app */;
+			productReference = 36C37F012487DBEE00DF3145 /* 따릉해.app */;
 			productType = "com.apple.product-type.application";
 		};
 		36C37F192487DBF100DF3145 /* bicycleTests */ = {
@@ -1038,7 +1046,7 @@
 				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.bicycle;
-				PRODUCT_NAME = bicycle;
+				PRODUCT_NAME = "따릉해";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1061,7 +1069,7 @@
 				);
 				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinnify.bicycle;
-				PRODUCT_NAME = bicycle;
+				PRODUCT_NAME = "따릉해";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

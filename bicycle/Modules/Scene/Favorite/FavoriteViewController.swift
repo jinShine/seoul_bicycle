@@ -129,20 +129,18 @@ class FavoriteViewController: BaseViewController {
           ) as? FavoriteCell else { return UITableViewCell() }
         
         cell.configure(with: station)
+        cell.likeButton.rx.tap.asDriver()
+          .throttle(.seconds(1))
+          .drive(onNext: { [weak self] _ in
+            self?.viewModel?.didTapLikeButton.onNext(station)
+          }).disposed(by: cell.disposeBag)
         return cell
     })
     
     let refresh = tableView.refreshControl!.rx.controlEvent(.valueChanged).mapToVoid()
-    
-    let didTapLike = Observable.zip(tableView.rx.itemSelected, tableView.rx.modelSelected(Station.self))
-      .map { (indexPath, station) -> (FavoriteCell, Station) in
-        let cell = self.tableView.cellForRow(at: indexPath) as! FavoriteCell
-        return (cell, station)
-      }.flatMap { cell, station in cell.likeButton.rx.tap.map { station } }
 
     let input = FavoriteViewModel.Input(trigger: rx.viewWillAppear.mapToVoid(),
-                                        refresh: refresh,
-                                        didTapLike: didTapLike)
+                                        refresh: refresh)
     
     // Output
     
@@ -181,9 +179,8 @@ class FavoriteViewController: BaseViewController {
       }).disposed(by: rx.disposeBag)
     
     output?.removeLike
-      .drive(onNext: { _ in
-        print("오오오오오오")
-      }).disposed(by: rx.disposeBag)
+      .drive()
+      .disposed(by: rx.disposeBag)
     
     tableView.rx.modelSelected(Station.self)
       .subscribe(onNext: { (station) in

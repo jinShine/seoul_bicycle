@@ -15,7 +15,6 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   struct Input {
     let trigger: Observable<Void>
     let refresh: Observable<Void>
-    let didTapLike: Observable<Station>
   }
   
   struct Output {
@@ -29,6 +28,7 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   let locationInteractor: LocationUseCase
   let seoulBicycleInteractor: SeoulBicycleUseCase
   let stationInteractor: StationUseCase
+  let didTapLikeButton = PublishSubject<Station>()
   
   init(locationInteractor: LocationUseCase,
        seoulBicycleInteractor: SeoulBicycleUseCase,
@@ -64,8 +64,9 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
       .map { [SectionStation(model: 0, items: $0)] }
       .asObservable()
     
-    let removeLike = input.didTapLike
-      .flatMap { self.stationInteractor.delete(station: $0) }
+    let removeLike = didTapLikeButton
+      .distinctUntilChanged()
+      .flatMapLatest { self.stationInteractor.delete(station: $0) }
       .flatMapLatest { _ in stationListData }
       .mapToVoid()
       .asDriver(onErrorJustReturn: ())
