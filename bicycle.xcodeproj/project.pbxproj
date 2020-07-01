@@ -73,6 +73,8 @@
 		36DF35AD249A74BD00EDC36D /* StationSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */; };
 		36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35AE249A80D800EDC36D /* Transitionable.swift */; };
 		36F343EC24A9FD7400902024 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343EB24A9FD7400902024 /* EmptyView.swift */; };
+		36F343F124ACC70D00902024 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F024ACC70D00902024 /* SignInViewController.swift */; };
+		36F343F324ACC71600902024 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F224ACC71600902024 /* SignInViewModel.swift */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -172,6 +174,8 @@
 		36DF35AC249A74BD00EDC36D /* StationSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewModel.swift; sourceTree = "<group>"; };
 		36DF35AE249A80D800EDC36D /* Transitionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitionable.swift; sourceTree = "<group>"; };
 		36F343EB24A9FD7400902024 /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		36F343F024ACC70D00902024 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		36F343F224ACC71600902024 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -533,6 +537,8 @@
 		36F343EF24AC9DE500902024 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				36F343F024ACC70D00902024 /* SignInViewController.swift */,
+				36F343F224ACC71600902024 /* SignInViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -828,6 +834,7 @@
 				365FA2EB24A113FF000FFEA5 /* StationInteractor.swift in Sources */,
 				36D293A724A5A7A400C7155F /* SearchedStationCell.swift in Sources */,
 				367C2B92248EA468009111E7 /* LocationManager.swift in Sources */,
+				36F343F324ACC71600902024 /* SignInViewModel.swift in Sources */,
 				365FA2E324A103E7000FFEA5 /* AppDelegate+Setup.swift in Sources */,
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
@@ -851,6 +858,7 @@
 				36DF359524939CE300EDC36D /* SeoulBicycleErrorModel.swift in Sources */,
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
 				36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */,
+				36F343F124ACC70D00902024 /* SignInViewController.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
 				365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,

@@ -16,6 +16,7 @@ class Navigator {
     case stationMap(viewModel: StationMapViewModel)
     case userInfo(viewModel: UserInfoViewModel)
     case stationSearch(viewModel: StationSearchViewModel)
+    case signIn(viewModel: SignInViewModel)
   }
   
   func get(for scene: Scene) -> UIViewController {
@@ -27,6 +28,7 @@ class Navigator {
     case .stationMap(let viewModel): return StationMapViewController(viewModel: viewModel, navigator: self)
     case .userInfo(let viewModel): return StationMapViewController(viewModel: viewModel, navigator: self)
     case .stationSearch(let viewModel): return StationSearchViewController(viewModel: viewModel, navigator: self)
+    case .signIn(let viewModel): return SignInViewController(viewModel: viewModel, navigator: self)
     }
   }
 }

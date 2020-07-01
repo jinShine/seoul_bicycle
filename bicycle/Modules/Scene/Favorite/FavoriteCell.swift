@@ -130,7 +130,7 @@ class FavoriteCell: BaseTableViewCell {
       $0.leading.lessThanOrEqualTo(nameLabel.snp.trailing).offset(16)
       $0.trailing.equalTo(-24)
       $0.centerY.equalTo(nameLabel)
-            $0.size.equalTo(50)
+      $0.size.equalTo(50)
 //      $0.width.equalTo(20)
 //      $0.height.equalTo(18)
     }

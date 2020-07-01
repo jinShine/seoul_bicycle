@@ -26,6 +26,7 @@ target 'bicycle' do
   pod 'RAMAnimatedTabBarController'
   pod 'SwiftEntryKit', '1.2.3'
   pod 'NVActivityIndicatorView'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
 
   # naver map
   pod 'NMapsMap'

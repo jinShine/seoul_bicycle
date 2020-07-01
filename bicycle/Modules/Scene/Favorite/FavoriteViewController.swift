@@ -40,7 +40,7 @@ class FavoriteViewController: BaseViewController {
   
   let navigationView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "Header-Background")
+    imageView.image = Constant.naviBackground.image
     return imageView
   }()
   
