@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ActiveLabel/ActiveLabel.framework
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework
 ${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework
@@ -14,6 +15,7 @@ ${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.fr
 ${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
 ${BUILT_PRODUCTS_DIR}/RxCoreData/RxCoreData.framework
 ${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework
+${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework
 ${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
 ${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
 ${BUILT_PRODUCTS_DIR}/RxViewController/RxViewController.framework

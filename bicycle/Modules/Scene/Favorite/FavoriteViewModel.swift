@@ -26,15 +26,15 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
   }
   
   let locationInteractor: LocationUseCase
-  let seoulBicycleInteractor: SeoulBicycleUseCase
+  let seoulOpenAPIInteractor: SeoulOpenAPIUseCase
   let stationInteractor: StationUseCase
   let didTapLikeButton = PublishSubject<Station>()
   
   init(locationInteractor: LocationUseCase,
-       seoulBicycleInteractor: SeoulBicycleUseCase,
+       seoulOpenAPIInteractor: SeoulOpenAPIUseCase,
        stationInteractor: StationUseCase) {
     self.locationInteractor = locationInteractor
-    self.seoulBicycleInteractor = seoulBicycleInteractor
+    self.seoulOpenAPIInteractor = seoulOpenAPIInteractor
     self.stationInteractor = stationInteractor
   }
   
@@ -45,7 +45,7 @@ class FavoriteViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType {
     let onLoading = PublishSubject<Bool>()
     let isLoading = onLoading.asDriver(onErrorJustReturn: false)
     
-    let stationListData = Observable.combineLatest(seoulBicycleInteractor.fetchStations(), stationInteractor.readLikeStation())
+    let stationListData = Observable.combineLatest(seoulOpenAPIInteractor.fetchStations(), stationInteractor.readLikeStation())
       .map { (allStation, likedStation) in
         allStation
           .map { station in

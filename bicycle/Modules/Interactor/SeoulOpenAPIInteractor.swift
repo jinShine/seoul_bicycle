@@ -1,5 +1,5 @@
 //
-//  SeoulBicycleInteractor.swift
+//  SeoulOpenAPIInteractor.swift
 //  bicycle
 //
 //  Created by Jinnify on 2020/06/12.
@@ -9,12 +9,12 @@
 import Foundation
 import RxSwift
 
-protocol SeoulBicycleUseCase {
+protocol SeoulOpenAPIUseCase {
   
   func fetchStations() -> Observable<[Station]>
 }
 
-class SeoulBicycleInteractor: SeoulBicycleUseCase, AppGlobalRepositoryType {
+class SeoulOpenAPIInteractor: SeoulOpenAPIUseCase, AppGlobalRepositoryType {
   
   private var service: Networkable {
     return appConstant.network

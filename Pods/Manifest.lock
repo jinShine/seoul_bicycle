@@ -1,4 +1,5 @@
 PODS:
+  - ActiveLabel (1.1.0)
   - Alamofire (5.0.2)
   - Buglife (2.10.1)
   - Crashlytics (3.14.0):
@@ -99,6 +100,9 @@ PODS:
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
+  - RxGesture (3.0.2):
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -111,6 +115,7 @@ PODS:
     - QuickLayout (= 3.0.0)
 
 DEPENDENCIES:
+  - ActiveLabel
   - Buglife
   - Crashlytics (~> 3.14.0)
   - Fabric (~> 1.10.2)
@@ -124,6 +129,7 @@ DEPENDENCIES:
   - RxCocoa (~> 5)
   - RxCoreData
   - RxDataSources (~> 4.0)
+  - RxGesture
   - RxSwift (~> 5)
   - RxViewController
   - SkyFloatingLabelTextField (~> 3.0)
@@ -132,6 +138,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ActiveLabel
     - Alamofire
     - Buglife
     - Crashlytics
@@ -159,6 +166,7 @@ SPEC REPOS:
     - RxCocoa
     - RxCoreData
     - RxDataSources
+    - RxGesture
     - RxRelay
     - RxSwift
     - RxViewController
@@ -167,6 +175,7 @@ SPEC REPOS:
     - SwiftEntryKit
 
 SPEC CHECKSUMS:
+  ActiveLabel: 5e3f4de79a1952d4604b845a0610d4776e4b82b3
   Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
   Buglife: bc8e4931ebe37b2901c6dbcb0ca6dd76f62a98c3
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
@@ -194,6 +203,7 @@ SPEC CHECKSUMS:
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxCoreData: 1ed5f83e80facccc90fc054eb7f39a44177de56a
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxGesture: d6bd7447ca3a596c7a9702a6a2b6a2bb5d8bae54
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxViewController: 7330a46e5c31cd680db169da4c9fc8676e975a81
@@ -201,6 +211,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftEntryKit: 340713c2e4a6662c5149629990bf1088bf5f0389
 
-PODFILE CHECKSUM: 37099e87247d61869b36cc035f6af3ff9fb0a211
+PODFILE CHECKSUM: 01bbdd7a471fdba2fe92fdb0d6da29fda224490f
 
 COCOAPODS: 1.9.0

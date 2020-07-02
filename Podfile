@@ -15,6 +15,7 @@ target 'bicycle' do
   pod 'RxViewController'
   pod 'NSObject+Rx'
   pod "RxCoreData"
+  pod "RxGesture"
 
   # auto layout
   pod 'SnapKit', '~> 5.0.0'
@@ -27,6 +28,7 @@ target 'bicycle' do
   pod 'SwiftEntryKit', '1.2.3'
   pod 'NVActivityIndicatorView'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'ActiveLabel'
 
   # naver map
   pod 'NMapsMap'

@@ -13,7 +13,7 @@ import RxCocoa
 class SignInViewModel: BaseViewModel, ViewModelType {
   
   struct Input {
-    
+    let userInfo: Observable<(String, String)>
   }
   
   struct Output {
@@ -22,6 +22,7 @@ class SignInViewModel: BaseViewModel, ViewModelType {
 
   func transform(input: Input) -> Output {
     
+    input.userInfo
 
     return Output()
   }

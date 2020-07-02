@@ -1,5 +1,5 @@
 //
-//  SeoulBicycleAPI.swift
+//  SeoulOpenAPI.swift
 //  bicycle
 //
 //  Created by Jinnify on 2020/06/12.
@@ -9,11 +9,11 @@
 import Foundation
 import Moya
 
-enum SeoulBicycleAPI {
+enum SeoulOpenAPI {
   case bicycleList(start: Int, last: Int)
 }
 
-extension SeoulBicycleAPI: TargetType {
+extension SeoulOpenAPI: TargetType {
 
   var baseURL: URL {
     return URL(string: "http://openapi.seoul.go.kr:8088/" + AppConfiguration.current().seoulBicycleId! + "/json")!

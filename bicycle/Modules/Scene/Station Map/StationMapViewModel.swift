@@ -33,16 +33,16 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
   }
   
   let locationInteractor: LocationUseCase
-  let seoulBicycleInteractor: SeoulBicycleUseCase
+  let seoulOpenAPIInteractor: SeoulOpenAPIUseCase
   let stationInteractor: StationUseCase
   var stationList: [Station] = []
   var currentCooredinate = BehaviorSubject<(Double, Double)>(value: (0.0, 0.0))
   
   init(locationInteractor: LocationUseCase,
-       seoulBicycleInteractor: SeoulBicycleUseCase,
+       seoulOpenAPIInteractor: SeoulOpenAPIUseCase,
        stationInteractor: StationUseCase) {
     self.locationInteractor = locationInteractor
-    self.seoulBicycleInteractor = seoulBicycleInteractor
+    self.seoulOpenAPIInteractor = seoulOpenAPIInteractor
     self.stationInteractor = stationInteractor
   }
   
@@ -54,7 +54,7 @@ class StationMapViewModel: BaseViewModel, ViewModelType, AppGlobalRepositoryType
       .start()
       .asDriver(onErrorJustReturn: false)
 
-    let stationListData = Observable.combineLatest(seoulBicycleInteractor.fetchStations(), stationInteractor.readLikeStation())
+    let stationListData = Observable.combineLatest(seoulOpenAPIInteractor.fetchStations(), stationInteractor.readLikeStation())
       .map { (allStation, likedStation) in
         allStation.map { station in
           self.remakeModel(for: station, with: likedStation)

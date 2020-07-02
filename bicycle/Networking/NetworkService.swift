@@ -10,12 +10,8 @@ import RxSwift
 import Moya
 import Alamofire
 
-protocol Networkable {
-  func buildRequest(to router: SeoulBicycleAPI) -> Single<NetworkDataResponse>
-}
+struct NetworkService {
 
-struct NetworkService: Networkable {
-  
   static private let sharedManager: Alamofire.Session = {
     let configuration = URLSessionConfiguration.default
     configuration.headers = HTTPHeaders.default
@@ -24,20 +20,23 @@ struct NetworkService: Networkable {
     configuration.requestCachePolicy = NSURLRequest.CachePolicy.useProtocolCachePolicy
     return Alamofire.Session(configuration: configuration)
   }()
+}
+
+extension NetworkService: Networkable {
   
-  private let provider: MoyaProvider<SeoulBicycleAPI> = {
-    
-    let provider = MoyaProvider<SeoulBicycleAPI>(endpointClosure: MoyaProvider.defaultEndpointMapping,
-                                                 requestClosure: MoyaProvider<SeoulBicycleAPI>.defaultRequestMapping,
+//  typealias TargetType = SeoulOpenAPI
+
+  var provider: MoyaProvider<TargetType> {
+    return MoyaProvider<TargetType>(endpointClosure: MoyaProvider.defaultEndpointMapping,
+                                                 requestClosure: MoyaProvider<SeoulOpenAPI>.defaultRequestMapping,
                                                  stubClosure: MoyaProvider.neverStub,
                                                  callbackQueue: nil,
-                                                 session: sharedManager,
+                                                 session: NetworkService.sharedManager,
                                                  plugins: [],
                                                  trackInflights: false)
-    return provider
-  }()
+  }
   
-  func buildRequest(to router: SeoulBicycleAPI) -> Single<NetworkDataResponse> {
+  func buildRequest(to router: TargetType) -> Single<NetworkDataResponse> {
     return self.provider.rx.request(router)
       .flatMap { response -> Single<NetworkDataResponse> in
         return Single.create(subscribe: { single -> Disposable in

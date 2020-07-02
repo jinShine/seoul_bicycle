@@ -53,6 +53,9 @@ class BaseViewController: UIViewController {
   func bindViewModel() {
     
   }
+}
+
+extension BaseViewController {
   
   func loadingStart() {
     activityIndicator.startAnimating()
@@ -60,5 +63,17 @@ class BaseViewController: UIViewController {
   
   func loadingStop() {
     activityIndicator.stopAnimating()
+  }
+  
+  func setupDismissGesture() {
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+    tapGesture.numberOfTapsRequired = 1
+    tapGesture.isEnabled = true
+    tapGesture.cancelsTouchesInView = false
+    view.addGestureRecognizer(tapGesture)
+  }
+  
+  @objc func keyboardDismiss(sender: UITapGestureRecognizer) {
+    view.endEditing(true)
   }
 }
