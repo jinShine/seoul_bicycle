@@ -1,18 +1,23 @@
 //
-//  NetworkService.swift
+//  SeoulOpenAPIService.swift
 //  bicycle
 //
-//  Created by Jinnify on 2020/06/12.
+//  Created by Jinnify on 2020/07/05.
 //  Copyright © 2020 Jinnify. All rights reserved.
 //
 
-import RxSwift
+import Foundation
 import Moya
+import RxSwift
 import Alamofire
 
-struct NetworkService {
+protocol SeoulOpenAPIProtocol {
+  func buildRequest(to router: SeoulOpenAPI) -> Single<NetworkDataResponse>
+}
 
-  static private let sharedManager: Alamofire.Session = {
+struct SeoulOpenAPIService {
+  
+  static let sharedManager: Alamofire.Session = {
     let configuration = URLSessionConfiguration.default
     configuration.headers = HTTPHeaders.default
     configuration.timeoutIntervalForRequest = 30
@@ -22,33 +27,31 @@ struct NetworkService {
   }()
 }
 
-extension NetworkService: Networkable {
+extension SeoulOpenAPIService: SeoulOpenAPIProtocol {
   
-//  typealias TargetType = SeoulOpenAPI
-
-  var provider: MoyaProvider<TargetType> {
-    return MoyaProvider<TargetType>(endpointClosure: MoyaProvider.defaultEndpointMapping,
+  var provider: MoyaProvider<SeoulOpenAPI> {
+    return MoyaProvider<SeoulOpenAPI>(endpointClosure: MoyaProvider.defaultEndpointMapping,
                                                  requestClosure: MoyaProvider<SeoulOpenAPI>.defaultRequestMapping,
                                                  stubClosure: MoyaProvider.neverStub,
                                                  callbackQueue: nil,
-                                                 session: NetworkService.sharedManager,
+                                                 session: SeoulOpenAPIService.sharedManager,
                                                  plugins: [],
                                                  trackInflights: false)
   }
   
-  func buildRequest(to router: TargetType) -> Single<NetworkDataResponse> {
+  func buildRequest(to router: SeoulOpenAPI) -> Single<NetworkDataResponse> {
     return self.provider.rx.request(router)
       .flatMap { response -> Single<NetworkDataResponse> in
         return Single.create(subscribe: { single -> Disposable in
           let requestStatusCode = NetworkStatusCode(rawValue: response.response?.statusCode ?? 0)
-          
+
           guard requestStatusCode != .unauthorized && requestStatusCode != .forbidden else {
             single(.error(RequestError.invalidRequest))
             return Disposables.create()
           }
-          
+
           single(.success(NetworkDataResponse(jsonData: response.data)))
-          
+
           return Disposables.create()
         })
     }

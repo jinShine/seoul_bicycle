@@ -17,14 +17,26 @@ class SignInViewModel: BaseViewModel, ViewModelType {
   }
   
   struct Output {
-    
+    let loginSuccess: Observable<Data?>
+  }
+
+  let seoulBikeAPIInteractor: SeoulBikeAPIUseCase
+  
+  init(seoulBikeAPIInteractor: SeoulBikeAPIUseCase) {
+    self.seoulBikeAPIInteractor = seoulBikeAPIInteractor
   }
 
   func transform(input: Input) -> Output {
     
-    input.userInfo
+    let loginSuccess = input.userInfo
+      .flatMap { (id, pw) in
+        self.seoulBikeAPIInteractor.login(id: id, pw: pw)
+    }
+    
+      
+    
 
-    return Output()
+    return Output(loginSuccess: loginSuccess)
   }
 }
 

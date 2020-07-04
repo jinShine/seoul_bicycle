@@ -14,13 +14,15 @@ class AppConstant: NSObject {
   var window: UIWindow?
   var navigator: Navigator
   var coreData: CoreDataStorageable
-  var network: Networkable
+  var seoulOpenNetwork: SeoulOpenAPIProtocol
+  var seoulBikeNetwork: SeoulBikeAPIProtocol
   var repository: AppRepository
   
   private override init() {
     self.navigator = Navigator.default
     self.coreData = CoreDataStorage.shared
-    self.network = NetworkService()
+    self.seoulOpenNetwork = SeoulOpenAPIService()
+    self.seoulBikeNetwork = SeoulBikeAPIService()
     self.repository = AppRepository()
     super.init()
   }
@@ -36,7 +38,7 @@ class AppConstant: NSObject {
 //      window.makeKeyAndVisible()
 //    }
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      let viewModel = SignInViewModel()
+      let viewModel = SignInViewModel(seoulBikeAPIInteractor: SeoulBikeAPIInteractor())
       window.rootViewController = self.navigator.get(for: .signIn(viewModel: viewModel))
       window.backgroundColor = .white
       window.makeKeyAndVisible()

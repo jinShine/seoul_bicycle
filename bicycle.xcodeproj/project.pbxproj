@@ -58,7 +58,6 @@
 		36D293AF24A8F5A600C7155F /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293AE24A8F5A600C7155F /* FavoriteCell.swift */; };
 		36D293B124A9AE9F00C7155F /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D293B024A9AE9F00C7155F /* AppRepository.swift */; };
 		36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */; };
-		36DF358D2493944100EDC36D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358C2493944100EDC36D /* NetworkService.swift */; };
 		36DF358F2493949400EDC36D /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF358E2493949400EDC36D /* NetworkResponse.swift */; };
 		36DF3591249394A600EDC36D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF3590249394A600EDC36D /* NetworkError.swift */; };
 		36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DF35922493986D00EDC36D /* Data+Decode.swift */; };
@@ -76,8 +75,9 @@
 		36F343F124ACC70D00902024 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F024ACC70D00902024 /* SignInViewController.swift */; };
 		36F343F324ACC71600902024 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F224ACC71600902024 /* SignInViewModel.swift */; };
 		36F343F724ADBE5C00902024 /* SeoulBikeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F624ADBE5C00902024 /* SeoulBikeAPI.swift */; };
-		36F343F924ADC1E100902024 /* SeoulBikeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343F824ADC1E100902024 /* SeoulBikeInteractor.swift */; };
-		36F343FB24ADCC6C00902024 /* Networable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F343FA24ADCC6C00902024 /* Networable.swift */; };
+		36F3440124B0D99600902024 /* SeoulOpenAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F3440024B0D99600902024 /* SeoulOpenAPIService.swift */; };
+		36F3440324B0D9AA00902024 /* SeoulBikeAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F3440224B0D9AA00902024 /* SeoulBikeAPIService.swift */; };
+		36F3440524B0DCA500902024 /* SeoulBikeAPIInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F3440424B0DCA500902024 /* SeoulBikeAPIInteractor.swift */; };
 		9526470FB79F06B765D071B1 /* Pods_bicycle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC76079FE7C8BB35A88A8DB8 /* Pods_bicycle.framework */; };
 		9F9B3126496427C9A063027A /* Pods_bicycle_bicycleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */; };
 		B867E1A4C3F1A1386DC2926F /* Pods_bicycleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */; };
@@ -161,7 +161,6 @@
 		36D293AE24A8F5A600C7155F /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		36D293B024A9AE9F00C7155F /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		36DF35872493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppConfiguration+SeoulBicycle.swift"; sourceTree = "<group>"; };
-		36DF358C2493944100EDC36D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		36DF358E2493949400EDC36D /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
 		36DF3590249394A600EDC36D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		36DF35922493986D00EDC36D /* Data+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Decode.swift"; sourceTree = "<group>"; };
@@ -180,8 +179,9 @@
 		36F343F024ACC70D00902024 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		36F343F224ACC71600902024 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		36F343F624ADBE5C00902024 /* SeoulBikeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBikeAPI.swift; sourceTree = "<group>"; };
-		36F343F824ADC1E100902024 /* SeoulBikeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBikeInteractor.swift; sourceTree = "<group>"; };
-		36F343FA24ADCC6C00902024 /* Networable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networable.swift; sourceTree = "<group>"; };
+		36F3440024B0D99600902024 /* SeoulOpenAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulOpenAPIService.swift; sourceTree = "<group>"; };
+		36F3440224B0D9AA00902024 /* SeoulBikeAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBikeAPIService.swift; sourceTree = "<group>"; };
+		36F3440424B0DCA500902024 /* SeoulBikeAPIInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeoulBikeAPIInteractor.swift; sourceTree = "<group>"; };
 		4A13FF05ECE08FB4BC3F7913 /* Pods-bicycle-bicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bicycle-bicycleUITests.debug.xcconfig"; path = "Target Support Files/Pods-bicycle-bicycleUITests/Pods-bicycle-bicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A335979A82BC42B844D2A25 /* Pods_bicycle_bicycleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycle_bicycleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		508096FC6B142CDE42108879 /* Pods_bicycleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bicycleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,8 +391,8 @@
 			children = (
 				367C2B96248EB6C7009111E7 /* LocationInteractor.swift */,
 				36DF35992493A04A00EDC36D /* SeoulOpenAPIInteractor.swift */,
+				36F3440424B0DCA500902024 /* SeoulBikeAPIInteractor.swift */,
 				365FA2EA24A113FF000FFEA5 /* StationInteractor.swift */,
-				36F343F824ADC1E100902024 /* SeoulBikeInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -508,10 +508,10 @@
 			isa = PBXGroup;
 			children = (
 				36DF359D2493E4D800EDC36D /* Router */,
-				36DF358C2493944100EDC36D /* NetworkService.swift */,
 				36DF358E2493949400EDC36D /* NetworkResponse.swift */,
 				36DF3590249394A600EDC36D /* NetworkError.swift */,
-				36F343FA24ADCC6C00902024 /* Networable.swift */,
+				36F3440024B0D99600902024 /* SeoulOpenAPIService.swift */,
+				36F3440224B0D9AA00902024 /* SeoulBikeAPIService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -824,6 +824,7 @@
 				36C37F3B2487F27500DF3145 /* AppConstant.swift in Sources */,
 				367C2B84248AC55C009111E7 /* AppInfo.swift in Sources */,
 				36C37F3D2487F28100DF3145 /* Navigator.swift in Sources */,
+				36F3440124B0D99600902024 /* SeoulOpenAPIService.swift in Sources */,
 				367C2B86248AD06D009111E7 /* AppConfiguration+Naver.swift in Sources */,
 				367C2B8E248E9E06009111E7 /* ThemeColor.swift in Sources */,
 				36C37F052487DBEE00DF3145 /* AppDelegate.swift in Sources */,
@@ -833,7 +834,6 @@
 				365F8496249006200023CAE3 /* CALayer+Addition.swift in Sources */,
 				36F343EC24A9FD7400902024 /* EmptyView.swift in Sources */,
 				365F8494248FFC2A0023CAE3 /* ToastView.swift in Sources */,
-				36DF358D2493944100EDC36D /* NetworkService.swift in Sources */,
 				367C2B72248A17C4009111E7 /* StationMapViewModel.swift in Sources */,
 				36D293AF24A8F5A600C7155F /* FavoriteCell.swift in Sources */,
 				367C2B74248A1A58009111E7 /* BaseViewController.swift in Sources */,
@@ -848,9 +848,11 @@
 				36DF3591249394A600EDC36D /* NetworkError.swift in Sources */,
 				367C2B90248E9E51009111E7 /* UIColor+Addition.swift in Sources */,
 				36DF35882493810E00EDC36D /* AppConfiguration+SeoulBicycle.swift in Sources */,
+				36F3440524B0DCA500902024 /* SeoulBikeAPIInteractor.swift in Sources */,
 				367C2B6E248A1783009111E7 /* UserInfoViewModel.swift in Sources */,
 				36DF359824939D5E00EDC36D /* DebugPrint.swift in Sources */,
 				367C2B6C248A1779009111E7 /* UserInfoViewController.swift in Sources */,
+				36F3440324B0D9AA00902024 /* SeoulBikeAPIService.swift in Sources */,
 				36DF35AB249A74B100EDC36D /* StationSearchViewController.swift in Sources */,
 				367C2B66248A1134009111E7 /* HomeTabBarViewModel.swift in Sources */,
 				36DF35AF249A80D800EDC36D /* Transitionable.swift in Sources */,
@@ -869,10 +871,8 @@
 				367C2B6A248A1655009111E7 /* FavoriteViewModel.swift in Sources */,
 				36DF35932493986D00EDC36D /* Data+Decode.swift in Sources */,
 				36F343F124ACC70D00902024 /* SignInViewController.swift in Sources */,
-				36F343F924ADC1E100902024 /* SeoulBikeInteractor.swift in Sources */,
 				36C37F462489076300DF3145 /* HomeTabBarController.swift in Sources */,
 				365FA2DC24A06B79000FFEA5 /* MarkerInfo.swift in Sources */,
-				36F343FB24ADCC6C00902024 /* Networable.swift in Sources */,
 				367C2B70248A17BC009111E7 /* StationMapViewController.swift in Sources */,
 				36DF35A32494652D00EDC36D /* ThemeFont.swift in Sources */,
 				36D293A924A5A88300C7155F /* BaseTableViewCell.swift in Sources */,

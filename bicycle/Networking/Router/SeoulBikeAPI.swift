@@ -16,19 +16,19 @@ enum SeoulBikeAPI {
 extension SeoulBikeAPI: TargetType {
   
   var baseURL: URL {
-    return URL(string: "https://www.bikeseoul.com/")!
+    return URL(string: "http://www.bikeseoul.com")!
   }
 
   var path: String {
     switch self {
-    case .login: return ""
+    case .login: return "/j_spring_security_check"
     }
   }
 
   var method: Moya.Method {
     switch self {
     case .login:
-      return .post
+      return .get
     }
   }
 
@@ -40,15 +40,15 @@ extension SeoulBikeAPI: TargetType {
     switch self {
     case .login(let id, let pw):
       return .requestParameters(parameters: [
-        "j_password": id,
-        "j_username": pw
+        "j_username": id,
+        "j_password": pw
       ], encoding: JSONEncoding.default)
     }
   }
 
   var headers: [String : String]? {
     return [
-      "Content-Type" : "application/json"
+      "Content-Type": "application/x-www-form-urlencoded"
     ]
   }
 }

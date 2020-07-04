@@ -11,7 +11,8 @@ import UIKit
 protocol AppGlobalRepositoryType {
   
   var appConstant: AppConstant { get }
-  var network: Networkable { get }
+  var seoulOpenNetwork: SeoulOpenAPIProtocol { get }
+  var seoulBikeNetwork: SeoulBikeAPIProtocol { get }
   var coreData: CoreDataStorageable { get }
   var repository: AppRepository { get }
 }
@@ -22,8 +23,12 @@ extension AppGlobalRepositoryType {
     return AppConstant.shared
   }
   
-  var network: Networkable {
-    return appConstant.network
+  var seoulOpenNetwork: SeoulOpenAPIProtocol {
+    return appConstant.seoulOpenNetwork
+  }
+  
+  var seoulBikeNetwork: SeoulBikeAPIProtocol {
+    return appConstant.seoulBikeNetwork
   }
   
   var coreData: CoreDataStorageable {

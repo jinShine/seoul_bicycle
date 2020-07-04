@@ -11,9 +11,7 @@ import RxCocoa
 import CoreData
 
 protocol StationUseCase {
-  
-//  var likeStations: [Station] { get set }
-  
+
   @discardableResult
   func createStation(station: Station) -> Observable<Void>
   

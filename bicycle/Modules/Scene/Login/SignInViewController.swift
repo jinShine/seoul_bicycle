@@ -14,6 +14,8 @@ import RxGesture
 import RAMAnimatedTabBarController
 import SkyFloatingLabelTextField
 import ActiveLabel
+import WebKit
+import Alamofire
 
 class SignInViewController: BaseViewController {
   
@@ -125,6 +127,7 @@ class SignInViewController: BaseViewController {
     button.titleLabel?.font = AppTheme.font.custom(size: 15)
     button.backgroundColor = AppTheme.color.main
     button.layer.cornerRadius = 8
+    button.isUserInteractionEnabled = true
     return button
   }()
   
@@ -171,6 +174,26 @@ class SignInViewController: BaseViewController {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  let webView = WKWebView()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    let headers: HTTPHeaders = [
+        "Content-Type": "application/x-www-form-urlencoded"
+    ]
+    let parameters = [
+        "j_username": "rlatmd134",
+        "j_password": "whis!346"
+    ]
+//    let url = NSURL(string: "https://www.bikeseoul.com/j_spring_security_check")!
+    let af = AF.request("https://www.bikeseoul.com/j_spring_security_check", method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers, interceptor: nil)
+    af.responseData { response in
+      print(String(data: response.data!, encoding: .utf8))
+    }
+    
   }
   
   override func setupUI() {
@@ -277,12 +300,22 @@ class SignInViewController: BaseViewController {
     let dd = Observable.combineLatest(idTextField.rx.text.orEmpty.asObservable(), pwTextField.rx.text.orEmpty.asObservable())
     
     
-    let input = SignInViewModel.Input(userInfo: dd)
+    let button1 = signInButton.rx.tap
+      .withLatestFrom(dd)
+//      .flatMap { dd }
+      .debug("123123123")
+    
+    let input = SignInViewModel.Input(userInfo: button1)
     
     // Output
     
     let output = viewModel?.transform(input: input)
     
+    output?.loginSuccess
+      .subscribe(onNext: { data in
+        print(data)
+      })
+      .disposed(by: rx.disposeBag)
   }
   
   private func setupDescLabel() {
@@ -292,5 +325,32 @@ class SignInViewController: BaseViewController {
                            .underlineStyle: NSUnderlineStyle.single.rawValue,
                            .underlineColor: AppTheme.color.subMain], range: foundRange)
     descLabel.attributedText = attrStr
+  }
+}
+
+extension WKWebView {
+  
+  func load(_ urlString: String) {
+    if let url = URL(string: urlString) {
+      let request = URLRequest(url: url)
+      load(request)
+    }
+  }
+}
+
+
+extension SignInViewController: WKNavigationDelegate, WKScriptMessageHandler {
+  
+  func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+    
+    print(message.body)
+  }
+  
+  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    print(navigation)
+  }
+  
+  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+    print(error)
   }
 }

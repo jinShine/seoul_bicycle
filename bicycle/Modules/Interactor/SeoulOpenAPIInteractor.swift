@@ -16,8 +16,8 @@ protocol SeoulOpenAPIUseCase {
 
 class SeoulOpenAPIInteractor: SeoulOpenAPIUseCase, AppGlobalRepositoryType {
   
-  private var service: Networkable {
-    return appConstant.network
+  private var service: SeoulOpenAPIProtocol {
+    return appConstant.seoulOpenNetwork
   }
 
   private func stationRequest(start: Int, last: Int) -> Single<RentStationStatus> {
