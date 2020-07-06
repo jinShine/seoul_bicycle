@@ -7,32 +7,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6BCE277E-3B92-4998-8F04-8F0348603867"
+            uuid = "071B1C61-42A5-40D6-BB57-FB1EEED5DF4A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bicycle/Modules/Interactor/SeoulBikeAPIInteractor.swift"
+            filePath = "bicycle/Networking/SeoulOpenAPIService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "login(id:pw:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "buildRequest(to:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9F5A5FD4-80DE-4241-9158-D3879C20E7A7"
+            uuid = "D9DF7CCC-E38E-4F59-B444-C3AA129EB144"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bicycle/Networking/SeoulBikeAPIService.swift"
+            filePath = "bicycle/Modules/Interactor/SeoulOpenAPIInteractor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "service"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5BC8AB91-8EF3-4405-8BC7-60E4837AF60A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bicycle/Networking/SeoulOpenAPIService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "provider"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1766A7E6-9CD9-44AB-A768-E28E04A77799"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bicycle/Networking/SeoulOpenAPIService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "buildRequest(to:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1766A7E6-9CD9-44AB-A768-E28E04A77799 - 95ad37e8c1def8d7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "&#xb530;&#xb989;&#xd574;.SeoulOpenAPIService.buildRequest(to: &#xb530;&#xb989;&#xd574;.SeoulOpenAPI) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, &#xb530;&#xb989;&#xd574;.NetworkDataResponse&gt;"
+                  moduleName = "&#x1104;&#x1161;&#x1105;&#x1173;&#x11bc;&#x1112;&#x1162;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinnify/Documents/GitProject/seoul_bicycle/bicycle/Networking/SeoulOpenAPIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "300">
+               </Location>
+               <Location
+                  uuid = "1766A7E6-9CD9-44AB-A768-E28E04A77799 - 5212bb1fccb39ed3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Moya.Response) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, &#xb530;&#xb989;&#xd574;.NetworkDataResponse&gt; in &#xb530;&#xb989;&#xd574;.SeoulOpenAPIService.buildRequest(to: &#xb530;&#xb989;&#xd574;.SeoulOpenAPI) -&gt; RxSwift.PrimitiveSequence&lt;RxSwift.SingleTrait, &#xb530;&#xb989;&#xd574;.NetworkDataResponse&gt;"
+                  moduleName = "&#x1104;&#x1161;&#x1105;&#x1173;&#x11bc;&#x1112;&#x1162;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinnify/Documents/GitProject/seoul_bicycle/bicycle/Networking/SeoulOpenAPIService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC37DBC4-8780-4C33-A575-4430E89CBABA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bicycle/Modules/Interactor/SeoulOpenAPIInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "stationRequest(start:last:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E51169A4-3FDB-42AB-B071-4A785089E0FA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "bicycle/Modules/Interactor/SeoulOpenAPIInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "stationRequest(start:last:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
