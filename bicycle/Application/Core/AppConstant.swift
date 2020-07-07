@@ -31,18 +31,18 @@ class AppConstant: NSObject {
     guard let window = window else { return }
     self.window = window
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-      let viewModel = HomeTabBarViewModel()
-      window.rootViewController = self.navigator.get(for: .tabs(viewModel: viewModel))
-      window.backgroundColor = .white
-      window.makeKeyAndVisible()
-    }
 //    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//      let viewModel = SignInViewModel(seoulBikeAPIInteractor: SeoulBikeAPIInteractor())
-//      window.rootViewController = self.navigator.get(for: .signIn(viewModel: viewModel))
+//      let viewModel = HomeTabBarViewModel()
+//      window.rootViewController = self.navigator.get(for: .tabs(viewModel: viewModel))
 //      window.backgroundColor = .white
 //      window.makeKeyAndVisible()
 //    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+      let viewModel = SignInViewModel(seoulBikeAPIInteractor: SeoulBikeAPIInteractor())
+      window.rootViewController = self.navigator.get(for: .signIn(viewModel: viewModel))
+      window.backgroundColor = .white
+      window.makeKeyAndVisible()
+    }
   }
   
 }
