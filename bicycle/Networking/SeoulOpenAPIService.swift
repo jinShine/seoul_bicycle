@@ -43,6 +43,7 @@ extension SeoulOpenAPIService: SeoulOpenAPIProtocol {
     return self.provider.rx.request(router)
       .flatMap { response -> Single<NetworkDataResponse> in
         return Single.create(subscribe: { single -> Disposable in
+          print(response)
           let requestStatusCode = NetworkStatusCode(rawValue: response.response?.statusCode ?? 0)
 
           guard requestStatusCode != .unauthorized && requestStatusCode != .forbidden else {
